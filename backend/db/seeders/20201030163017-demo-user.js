@@ -3,38 +3,60 @@ const faker = require('faker');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert(
-      'Users',
-      [
-        {
-          email: 'demo@user.io',
-          username: 'Demo-lition',
-          hashedPassword: bcrypt.hashSync('password')
-        },
-        {
-          email: faker.internet.email(),
-          username: 'FakeUser1',
-          hashedPassword: bcrypt.hashSync(faker.internet.password())
-        },
-        {
-          email: faker.internet.email(),
-          username: 'FakeUser2',
-          hashedPassword: bcrypt.hashSync(faker.internet.password())
-        }
-      ],
-      {}
-    );
-  },
+    up: async (queryInterface, Sequelize) => {
+        return queryInterface.bulkInsert(
+            'Users',
+            [
+                {
+                    email: 'demo@user.io',
+                    firstName: 'Demo',
+                    lastName: 'Lition',
+                    hashedPassword: bcrypt.hashSync('password'),
+                    phoneNumber: faker.phone.phoneNumber(),
+                },
+                {
+                    email: faker.internet.email(),
+                    firstName: faker.name.firstName(),
+                    lastName: faker.name.lastName(),
+                    hashedPassword: bcrypt.hashSync(faker.internet.password()),
+                    phoneNumber: faker.phone.phoneNumber(),
+                },
+                {
+                    email: faker.internet.email(),
+                    firstName: faker.name.firstName(),
+                    lastName: faker.name.lastName(),
+                    hashedPassword: bcrypt.hashSync(faker.internet.password()),
+                    phoneNumber: faker.phone.phoneNumber(),
+                },
+                {
+                    email: faker.internet.email(),
+                    firstName: faker.name.firstName(),
+                    lastName: faker.name.lastName(),
+                    hashedPassword: bcrypt.hashSync(faker.internet.password()),
+                    phoneNumber: faker.phone.phoneNumber(),
+                },
+                {
+                    email: faker.internet.email(),
+                    firstName: faker.name.firstName(),
+                    lastName: faker.name.lastName(),
+                    hashedPassword: bcrypt.hashSync(faker.internet.password()),
+                    phoneNumber: faker.phone.phoneNumber(),
+                },
+            ],
+            {}
+        );
+    },
 
-  down: async (queryInterface, Sequelize) => {
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(
-      'Users',
-      {
-        username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }
-      },
-      {}
-    );
-  }
+    down: async (queryInterface, Sequelize) => {
+        const Op = Sequelize.Op;
+        return queryInterface.bulkDelete(
+            'Users',
+            {
+                username: {
+                    [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'],
+                },
+            },
+            {}
+        );
+    },
 };
