@@ -1,19 +1,22 @@
 'use strict';
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('ChatRooms', {
+        return queryInterface.createTable('Participants', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            name: {
-                type: Sequelize.STRING(50),
-            },
-            adminId: {
+            userId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
+                references: { model: 'User' },
+            },
+            roomId: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: { model: 'ChatRoom' },
             },
             createdAt: {
                 allowNull: false,
@@ -26,6 +29,6 @@ module.exports = {
         });
     },
     down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('ChatRooms');
+        return queryInterface.dropTable('Participants');
     },
 };
