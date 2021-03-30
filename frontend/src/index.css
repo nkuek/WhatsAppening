@@ -1,1 +1,29 @@
 /* TODO Add site wide styles */
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    font: inherit;
+    border: none;
+}
+
+li {
+    list-style: none;
+}
+
+#modal-background {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+#modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+#modal-content > form {
+    display: flex;
+    flex-direction: column;
+}
