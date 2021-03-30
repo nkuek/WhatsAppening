@@ -13,6 +13,7 @@ import NewRoomForm from './NewRoomForm';
 import DropdownMenu from './DropdownMenu';
 
 import './SideBar.css';
+import Profile from './Profile';
 
 const CustomIconButton = withStyles({
     root: {
@@ -27,17 +28,26 @@ const SideBar = ({ isLoaded, socket }) => {
     const sessionUser = useSelector((state) => state.session.user);
 
     const [showNewRoomForm, setShowNewRoomForm] = useState(false);
+    const [showProfile, setShowProfile] = useState(false);
 
     const openNewRoomForm = () => {
         setShowNewRoomForm((prev) => !prev);
     };
 
+    console.log(showProfile);
+
     return (
         <div className="sidebarContainer">
             <div className="sidebarContent">
-                {!showNewRoomForm ? (
+                {!showNewRoomForm && !showProfile ? (
                     <div className="sidebarContentHeader">
-                        {isLoaded && <ProfileButton user={sessionUser} />}
+                        {isLoaded && (
+                            <ProfileButton
+                                setShowProfile={setShowProfile}
+                                showProfile={showProfile}
+                                user={sessionUser}
+                            />
+                        )}
                         {sessionUser ? (
                             <div className="sidebarButtonsContainer">
                                 <CustomIconButton onClick={openNewRoomForm}>
@@ -61,10 +71,15 @@ const SideBar = ({ isLoaded, socket }) => {
                             </div>
                         )}
                     </div>
-                ) : (
+                ) : showNewRoomForm ? (
                     <NewRoomForm
                         setShowNewRoomForm={setShowNewRoomForm}
                         socket={socket}
+                    />
+                ) : (
+                    <Profile
+                        setShowProfile={setShowProfile}
+                        user={sessionUser}
                     />
                 )}
             </div>

@@ -1,9 +1,12 @@
 import { IconButton } from '@material-ui/core';
 
-function ProfileButton({ user }) {
+function ProfileButton({ user, showProfile, setShowProfile }) {
+    const openProfile = () => {
+        setShowProfile((prev) => !prev);
+    };
     return (
         <div className="profileButtonContainer">
-            <IconButton>
+            <IconButton onClick={openProfile}>
                 {user && user.profileUrl ? (
                     <img className="userProfilePicture" src={user.profileUrl} />
                 ) : (

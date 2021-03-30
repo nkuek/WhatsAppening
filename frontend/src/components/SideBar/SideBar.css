@@ -13,7 +13,8 @@
     background-color: #2a2f32;
 }
 
-.sidebarContentBody {
+.sidebarContentBody,
+.profileBody {
     background-color: #131C21;
     height: 100%;
 }
@@ -28,7 +29,8 @@
     border-radius: 100%;
 }
 
-.newRoomFormHeader {
+.newRoomFormHeader,
+.profileHeader {
     display: flex;
     align-items: center;
     background-color: #2a2f32;
@@ -81,4 +83,30 @@
 
 .dropdownItem:hover {
     background-color: #212527;
+}
+
+.profileBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.profilePicture img {
+    border-radius: 100%;
+}
+
+.profileInformation {
+    box-sizing: border-box;
+    padding: 30px;
+    width: 100%;
+}
+
+.profileName {
+    color: #009184;
+    margin-bottom: 20px;
+}
+
+.userName {
+    color: white;
 }
