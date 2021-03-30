@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const { port } = require('../config');
-const io = require('../websockets');
+const io = require('../routes/websockets');
 
 const app = require('../app');
 

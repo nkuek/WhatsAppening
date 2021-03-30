@@ -22,7 +22,7 @@ function LoginForm() {
     const handleDemoUser = () => {
         return dispatch(
             sessionActions.login({
-                credential: 'Demo-lition',
+                credential: 'demo@user.io',
                 password: 'password',
             })
         );

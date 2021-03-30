@@ -12,6 +12,8 @@ module.exports = {
                     firstName: 'Demo',
                     lastName: 'Lition',
                     hashedPassword: bcrypt.hashSync('password'),
+                    profileUrl:
+                        'https://d92mrp7hetgfk.cloudfront.net/images/sites/misc/App_Academy_logo-8/original.png?1567098952',
                     phoneNumber: '5555555555',
                 },
                 {

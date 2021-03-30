@@ -11,12 +11,12 @@ module.exports = {
             userId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
-                references: { model: 'User' },
+                references: { model: 'Users' },
             },
             roomId: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
-                references: { model: 'ChatRoom' },
+                references: { model: 'ChatRooms' },
             },
             createdAt: {
                 allowNull: false,

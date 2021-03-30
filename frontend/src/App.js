@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import SignupFormPage from './components/SignupFormModal/SignupForm';
-// import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from './store/session';
-import Navigation from './components/Navigation';
 import io from 'socket.io-client';
+import SideBar from './components/SideBar';
 
 const socket = io('localhost:5000');
 
@@ -20,8 +19,10 @@ function App() {
     const handleNewMessage = (e) => {
         e.preventDefault();
         socket.emit('new message', {
-            username: user.username,
-            message: messageInput,
+            name: user.firstName,
+            authorId: user.id,
+            body: messageInput,
+            chatRoomId: 1,
         });
         setMessageInput('');
     };
@@ -41,7 +42,7 @@ function App() {
 
     return (
         <>
-            <Navigation isLoaded={isLoaded} />
+            <SideBar isLoaded={isLoaded} socket={socket} />
             <form onSubmit={handleNewMessage}>
                 <label>Message</label>
                 <input

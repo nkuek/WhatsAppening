@@ -1,0 +1,9 @@
+.signupButton {
+    border-radius: 5px;
+    padding: 5px 10px;
+
+}
+
+.signupButton:hover {
+    background-color: rgb(226, 226, 226)
+}

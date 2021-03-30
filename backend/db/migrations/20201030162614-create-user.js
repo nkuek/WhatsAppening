@@ -30,6 +30,9 @@ module.exports = {
                 allowNull: false,
                 unique: true,
             },
+            profileUrl: {
+                type: Sequelize.STRING,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

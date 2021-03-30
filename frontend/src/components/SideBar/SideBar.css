@@ -1,0 +1,84 @@
+.sidebarContainer {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100vh;
+}
+.sidebarContentHeader {
+    display: flex;
+    border-bottom: 1px solid gray;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    background-color: #2a2f32;
+}
+
+.sidebarContentBody {
+    background-color: #131C21;
+    height: 100%;
+}
+
+.sidebarButtonsContainer {
+    display: flex;
+}
+
+.userProfilePicture {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.newRoomFormHeader {
+    display: flex;
+    align-items: center;
+    background-color: #2a2f32;
+    color: white;
+}
+
+.newRoomForm {
+    display: flex;
+    background-color: #131C21;
+    justify-content: center;
+}
+
+.newRoomFormInputContainer {
+    display: flex;
+    box-sizing: border-box;
+    margin-top: 10px;
+    width: 80%;
+}
+
+.newRoomFormInputContainer input {
+    padding: 10px 0px;
+    padding-left: 20px;
+    background-color: #2a2f32;
+    color: white;
+    font: inherit;
+    border-radius: 20px;
+    border: 1px solid gray;
+    width: 100%;
+    font-size: .8em;
+}
+
+.dropdownContainer {
+    border-radius: 5px;
+}
+
+.dropdownList {
+    text-align: center;
+    background-color: #2a2f32;
+    color: #fff;
+    font-size: .8em;
+    padding: 10px 0px;
+    border-radius: 5px;
+}
+
+.dropdownItem {
+    padding: 10px;
+    cursor: pointer;
+
+}
+
+.dropdownItem:hover {
+    background-color: #212527;
+}

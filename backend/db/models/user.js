@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            profileUrl: {
+                type: DataTypes.STRING,
+            },
             hashedPassword: {
                 type: DataTypes.STRING.BINARY,
                 allowNull: false,
@@ -64,11 +67,23 @@ module.exports = (sequelize, DataTypes) => {
         });
         User.hasMany(models.Message, { foreignKey: 'authorId' });
         User.hasMany(models.MessageReaction, { foreignKey: 'userId' });
+        User.belongsToMany(models.User, {
+            as: 'contacts',
+            through: 'Contact',
+            foreignKey: 'user1Id',
+            otherKey: 'user2Id',
+        });
+        User.belongsToMany(models.User, {
+            as: 'user2contacts',
+            through: 'Contact',
+            foreignKey: 'user2Id',
+            otherKey: 'user1Id',
+        });
     };
     User.prototype.toSafeObject = function () {
         // remember, this cannot be an arrow function
-        const { id, firstName, lastName, email } = this; // context will be the User instance
-        return { id, firstName, lastName, email };
+        const { id, firstName, lastName, profileUrl, email } = this; // context will be the User instance
+        return { id, firstName, lastName, profileUrl, email };
     };
 
     User.prototype.validatePassword = function (password) {
