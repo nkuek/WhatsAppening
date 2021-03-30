@@ -12,35 +12,35 @@ module.exports = {
                     firstName: 'Demo',
                     lastName: 'Lition',
                     hashedPassword: bcrypt.hashSync('password'),
-                    phoneNumber: faker.phone.phoneNumber(),
+                    phoneNumber: '5555555555',
                 },
                 {
                     email: faker.internet.email(),
                     firstName: faker.name.firstName(),
                     lastName: faker.name.lastName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
-                    phoneNumber: faker.phone.phoneNumber(),
+                    phoneNumber: '5555555556',
                 },
                 {
                     email: faker.internet.email(),
                     firstName: faker.name.firstName(),
                     lastName: faker.name.lastName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
-                    phoneNumber: faker.phone.phoneNumber(),
+                    phoneNumber: '5555555557',
                 },
                 {
                     email: faker.internet.email(),
                     firstName: faker.name.firstName(),
                     lastName: faker.name.lastName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
-                    phoneNumber: faker.phone.phoneNumber(),
+                    phoneNumber: '5555555558',
                 },
                 {
                     email: faker.internet.email(),
                     firstName: faker.name.firstName(),
                     lastName: faker.name.lastName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
-                    phoneNumber: faker.phone.phoneNumber(),
+                    phoneNumber: '5555555559',
                 },
             ],
             {}
@@ -48,15 +48,6 @@ module.exports = {
     },
 
     down: async (queryInterface, Sequelize) => {
-        const Op = Sequelize.Op;
-        return queryInterface.bulkDelete(
-            'Users',
-            {
-                username: {
-                    [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'],
-                },
-            },
-            {}
-        );
+        return queryInterface.bulkDelete('Users');
     },
 };
