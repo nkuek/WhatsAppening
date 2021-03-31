@@ -45,15 +45,13 @@ const validateSignup = [
 // Sign up
 router.post(
     '/',
-    // validateSignup,
     singleMulterUpload('image'),
+    validateSignup,
     asyncHandler(async (req, res) => {
         console.log('hello');
         const { email, password, name, phoneNumber } = req.body;
         const profileImageUrl = await singlePublicFileUpload(req.file);
-        console.log('==========');
-        console.log(profileImageUrl);
-        console.log('==========');
+
         const user = await User.signup({
             email,
             password,

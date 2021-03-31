@@ -1,9 +1,12 @@
+const { singleMulterUpload, singlePublicFileUpload } = require('../awsS3');
 const db = require('../db/models');
 const io = require('socket.io')({
     cors: {
         origin: '*',
     },
 });
+
+// io.use(singleMulterUpload('image'));
 
 io.on('connection', (socket) => {
     console.log('a user has connected');
@@ -18,9 +21,9 @@ io.on('connection', (socket) => {
         console.log(name, body, chatRoomId);
     });
 
-    socket.on('new room', (data) => {
-        const { name, adminId } = data;
-        db.ChatRoom.create({ name, adminId });
+    socket.on('new room', async (data) => {
+        const { name, adminId, image } = data;
+        db.ChatRoom.create({ name, adminId, imageUrl: image });
         socket.emit('created room', { adminId });
     });
 });
