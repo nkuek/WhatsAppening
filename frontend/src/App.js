@@ -9,7 +9,6 @@ const socket = io('localhost:5000');
 
 function App() {
     const dispatch = useDispatch();
-    const [isConnected, setIsConnected] = useState(socket.connected);
     const [isLoaded, setIsLoaded] = useState(false);
     const [messageInput, setMessageInput] = useState('');
 
@@ -18,22 +17,21 @@ function App() {
     const handleNewMessage = (e) => {
         e.preventDefault();
         socket.emit('new message', {
-            name: user.firstName,
+            name: user.name,
             authorId: user.id,
             body: messageInput,
             chatRoomId: 1,
         });
         setMessageInput('');
     };
+    console.log(isLoaded);
 
     useEffect(() => {
         if (isLoaded && user) dispatch(getUserRooms(user.id));
-    }, [isLoaded, user]);
+    }, [isLoaded, user, dispatch]);
 
     useEffect(() => {
         socket.on('new user', () => {
-            setIsConnected(true);
-            console.log('connected');
             dispatch(sessionActions.restoreUser());
             setIsLoaded(true);
         });

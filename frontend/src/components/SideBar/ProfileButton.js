@@ -6,16 +6,16 @@ function ProfileButton({ user, showProfile, setShowProfile }) {
     };
     return (
         <div className="profileButtonContainer">
-            <IconButton onClick={openProfile}>
-                {user && user.profileUrl ? (
+            {user && user.profileUrl ? (
+                <IconButton onClick={openProfile}>
                     <img className="userProfilePicture" src={user.profileUrl} />
-                ) : (
-                    <i
-                        style={{ color: '#B1B3B5' }}
-                        className="fas fa-user-circle"
-                    />
-                )}
-            </IconButton>
+                </IconButton>
+            ) : (
+                <i
+                    style={{ color: '#B1B3B5' }}
+                    className="fas fa-user-circle"
+                />
+            )}
         </div>
     );
 }

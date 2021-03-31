@@ -33,14 +33,17 @@ const SideBar = ({ isLoaded, socket }) => {
     const [showProfile, setShowProfile] = useState(false);
 
     const openNewRoomForm = () => {
-        setShowNewRoomForm((prev) => !prev);
+        document
+            .querySelector('.newRoomFormContainer')
+            .classList.toggle('show');
+        document.querySelector('.sidebarContainer').classList.toggle('hidden');
     };
 
     return (
         isLoaded && (
-            <div className="sidebarContainer">
-                <div className="sidebarContent">
-                    {!showNewRoomForm && !showProfile ? (
+            <>
+                <div className="sidebarContainer">
+                    <div className="sidebarContent">
                         <div className="sidebarContentHeader">
                             <ProfileButton
                                 setShowProfile={setShowProfile}
@@ -70,22 +73,27 @@ const SideBar = ({ isLoaded, socket }) => {
                                 </div>
                             )}
                         </div>
-                    ) : showNewRoomForm ? (
-                        <NewRoomForm
-                            setShowNewRoomForm={setShowNewRoomForm}
-                            socket={socket}
-                        />
-                    ) : (
-                        <Profile
-                            setShowProfile={setShowProfile}
-                            user={sessionUser}
-                        />
-                    )}
+                    </div>
+                    <div className="sidebarContentBody">
+                        <ChatList />
+                    </div>
                 </div>
-                <div className="sidebarContentBody">
-                    <ChatList />
+
+                <div className="newRoomFormContainer">
+                    <NewRoomForm
+                        showNewRoomForm={showNewRoomForm}
+                        setShowNewRoomForm={setShowNewRoomForm}
+                        socket={socket}
+                    />
                 </div>
-            </div>
+
+                <div className="profileContainer">
+                    <Profile
+                        setShowProfile={setShowProfile}
+                        user={sessionUser}
+                    />
+                </div>
+            </>
         )
     );
 };
