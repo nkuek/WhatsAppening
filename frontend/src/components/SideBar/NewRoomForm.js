@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { IconButton } from '@material-ui/core';
-const NewRoomForm = ({ showNewRoomForm, setShowNewRoomForm, socket }) => {
+const NewRoomForm = ({ socket }) => {
     const [roomName, setRoomName] = useState('');
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -35,7 +35,7 @@ const NewRoomForm = ({ showNewRoomForm, setShowNewRoomForm, socket }) => {
         setRoomName('');
         setImage(null);
         setPreview(null);
-        setShowNewRoomForm(false);
+        openNewRoomForm();
     };
     return (
         <>

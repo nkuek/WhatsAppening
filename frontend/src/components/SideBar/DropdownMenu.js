@@ -21,7 +21,7 @@ const CustomIconButton = withStyles({
     },
 })(IconButton);
 
-const DropdownMenu = ({ openNewRoomForm }) => {
+const DropdownMenu = () => {
     const dispatch = useDispatch();
     const anchorRef = useRef(null);
     const [showDropdownMenu, setShowDropdownMenu] = useState(false);
@@ -34,6 +34,12 @@ const DropdownMenu = ({ openNewRoomForm }) => {
 
     const toggleDropdownMenu = () => {
         setShowDropdownMenu((prev) => !prev);
+    };
+    const openNewRoomForm = () => {
+        document
+            .querySelector('.newRoomFormContainer')
+            .classList.toggle('show');
+        setShowDropdownMenu(false);
     };
 
     return (

@@ -13,11 +13,18 @@
     background-color: #2a2f32;
 }
 
-.newRoomFormContainer {
-    width: 0;
-    display: none;
+.newRoomFormContainer,
+.profileContainer {
+    /* display: none; */
+    position: absolute;
+    left: -30%;
+    width: 30%;
     height: 100vh;
-    transition: 1000ms width;
+    transition: left 500ms;
+}
+.show {
+
+    left: 0%;
 }
 
 .sidebarContentBody,
@@ -94,19 +101,6 @@
     background-color: #212527;
 }
 
-.show {
-    width: 30%;
-    display: initial;
-}
-
-.hidden {
-    width: 0;
-    display: none;
-}
-
-.profileContainer {
-    display: none;
-}
 
 .profileBody {
     display: flex;

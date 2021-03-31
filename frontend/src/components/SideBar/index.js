@@ -29,14 +29,16 @@ const CustomIconButton = withStyles({
 const SideBar = ({ isLoaded, socket }) => {
     const sessionUser = useSelector((state) => state.session.user);
 
-    const [showNewRoomForm, setShowNewRoomForm] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
 
     const openNewRoomForm = () => {
         document
             .querySelector('.newRoomFormContainer')
             .classList.toggle('show');
-        document.querySelector('.sidebarContainer').classList.toggle('hidden');
+    };
+
+    const openProfile = () => {
+        document.querySelector('.profileContainer').classList.toggle('show');
     };
 
     return (
@@ -63,9 +65,7 @@ const SideBar = ({ isLoaded, socket }) => {
                                             <ChatIcon />
                                         </Tooltip>
                                     </CustomIconButton>
-                                    <DropdownMenu
-                                        openNewRoomForm={openNewRoomForm}
-                                    />
+                                    <DropdownMenu />
                                 </div>
                             ) : (
                                 <div className="loginSignup">
@@ -80,18 +80,11 @@ const SideBar = ({ isLoaded, socket }) => {
                 </div>
 
                 <div className="newRoomFormContainer">
-                    <NewRoomForm
-                        showNewRoomForm={showNewRoomForm}
-                        setShowNewRoomForm={setShowNewRoomForm}
-                        socket={socket}
-                    />
+                    <NewRoomForm socket={socket} />
                 </div>
 
                 <div className="profileContainer">
-                    <Profile
-                        setShowProfile={setShowProfile}
-                        user={sessionUser}
-                    />
+                    <Profile openProfile={openProfile} user={sessionUser} />
                 </div>
             </>
         )

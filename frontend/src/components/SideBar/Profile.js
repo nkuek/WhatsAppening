@@ -3,19 +3,24 @@ import { IconButton } from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import * as sessionActions from '../../store/session';
 
-const Profile = ({ setShowProfile, user }) => {
+const Profile = ({ user }) => {
     const dispatch = useDispatch();
     const logout = (e) => {
-        setShowProfile(false);
+        openProfile();
         dispatch(sessionActions.logout());
     };
+
+    const openProfile = () => {
+        document.querySelector('.profileContainer').classList.toggle('show');
+    };
+
     return (
         user && (
             <>
                 <div className="profileHeader">
                     <IconButton
                         style={{ color: 'white' }}
-                        onClick={() => setShowProfile(false)}
+                        onClick={openProfile}
                     >
                         <KeyboardBackspaceIcon />
                     </IconButton>

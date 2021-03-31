@@ -1,8 +1,8 @@
 import { IconButton } from '@material-ui/core';
 
-function ProfileButton({ user, showProfile, setShowProfile }) {
+function ProfileButton({ user }) {
     const openProfile = () => {
-        setShowProfile((prev) => !prev);
+        document.querySelector('.profileContainer').classList.toggle('show');
     };
     return (
         <div className="profileButtonContainer">
