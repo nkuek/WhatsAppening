@@ -6,15 +6,13 @@ import io from 'socket.io-client';
 import SideBar from './components/SideBar';
 import ChatRoom from './components/ChatRoom';
 
-const socket = io('localhost:5000');
+export const socket = io('localhost:5000');
 
 function App() {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
 
     const user = useSelector((state) => state.session.user);
-
-    console.log(isLoaded);
 
     useEffect(() => {
         if (isLoaded && user) dispatch(getUserRooms(user.id));
@@ -26,8 +24,12 @@ function App() {
             setIsLoaded(true);
         });
         socket.on('created room', (data) => {
-            console.log(data.adminId);
             dispatch(getUserRooms(data.adminId));
+        });
+
+        socket.on('load rooms', () => {
+            console.log('loading rooms');
+            dispatch(getUserRooms(user.id));
         });
 
         socket.emit('connection');

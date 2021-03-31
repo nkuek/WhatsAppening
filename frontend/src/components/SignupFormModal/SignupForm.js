@@ -1,4 +1,3 @@
-import { Avatar } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -17,7 +16,6 @@ function SignupFormPage({ setShowModal }) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState([]);
-    const [showSignupForm, setShowSignupForm] = useState(true);
 
     if (sessionUser) return <Redirect to="/" />;
 
@@ -39,10 +37,7 @@ function SignupFormPage({ setShowModal }) {
         if (password === confirmPassword) {
             setErrors([]);
             const formattedNumber = phoneNumber.replaceAll('-', '');
-            if (errors.length === 0) {
-                setShowModal(false);
-            }
-            return dispatch(
+            dispatch(
                 sessionActions.signup({
                     email,
                     name,
@@ -54,6 +49,9 @@ function SignupFormPage({ setShowModal }) {
             ).catch((res) => {
                 if (res.data && res.data.errors) setErrors(res.data.errors);
             });
+        }
+        if (errors.length === 0) {
+            setShowModal(false);
         }
         return setErrors([
             'Confirm Password field must be the same as the Password field',

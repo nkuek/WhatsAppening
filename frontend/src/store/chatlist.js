@@ -25,7 +25,7 @@ export const removeUserRooms = () => (dispatch) => {
 };
 
 const initialState = [];
-function chatRoomReducer(state = initialState, action) {
+function chatListReducer(state = initialState, action) {
     switch (action.type) {
         case GET_ROOMS:
             return action.rooms;
@@ -36,4 +36,4 @@ function chatRoomReducer(state = initialState, action) {
     }
 }
 
-export default chatRoomReducer;
+export default chatListReducer;

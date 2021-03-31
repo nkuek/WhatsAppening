@@ -1,4 +1,6 @@
 import { fetch } from './csrf.js';
+import imageUploader from './images';
+import { socket } from '../App';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
@@ -29,27 +31,24 @@ export const restoreUser = () => async (dispatch) => {
 
 export const signup = (user) => async (dispatch) => {
     const { name, phoneNumber, email, password, image, confirmPassword } = user;
-    console.log(user);
 
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('phoneNumber', phoneNumber);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('confirmPassword', confirmPassword);
-
-    if (image) formData.append('image', image);
+    let imageUrl;
+    if (image) imageUrl = await imageUploader(image);
+    console.log(imageUrl);
 
     const res = await fetch(`/api/users/`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-        body: formData,
+        body: JSON.stringify({
+            name,
+            phoneNumber,
+            email,
+            password,
+            imageUrl,
+            confirmPassword,
+        }),
     });
 
-    const data = await res;
-    dispatch(setUser(data.user));
+    dispatch(setUser(res.data));
 };
 
 export const logout = () => async (dispatch) => {
@@ -60,7 +59,7 @@ export const logout = () => async (dispatch) => {
     return response;
 };
 
-const initialState = { user: null };
+const initialState = { user: null, contacts: [] };
 
 function reducer(state = initialState, action) {
     let newState;
@@ -69,8 +68,7 @@ function reducer(state = initialState, action) {
             newState = Object.assign({}, state, { user: action.payload });
             return newState;
         case REMOVE_USER:
-            newState = Object.assign({}, state, { user: null });
-            return newState;
+            return initialState;
         default:
             return state;
     }

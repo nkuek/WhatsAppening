@@ -1,11 +1,19 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { IconButton } from '@material-ui/core';
+import { Avatar, IconButton } from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import * as sessionActions from '../../store/session';
 import { removeUserRooms } from '../../store/chatlist';
 import EditIcon from '@material-ui/icons/Edit';
 import ClearIcon from '@material-ui/icons/Clear';
+import { withStyles } from '@material-ui/styles';
+
+const CustomAvatar = withStyles({
+    root: {
+        width: '150px',
+        height: '150px',
+    },
+})(Avatar);
 
 const Profile = ({ user }) => {
     const editNameRef = useRef(null);
@@ -55,13 +63,6 @@ const Profile = ({ user }) => {
         document.querySelector('.profileContainer').classList.toggle('show');
     };
 
-    // const closeEditName = (e) => {
-
-    //     if (editNameRef.current === e.target) {
-    //         setShowEditName(false);
-    //     }
-    // };
-
     const closeEditName = (e) => {
         if (e.target !== editNameRef.current && showEditName)
             setShowEditName(false);
@@ -82,20 +83,12 @@ const Profile = ({ user }) => {
                 </IconButton>
                 <div className="profileTitle">Profile</div>
             </div>
-            <form
-                // ref={editNameRef}
-                // onClick={closeEditName}
-                className="profileBody"
-            >
+            <form className="profileBody">
                 <div className="fileWrapper">
-                    <img
+                    <CustomAvatar
                         className="imgPreview"
-                        src={
-                            !preview
-                                ? 'https://i.stack.imgur.com/l60Hf.png'
-                                : preview
-                        }
-                    ></img>
+                        src={preview && preview}
+                    ></CustomAvatar>
                     <input
                         onChange={updateFile}
                         className="fileInput"
@@ -131,7 +124,7 @@ const Profile = ({ user }) => {
                                 <ClearIcon
                                     style={{
                                         position: 'relative',
-                                        left: '-60px',
+                                        left: '-30px',
                                         top: '2px',
                                         cursor: 'pointer',
                                     }}
@@ -141,11 +134,15 @@ const Profile = ({ user }) => {
                         )}
                     </div>
                 </div>
-                <button className="editProfileSubmit">Edit</button>
+                {showEditName && (
+                    <button className="editProfileSubmit">Edit</button>
+                )}
+                <div className="profileLogoutButtonContainer">
+                    <button onClick={logout} className="profileLogoutButton">
+                        Logout
+                    </button>
+                </div>
             </form>
-            <button onClick={logout} className="profileLogoutButton">
-                Logout
-            </button>
         </>
     );
 };

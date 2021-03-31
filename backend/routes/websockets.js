@@ -21,21 +21,12 @@ io.on('connection', (socket) => {
         console.log(name, body, chatRoomId);
     });
 
+    socket.on('new user', () => {
+        socket.emit('load rooms');
+    });
+
     socket.on('new room', async (data) => {
-        const { name, adminId, image } = data;
-        singleMulterUpload('image');
-        let profileImageUrl = null;
-        if (data.image)
-            try {
-                profileImageUrl = await singlePublicFileUpload(
-                    String(data.image)
-                );
-            } catch (e) {
-                console.error(e);
-            }
-        console.log(profileImageUrl);
-        db.ChatRoom.create({ name, adminId, imageUrl: profileImageUrl });
-        socket.emit('created room', { adminId });
+        socket.emit('created room', { adminId: data.adminId });
     });
 });
 

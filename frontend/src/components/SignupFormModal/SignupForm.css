@@ -81,13 +81,6 @@
     overflow: hidden;
 }
 
-.fileWrapper img {
-    height: 150px;
-    width: 150px;
-    object-fit: cover;
-    z-index: 1;
-}
-
 .fileInput {
     position: absolute;
     bottom: 0;

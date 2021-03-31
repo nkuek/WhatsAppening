@@ -1,12 +1,23 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import { IconButton } from '@material-ui/core';
+import { Avatar, IconButton } from '@material-ui/core';
+import { createNewRoom } from '../../store/chatroom';
+import { withStyles } from '@material-ui/styles';
+
+const CustomAvatar = withStyles({
+    root: {
+        width: '150px',
+        height: '150px',
+    },
+})(Avatar);
+
 const NewRoomForm = ({ socket }) => {
     const user = useSelector((state) => state.session.user);
+    const dispatch = useDispatch();
 
     const [roomName, setRoomName] = useState('');
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState('');
     const [preview, setPreview] = useState(user && user.profileUrl);
 
     const updateFile = (e) => {
@@ -22,25 +33,28 @@ const NewRoomForm = ({ socket }) => {
         }
     };
 
+    const resetForm = () => {
+        setTimeout(() => {
+            setRoomName('');
+            setImage(null);
+            setPreview(null);
+            document.querySelector('.fileInput').value = '';
+        }, 500);
+    };
     const openNewRoomForm = () => {
         document
             .querySelector('.newRoomFormContainer')
             .classList.toggle('show');
         document.querySelector('.sidebarContainer').classList.toggle('hidden');
-        setTimeout(() => {
-            setRoomName('');
-            setImage(null);
-            setPreview(null);
-        }, 500);
+        resetForm();
     };
 
     const handleNewRoomSubmit = (e) => {
         e.preventDefault();
-        console.log(image);
-        socket.emit('new room', { name: roomName, adminId: user.id, image });
-        setRoomName('');
-        setImage(null);
-        setPreview(null);
+        dispatch(createNewRoom(roomName, user.id, image)).then(() =>
+            socket.emit('new room', { adminId: user.id })
+        );
+        resetForm();
         openNewRoomForm();
     };
     return (
@@ -56,14 +70,10 @@ const NewRoomForm = ({ socket }) => {
             </div>
             <form onSubmit={handleNewRoomSubmit} className="newRoomForm">
                 <div className="fileWrapper">
-                    <img
+                    <CustomAvatar
                         className="imgPreview"
-                        src={
-                            !preview
-                                ? 'https://i.stack.imgur.com/l60Hf.png'
-                                : preview
-                        }
-                    ></img>
+                        src={preview && preview}
+                    ></CustomAvatar>
                     <input
                         onChange={updateFile}
                         className="fileInput"
