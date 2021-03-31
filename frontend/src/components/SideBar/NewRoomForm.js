@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { IconButton } from '@material-ui/core';
 const NewRoomForm = ({ socket }) => {
+    const user = useSelector((state) => state.session.user);
+
     const [roomName, setRoomName] = useState('');
     const [image, setImage] = useState(null);
-    const [preview, setPreview] = useState(null);
-
-    const user = useSelector((state) => state.session.user);
+    const [preview, setPreview] = useState(user && user.profileUrl);
 
     const updateFile = (e) => {
         const file = e.target.files[0];
@@ -27,10 +27,16 @@ const NewRoomForm = ({ socket }) => {
             .querySelector('.newRoomFormContainer')
             .classList.toggle('show');
         document.querySelector('.sidebarContainer').classList.toggle('hidden');
+        setTimeout(() => {
+            setRoomName('');
+            setImage(null);
+            setPreview(null);
+        }, 500);
     };
 
     const handleNewRoomSubmit = (e) => {
         e.preventDefault();
+        console.log(image);
         socket.emit('new room', { name: roomName, adminId: user.id, image });
         setRoomName('');
         setImage(null);

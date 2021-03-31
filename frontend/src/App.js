@@ -4,26 +4,16 @@ import * as sessionActions from './store/session';
 import { getUserRooms } from './store/chatlist';
 import io from 'socket.io-client';
 import SideBar from './components/SideBar';
+import ChatRoom from './components/ChatRoom';
 
 const socket = io('localhost:5000');
 
 function App() {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
-    const [messageInput, setMessageInput] = useState('');
 
     const user = useSelector((state) => state.session.user);
 
-    const handleNewMessage = (e) => {
-        e.preventDefault();
-        socket.emit('new message', {
-            name: user.name,
-            authorId: user.id,
-            body: messageInput,
-            chatRoomId: 1,
-        });
-        setMessageInput('');
-    };
     console.log(isLoaded);
 
     useEffect(() => {
@@ -46,6 +36,7 @@ function App() {
     return (
         <>
             <SideBar isLoaded={isLoaded} socket={socket} />
+            <ChatRoom socket={socket} user={user} />
             {/* <form onSubmit={handleNewMessage}>
                 <label>Message</label>
                 <input

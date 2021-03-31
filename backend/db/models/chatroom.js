@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     ChatRoom.associate = function (models) {
         ChatRoom.belongsTo(models.User, {
             foreignKey: 'adminId',
+            onDelete: 'CASCADE',
         });
         ChatRoom.hasMany(models.Message, { foreignKey: 'chatRoomId' });
         ChatRoom.belongsToMany(models.User, {
@@ -19,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
             through: 'Participant',
             foreignKey: 'roomId',
             otherKey: 'userId',
+            onDelete: 'CASCADE',
         });
     };
     return ChatRoom;

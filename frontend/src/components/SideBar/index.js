@@ -47,26 +47,30 @@ const SideBar = ({ isLoaded, socket }) => {
                 <div className="sidebarContainer">
                     <div className="sidebarContent">
                         <div className="sidebarContentHeader">
-                            <ProfileButton
-                                setShowProfile={setShowProfile}
-                                showProfile={showProfile}
-                                user={sessionUser}
-                            />
                             {sessionUser ? (
-                                <div className="sidebarButtonsContainer">
-                                    <CustomIconButton onClick={openNewRoomForm}>
-                                        <Tooltip
-                                            title="New Chat"
-                                            key="newChat"
-                                            placement="bottom"
-                                            className="tooltip"
-                                            arrow={true}
+                                <>
+                                    <ProfileButton
+                                        setShowProfile={setShowProfile}
+                                        showProfile={showProfile}
+                                        user={sessionUser}
+                                    />
+                                    <div className="sidebarButtonsContainer">
+                                        <CustomIconButton
+                                            onClick={openNewRoomForm}
                                         >
-                                            <ChatIcon />
-                                        </Tooltip>
-                                    </CustomIconButton>
-                                    <DropdownMenu />
-                                </div>
+                                            <Tooltip
+                                                title="New Chat"
+                                                key="newChat"
+                                                placement="bottom"
+                                                className="tooltip"
+                                                arrow={true}
+                                            >
+                                                <ChatIcon />
+                                            </Tooltip>
+                                        </CustomIconButton>
+                                        <DropdownMenu />
+                                    </div>{' '}
+                                </>
                             ) : (
                                 <div className="loginSignup">
                                     <LoginFormModal /> <SignupFormModal />

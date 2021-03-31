@@ -50,7 +50,8 @@ router.post(
     asyncHandler(async (req, res) => {
         console.log('hello');
         const { email, password, name, phoneNumber } = req.body;
-        const profileImageUrl = await singlePublicFileUpload(req.file);
+        let profileImageUrl = null;
+        if (req.file) profileImageUrl = await singlePublicFileUpload(req.file);
 
         const user = await User.signup({
             email,

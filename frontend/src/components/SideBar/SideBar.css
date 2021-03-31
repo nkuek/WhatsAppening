@@ -1,8 +1,10 @@
 .sidebarContainer {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 35%;
     height: 100vh;
+    position: relative;
+    z-index: 2
 }
 .sidebarContentHeader {
     display: flex;
@@ -10,6 +12,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0px 10px;
+    height: 108px;
     background-color: #2a2f32;
 }
 
@@ -17,13 +20,17 @@
 .profileContainer {
     /* display: none; */
     position: absolute;
-    left: -30%;
-    width: 30%;
-    transition: left 300ms ease-in-out;
+    left: -35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 35%;
+    transition: all 300ms ease-in-out;
+    z-index: 1;
 }
 .show {
-
     left: 0%;
+    z-index: 3;
 }
 
 .sidebarContentBody,
@@ -48,7 +55,7 @@
     align-items: center;
     background-color: #2a2f32;
     color: white;
-    height: 65px;
+    height: 108px;
     border-bottom: 1px solid rgba(255, 255, 255, .1);
 }
 
@@ -116,6 +123,10 @@
     height: 200px;
 }
 
+.default img {
+    object-fit: cover;
+}
+
 .profileInformation {
     box-sizing: border-box;
     padding: 30px;
@@ -144,4 +155,14 @@
 
 .chatListContainer {
     color: white;
+}
+
+.userNameAndEdit {
+    display: flex;
+    justify-content: space-between;
+}
+
+.userNameEdit {
+    padding: 5px;
+    border-radius: 5px;
 }

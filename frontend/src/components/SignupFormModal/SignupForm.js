@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import './SignupForm.css';
+import LoginFormModal from '../LoginFormModal';
 
-function SignupFormPage() {
+function SignupFormPage({ setShowModal }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [email, setEmail] = useState('');
@@ -16,6 +17,7 @@ function SignupFormPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState([]);
+    const [showSignupForm, setShowSignupForm] = useState(true);
 
     if (sessionUser) return <Redirect to="/" />;
 
@@ -37,7 +39,10 @@ function SignupFormPage() {
         if (password === confirmPassword) {
             setErrors([]);
             const formattedNumber = phoneNumber.replaceAll('-', '');
-            dispatch(
+            if (errors.length === 0) {
+                setShowModal(false);
+            }
+            return dispatch(
                 sessionActions.signup({
                     email,
                     name,
@@ -53,6 +58,11 @@ function SignupFormPage() {
         return setErrors([
             'Confirm Password field must be the same as the Password field',
         ]);
+    };
+
+    const handleAccountClick = () => {
+        setShowModal(false);
+        return <LoginFormModal />;
     };
 
     return (
@@ -141,9 +151,17 @@ function SignupFormPage() {
                             required
                         />
                     </div>
-                    <button className="signupFormSubmit" type="submit">
-                        Sign Up
-                    </button>
+                    <div className="signupFormFooter">
+                        <button className="signupFormSubmit" type="submit">
+                            Sign Up
+                        </button>
+                        <div
+                            onClick={handleAccountClick}
+                            className="hasAnAccount"
+                        >
+                            Already have an account?
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

@@ -1,22 +1,39 @@
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { IconButton } from '@material-ui/core';
 
-function ProfileButton({ user }) {
+function ProfileButton() {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const user = useSelector((state) => state.session.user);
+    console.log(user);
+
+    useEffect(() => {
+        if (user) setIsLoaded(true);
+    }, [user]);
+
     const openProfile = () => {
         document.querySelector('.profileContainer').classList.toggle('show');
     };
     return (
-        <div className="profileButtonContainer">
-            {user && user.profileUrl ? (
+        isLoaded && (
+            <div className="profileButtonContainer">
                 <IconButton onClick={openProfile}>
-                    <img className="userProfilePicture" src={user.profileUrl} />
+                    {user.profileUrl ? (
+                        <img
+                            className="userProfilePicture"
+                            src={user.profileUrl}
+                        />
+                    ) : (
+                        <img
+                            className="userProfilePicture default"
+                            src={
+                                'https://qph.fs.quoracdn.net/main-qimg-2b21b9dd05c757fe30231fac65b504dd'
+                            }
+                        />
+                    )}
                 </IconButton>
-            ) : (
-                <i
-                    style={{ color: '#B1B3B5' }}
-                    className="fas fa-user-circle"
-                />
-            )}
-        </div>
+            </div>
+        )
     );
 }
 

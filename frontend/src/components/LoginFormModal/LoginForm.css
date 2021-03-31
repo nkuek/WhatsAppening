@@ -1,6 +1,5 @@
 .loginFormContainer {
     padding: 40px;
-    width: 20vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,23 +15,50 @@
     width: 100%;
 }
 
+.loginFormInputContainer {
+    display: flex;
+    flex-direction: column;
+    border-radius: 3px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.loginFormInputContainer label {
+    margin-bottom: 10px;
+}
+
+.loginFormInputContainer input {
+    padding: 5px;
+    width: 300px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+}
+
+.loginFormInputContainer input:focus {
+    padding-left: 10px;
+    border: 2px solid #2878ff;
+}
+
+
+
 .loginFormHeader {
     font-size: 2em;
     margin-bottom: 20px;
 }
 
-.loginFormButtonContainer {
+/* .loginFormButtonContainer {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    width: 100%;
-}
+} */
 
 .loginFormButton {
-    margin: 10px 0px;
-    border-radius: 5px;
+    border-radius: 10px;
     color: white;
-    padding: 5px 10px;
+    padding: 10px;
+    margin-left: 10px;
+    margin-bottom: 5px;
     background-color: #2878ff;
 }
 

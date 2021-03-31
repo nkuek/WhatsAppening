@@ -40,7 +40,7 @@ function LoginForm() {
                             <li key={idx}>{error}</li>
                         ))}
                     </ul>
-                    <div className="formInputContainer">
+                    <div className="loginFormInputContainer">
                         <label>Phone Number or Email</label>
                         <input
                             placeholder="Phone Number or Email"
@@ -50,7 +50,7 @@ function LoginForm() {
                             required
                         />
                     </div>
-                    <div className="formInputContainer">
+                    <div className="loginFormInputContainer">
                         <label>Password</label>
                         <input
                             placeholder="Password"
@@ -64,6 +64,8 @@ function LoginForm() {
                         <button className="loginFormButton" type="submit">
                             Login
                         </button>
+                    </div>
+                    <div className="loginFormButtonContainer">
                         <button
                             className="loginFormButton"
                             onClick={handleDemoUser}

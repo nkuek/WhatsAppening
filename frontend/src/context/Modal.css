@@ -10,15 +10,30 @@
 }
 
 #modal-background {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
+  margin: auto;
+  z-index: 5;
 }
 
 #modal-content {
-  position: absolute;
-  color: white;
+    position: absolute;
+    inset: 50% auto auto 50%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: #2a2f32;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    margin-right: -50%;
+}
+
+#modal-content > form {
+    display: flex;
+    flex-direction: column;
 }

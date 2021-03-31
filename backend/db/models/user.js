@@ -64,6 +64,7 @@ module.exports = (sequelize, DataTypes) => {
             through: 'Participant',
             foreignKey: 'userId',
             otherKey: 'roomId',
+            onDelete: 'CASCADE',
         });
         User.hasMany(models.Message, {
             foreignKey: 'authorId',

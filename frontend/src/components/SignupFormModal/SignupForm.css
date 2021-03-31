@@ -1,7 +1,7 @@
 .signupFormContainer {
     padding: 40px;
-    width: 20vw;
     display: flex;
+    width: 500px;
     flex-direction: column;
     align-items: center;
 
@@ -14,7 +14,7 @@
 .formBody {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     width: 100%;
 }
 
@@ -28,6 +28,7 @@
 .formInputContainer {
     display: flex;
     flex-direction: column;
+    margin: 0px 50px;
     margin-top: 10px;
 }
 
@@ -41,6 +42,7 @@
     border-radius: 5px;
     box-sizing: border-box;
     border: 2px solid transparent;
+
 }
 
 .formInputContainer input:focus {
@@ -49,7 +51,8 @@
 }
 
 .signupFormSubmit {
-    margin-top: 10px;
+    margin: 30px 50px;
+    padding: 10px 20px;
     color: white;
     border-radius: 5px;
     background-color: #2878ff;
@@ -126,4 +129,19 @@
 
 .fileInput:hover {
     opacity: 1;
+}
+
+.signupFormFooter {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 50px;
+    text-align: center;
+}
+
+.hasAnAccount {
+    cursor: pointer;
+}
+
+.hasAnAccount:hover {
+    color: teal;
 }
