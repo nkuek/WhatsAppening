@@ -14,6 +14,8 @@ const NewRoomForm = ({ setShowNewRoomForm, socket }) => {
     const handleNewRoomSubmit = (e) => {
         e.preventDefault();
         socket.emit('new room', { name: roomName, adminId: user.id });
+        setRoomName('');
+        setShowNewRoomForm(false);
     };
     return (
         <div className="newRoomFormContainer">

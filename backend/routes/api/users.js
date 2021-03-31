@@ -5,6 +5,7 @@ const asyncHandler = require('express-async-handler');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
+const { ChatRoom } = require('../../db/models');
 
 const router = express.Router();
 
@@ -62,6 +63,19 @@ router.post(
         return res.json({
             user,
         });
+    })
+);
+
+router.put(
+    '/',
+    asyncHandler(async (req, res) => {
+        const { userId } = req.body;
+        const rooms = await ChatRoom.findAll({
+            where: {
+                adminId: userId,
+            },
+        });
+        return res.json({ rooms });
     })
 );
 

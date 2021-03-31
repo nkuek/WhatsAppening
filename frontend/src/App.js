@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
-import SignupFormPage from './components/SignupFormModal/SignupForm';
 import * as sessionActions from './store/session';
+import { getUserRooms } from './store/chatlist';
 import io from 'socket.io-client';
 import SideBar from './components/SideBar';
 
@@ -28,17 +27,23 @@ function App() {
     };
 
     useEffect(() => {
+        if (isLoaded && user) dispatch(getUserRooms(user.id));
+    }, [isLoaded, user]);
+
+    useEffect(() => {
         socket.on('new user', () => {
             setIsConnected(true);
             console.log('connected');
+            dispatch(sessionActions.restoreUser());
+            setIsLoaded(true);
+        });
+        socket.on('created room', (data) => {
+            console.log(data.adminId);
+            dispatch(getUserRooms(data.adminId));
         });
 
         socket.emit('connection');
     }, []);
-
-    useEffect(() => {
-        dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-    }, [dispatch]);
 
     return (
         <>

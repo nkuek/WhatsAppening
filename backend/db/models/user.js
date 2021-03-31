@@ -58,15 +58,25 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
     User.associate = function (models) {
-        User.hasMany(models.ChatRoom, { foreignKey: 'admindId', as: 'admin' });
+        User.hasMany(models.ChatRoom, {
+            foreignKey: 'adminId',
+            as: 'admin',
+            onDelete: 'CASCADE',
+        });
         User.belongsToMany(models.ChatRoom, {
             as: 'participants',
             through: 'Participant',
             foreignKey: 'userId',
             otherKey: 'roomId',
         });
-        User.hasMany(models.Message, { foreignKey: 'authorId' });
-        User.hasMany(models.MessageReaction, { foreignKey: 'userId' });
+        User.hasMany(models.Message, {
+            foreignKey: 'authorId',
+            onDelete: 'CASCADE',
+        });
+        User.hasMany(models.MessageReaction, {
+            foreignKey: 'userId',
+            onDelete: 'CASCADE',
+        });
         User.belongsToMany(models.User, {
             as: 'contacts',
             through: 'Contact',
