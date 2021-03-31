@@ -1,16 +1,15 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {
-    MenuList,
-    MenuItem,
     Popper,
     Paper,
     IconButton,
     ClickAwayListener,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
+import { removeUserRooms } from '../../store/chatlist';
 
 const CustomIconButton = withStyles({
     root: {
@@ -29,6 +28,7 @@ const DropdownMenu = () => {
     const logout = (e) => {
         e.preventDefault();
         setShowDropdownMenu(false);
+        dispatch(removeUserRooms());
         dispatch(sessionActions.logout());
     };
 

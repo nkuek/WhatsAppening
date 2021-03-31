@@ -1,10 +1,15 @@
 import { fetch } from './csrf.js';
 
-export const GET_ROOMS = 'chat/getRooms';
+const GET_ROOMS = 'chat/getRooms';
+const REMOVE_ROOMS = 'chat/removeRooms';
 
-export const getRooms = (rooms) => ({
+const getRooms = (rooms) => ({
     type: GET_ROOMS,
     rooms,
+});
+
+const removeRooms = () => ({
+    type: REMOVE_ROOMS,
 });
 
 export const getUserRooms = (userId) => async (dispatch) => {
@@ -15,11 +20,17 @@ export const getUserRooms = (userId) => async (dispatch) => {
     return dispatch(getRooms(res.data.rooms));
 };
 
+export const removeUserRooms = () => (dispatch) => {
+    dispatch(removeRooms());
+};
+
 const initialState = [];
 function chatRoomReducer(state = initialState, action) {
     switch (action.type) {
         case GET_ROOMS:
             return action.rooms;
+        case REMOVE_ROOMS:
+            return initialState;
         default:
             return state;
     }

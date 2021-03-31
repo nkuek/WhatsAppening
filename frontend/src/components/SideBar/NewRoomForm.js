@@ -60,7 +60,7 @@ const NewRoomForm = ({ socket }) => {
                     ></img>
                     <input
                         onChange={updateFile}
-                        class="fileInput"
+                        className="fileInput"
                         type="file"
                         accept="image/gif,image/jpeg,image/jpg,image/png"
                     ></input>

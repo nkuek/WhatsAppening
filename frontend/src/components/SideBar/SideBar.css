@@ -6,7 +6,7 @@
 }
 .sidebarContentHeader {
     display: flex;
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
     justify-content: space-between;
     align-items: center;
     padding: 0px 10px;
@@ -19,8 +19,7 @@
     position: absolute;
     left: -30%;
     width: 30%;
-    height: 100vh;
-    transition: left 500ms;
+    transition: left 300ms ease-in-out;
 }
 .show {
 
@@ -49,6 +48,8 @@
     align-items: center;
     background-color: #2a2f32;
     color: white;
+    height: 65px;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
 }
 
 .newRoomForm {
@@ -139,4 +140,8 @@
 
 .profileLogoutButton:hover {
     background-color: #5895ff;
+}
+
+.chatListContainer {
+    color: white;
 }

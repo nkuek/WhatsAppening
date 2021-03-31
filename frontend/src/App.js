@@ -46,14 +46,14 @@ function App() {
     return (
         <>
             <SideBar isLoaded={isLoaded} socket={socket} />
-            <form onSubmit={handleNewMessage}>
+            {/* <form onSubmit={handleNewMessage}>
                 <label>Message</label>
                 <input
                     onChange={(e) => setMessageInput(e.target.value)}
                     value={messageInput}
                 ></input>
                 <button>Send</button>
-            </form>
+            </form> */}
         </>
     );
 }

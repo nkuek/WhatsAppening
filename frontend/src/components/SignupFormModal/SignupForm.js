@@ -76,7 +76,7 @@ function SignupFormPage() {
                         }
                     ></img>
                     <input
-                        class="fileInput"
+                        className="fileInput"
                         type="file"
                         accept="image/gif,image/jpeg,image/jpg,image/png"
                         onChange={updateFile}
