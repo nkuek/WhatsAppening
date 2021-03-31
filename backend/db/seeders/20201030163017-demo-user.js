@@ -9,8 +9,7 @@ module.exports = {
             [
                 {
                     email: 'demo@user.io',
-                    firstName: 'Demo',
-                    lastName: 'Lition',
+                    name: 'Demo-lition',
                     hashedPassword: bcrypt.hashSync('password'),
                     profileUrl:
                         'https://d92mrp7hetgfk.cloudfront.net/images/sites/misc/App_Academy_logo-8/original.png?1567098952',
@@ -18,29 +17,25 @@ module.exports = {
                 },
                 {
                     email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
+                    name: faker.name.findName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
                     phoneNumber: '5555555556',
                 },
                 {
                     email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
+                    name: faker.name.findName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
                     phoneNumber: '5555555557',
                 },
                 {
                     email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
+                    name: faker.name.findName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
                     phoneNumber: '5555555558',
                 },
                 {
                     email: faker.internet.email(),
-                    firstName: faker.name.firstName(),
-                    lastName: faker.name.lastName(),
+                    name: faker.name.findName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
                     phoneNumber: '5555555559',
                 },

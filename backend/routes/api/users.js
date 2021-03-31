@@ -2,6 +2,7 @@ const express = require('express');
 const { check } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
@@ -14,12 +15,9 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .isEmail()
         .withMessage('Please provide a valid email.'),
-    check('firstName')
+    check('name')
         .exists({ checkFalsy: true })
-        .withMessage('First name cannot be blank'),
-    check('lastName')
-        .exists({ checkFalsy: true })
-        .withMessage('Last name cannot be blank'),
+        .withMessage('Name cannot be blank'),
     check('phoneNumber')
         .exists({ checkFalsy: true })
         .isMobilePhone()
@@ -47,15 +45,21 @@ const validateSignup = [
 // Sign up
 router.post(
     '/',
-    validateSignup,
+    // validateSignup,
+    singleMulterUpload('image'),
     asyncHandler(async (req, res) => {
-        const { email, password, firstName, lastName, phoneNumber } = req.body;
+        console.log('hello');
+        const { email, password, name, phoneNumber } = req.body;
+        const profileImageUrl = await singlePublicFileUpload(req.file);
+        console.log('==========');
+        console.log(profileImageUrl);
+        console.log('==========');
         const user = await User.signup({
             email,
             password,
-            firstName,
-            lastName,
+            name,
             phoneNumber,
+            profileImageUrl,
         });
 
         await setTokenCookie(res, user);

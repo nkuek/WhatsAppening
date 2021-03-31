@@ -13,11 +13,7 @@ module.exports = {
                 allowNull: false,
                 unique: true,
             },
-            firstName: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-            lastName: {
+            name: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
