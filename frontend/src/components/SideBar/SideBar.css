@@ -84,7 +84,7 @@
 
 .newRoomFormInputContainer input {
     padding: 10px 0px;
-    padding-left: 20px;
+    padding-left: 50px;
     background-color: #2a2f32;
     color: white;
     font: inherit;
@@ -96,6 +96,34 @@
 
 .newRoomFormInputContainer input:focus {
     border-color:#2878ff
+}
+
+.search.newRoomFormInputContainer {
+    display: flex;
+}
+
+.contacts {
+    font-size: 2em;
+}
+
+.contactsContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    padding-top: 20px;
+    position: relative;
+    z-index: 3;
+    background-color: #131C21;
+    box-sizing: border-box;
+    top: 0;
+    transition: top 400ms;
+}
+
+.searching {
+    top: -276px;
+    min-height: 100%;
+    height: auto;
 }
 
 .dropdownContainer {
