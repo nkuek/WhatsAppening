@@ -78,6 +78,12 @@
     width: 80%;
 }
 
+.newRoomFormDescription {
+    color: white;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
 .newRoomFormInputContainer input {
     padding: 10px 0px;
     padding-left: 20px;
@@ -88,6 +94,10 @@
     border: 1px solid gray;
     width: 100%;
     font-size: .8em;
+}
+
+.newRoomFormInputContainer input:focus {
+    border-color:#2878ff
 }
 
 .dropdownContainer {

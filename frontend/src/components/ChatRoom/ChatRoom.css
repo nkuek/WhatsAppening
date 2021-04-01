@@ -54,7 +54,6 @@
     height: 100%;
 }
 
-
 .chatRoomMessageInput {
     padding: 15px;
     border: none;
@@ -63,4 +62,37 @@
     color: #fff;
     font-size: 1.2em;
     background-color: #33383b;
+}
+
+.chatRoomMessageContainer {
+    height: fit-content;
+    display: flex;
+    padding: 0px 100px;
+}
+
+.chatRoomMessage {
+    margin: 5px;
+    width: fit-content;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.chatRoomMessageContainer.sent {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.chatRoomMessage.sent::after {
+    position: absolute;
+    right: 30px;
+    top: -15px;
+    border-top: none;
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    border-bottom: 15px solid black;
+}
+
+.chatRoomMessage.sent {
+    background-color: #056162;
+    position: relative;
 }

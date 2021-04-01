@@ -69,7 +69,7 @@ const SideBar = ({ isLoaded, socket }) => {
                                             </Tooltip>
                                         </CustomIconButton>
                                         <DropdownMenu />
-                                    </div>{' '}
+                                    </div>
                                 </>
                             ) : (
                                 <div className="loginSignup">

@@ -43,9 +43,25 @@ const ChatRoom = ({ socket, user }) => {
                     <div className="chatRoomName">{chatRoom.name}</div>
                 </header>
                 <div className="chatRoomMessageList">
-                    {chatRoom.messages.map((message) => (
-                        <div className="chatRoomMessage">{message.body}</div>
-                    ))}
+                    {chatRoom.messages.map((message) =>
+                        message.authorId === user.id ? (
+                            <div
+                                key={message.id}
+                                className="chatRoomMessageContainer sent"
+                            >
+                                <div className="chatRoomMessage sent">
+                                    {message.body}
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="chatRoomMessageContainer received">
+                                <div classname="chatRoomMessageSender"></div>
+                                <div className="chatRoomMessage received">
+                                    {message.body}
+                                </div>
+                            </div>
+                        )
+                    )}
                 </div>
                 <footer className="chatRoomMessageFooter">
                     <form

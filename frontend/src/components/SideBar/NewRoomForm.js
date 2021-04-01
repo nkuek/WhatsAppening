@@ -68,11 +68,8 @@ const NewRoomForm = ({ socket }) => {
                 </IconButton>
                 <div className="newRoomFormTitle">New Chat</div>
             </div>
-            <div className="newGroupButton">
-                New Group
-                <Avatar />
-            </div>
             <form onSubmit={handleNewRoomSubmit} className="newRoomForm">
+                <h1 className="newRoomFormDescription">Create a new group</h1>
                 <div className="fileWrapper">
                     <CustomAvatar
                         className="imgPreview"

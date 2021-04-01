@@ -41,7 +41,19 @@ router.put(
         const { chatRoomId } = req.body;
         const chatRoom = await ChatRoom.findByPk(chatRoomId);
         const messages = await chatRoom.getMessages();
-        return res.json({ chatRoom, messages });
+
+        // const users = await Promise.all(
+        //     messages.map(async (message) => message.getUser())
+        // );
+
+        let messagesAndUsers = await Promise.all(
+            messages.map(async (message) => {
+                let user = await message.getUser();
+                return { ...message.dataValues, author: user.name };
+            })
+        );
+
+        return res.json({ chatRoom, messagesAndUsers });
     })
 );
 
