@@ -16,7 +16,7 @@ const CustomAvatar = withStyles({
 
 function SignupFormPage({ showModal, setShowModal }) {
     const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.session.user);
+    const session = useSelector((state) => state.session);
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -26,13 +26,7 @@ function SignupFormPage({ showModal, setShowModal }) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
-    const [formSubmitted, setFormSubmitted] = useState(false);
-
-    useEffect(() => {
-        if (formSubmitted) dispatch(sessionActions.restoreUser());
-    }, [formSubmitted]);
-
-    if (sessionUser) return <Redirect to="/" />;
+    if (session.user && session.isLoaded) return <Redirect to="/" />;
 
     const updateFile = (e) => {
         const file = e.target.files[0];
@@ -52,39 +46,38 @@ function SignupFormPage({ showModal, setShowModal }) {
         if (password === confirmPassword) {
             setErrors([]);
 
-            return dispatch(
+            dispatch(
                 sessionActions.signup({
-                    name,
                     email,
+                    name,
+                    phoneNumber,
                     password,
                     confirmPassword,
-                    phoneNumber,
                 })
             )
-                .then((res) => {
-                    if (!res.data.errors) {
-                        console.log('okay');
-                        nextPage();
-                    }
+                .then(() => {
+                    nextPage();
                 })
-                .catch(async (res) => {
-                    if (res.data && res.data.errors) {
-                        setErrors(res.data.errors);
-                    }
+                .catch((res) => {
+                    if (res.data && res.data.errors) setErrors(res.data.errors);
                 });
+        } else {
+            setErrors(['Passwords must match']);
         }
     };
 
     const nextPage = () => {
-        console.log('next');
         document.querySelector('.signupFormContainer').classList.toggle('next');
     };
 
     const handlePictureUpload = () => {
-        dispatch(sessionActions.addProfilePicture(image));
+        dispatch(sessionActions.addProfilePicture(image)).then(() =>
+            window.location.reload()
+        );
     };
 
     const handleSkip = () => {
+        dispatch(sessionActions.loadUserState());
         window.location.reload();
     };
 

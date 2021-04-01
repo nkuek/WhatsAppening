@@ -14,44 +14,31 @@ export const socket = io(
 
 function App() {
     const dispatch = useDispatch();
-    const [isLoaded, setIsLoaded] = useState(false);
 
-    const user = useSelector((state) => state.session.user);
+    const session = useSelector((state) => state.session);
 
     useEffect(() => {
-        if (isLoaded && user) {
-            dispatch(getUserRooms(user.id));
+        if (session.user && session.isLoaded) {
+            dispatch(getUserRooms(session.user.id));
         }
-    }, [isLoaded, user, dispatch]);
+    }, [session, dispatch]);
 
     useEffect(() => {
         socket.on('new user', () => {
+            dispatch(sessionActions.loadUserState());
             dispatch(sessionActions.restoreUser());
-            setIsLoaded(true);
         });
         socket.on('created room', (data) => {
             dispatch(getUserRooms(data.adminId));
         });
-
-        // socket.on('load rooms', (data) => {
-        //     dispatch(getUserRooms(data.userId));
-        // });
 
         socket.emit('connection');
     }, []);
 
     return (
         <>
-            <SideBar isLoaded={isLoaded} socket={socket} />
-            <ChatRoom socket={socket} user={user} />
-            {/* <form onSubmit={handleNewMessage}>
-                <label>Message</label>
-                <input
-                    onChange={(e) => setMessageInput(e.target.value)}
-                    value={messageInput}
-                ></input>
-                <button>Send</button>
-            </form> */}
+            <SideBar socket={socket} />
+            <ChatRoom socket={socket} user={session.user} />
         </>
     );
 }

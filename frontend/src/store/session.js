@@ -4,6 +4,8 @@ import { socket } from '../App';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const LOAD_USER = 'session/loadUser';
+const UNLOAD_USER = 'session/unloadUser';
 
 const setUser = (user) => ({
     type: SET_USER,
@@ -12,6 +14,14 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
     type: REMOVE_USER,
+});
+
+const loadUser = () => ({
+    type: LOAD_USER,
+});
+
+const unloadUser = () => ({
+    type: UNLOAD_USER,
 });
 
 export const login = ({ credential, password }) => async (dispatch) => {
@@ -42,6 +52,16 @@ export const signup = (user) => async (dispatch) => {
             confirmPassword,
         }),
     });
+    dispatch(unloadUser());
+    return dispatch(setUser(res.data.user));
+};
+
+export const loadUserState = () => (dispatch) => {
+    dispatch(loadUser());
+};
+
+export const unloadUserState = () => (dispatch) => {
+    dispatch(unloadUser());
 };
 
 export const addProfilePicture = (image) => async (dispatch) => {
@@ -52,6 +72,7 @@ export const addProfilePicture = (image) => async (dispatch) => {
         body: JSON.stringify({ imageUrl }),
     });
 
+    dispatch(loadUser());
     dispatch(setUser(res.data));
 };
 
@@ -63,16 +84,18 @@ export const logout = () => async (dispatch) => {
     return response;
 };
 
-const initialState = { user: null, contacts: [] };
+const initialState = { user: null, contacts: [], isLoaded: false };
 
 function reducer(state = initialState, action) {
-    let newState;
     switch (action.type) {
         case SET_USER:
-            newState = Object.assign({}, state, { user: action.payload });
-            return newState;
+            return { ...state, user: action.payload };
         case REMOVE_USER:
-            return initialState;
+            return { ...state, user: null, contacts: [] };
+        case LOAD_USER:
+            return { ...state, isLoaded: true };
+        case UNLOAD_USER:
+            return { ...state, isLoaded: false };
         default:
             return state;
     }

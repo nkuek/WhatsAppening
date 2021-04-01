@@ -26,8 +26,8 @@ const CustomIconButton = withStyles({
     },
 })(IconButton);
 
-const SideBar = ({ isLoaded, socket }) => {
-    const sessionUser = useSelector((state) => state.session.user);
+const SideBar = ({ socket }) => {
+    const session = useSelector((state) => state.session);
 
     const [showProfile, setShowProfile] = useState(false);
 
@@ -42,56 +42,52 @@ const SideBar = ({ isLoaded, socket }) => {
     };
 
     return (
-        isLoaded && (
-            <>
-                <div className="sidebarContainer">
-                    <div className="sidebarContent">
-                        <div className="sidebarContentHeader">
-                            {sessionUser ? (
-                                <>
-                                    <ProfileButton
-                                        setShowProfile={setShowProfile}
-                                        showProfile={showProfile}
-                                        user={sessionUser}
-                                    />
-                                    <div className="sidebarButtonsContainer">
-                                        <CustomIconButton
-                                            onClick={openNewRoomForm}
+        <>
+            <div className="sidebarContainer">
+                <div className="sidebarContent">
+                    <div className="sidebarContentHeader">
+                        {session.user && session.isLoaded ? (
+                            <>
+                                <ProfileButton
+                                    setShowProfile={setShowProfile}
+                                    showProfile={showProfile}
+                                    user={session.user}
+                                />
+                                <div className="sidebarButtonsContainer">
+                                    <CustomIconButton onClick={openNewRoomForm}>
+                                        <Tooltip
+                                            title="New Chat"
+                                            key="newChat"
+                                            placement="bottom"
+                                            className="tooltip"
+                                            arrow={true}
                                         >
-                                            <Tooltip
-                                                title="New Chat"
-                                                key="newChat"
-                                                placement="bottom"
-                                                className="tooltip"
-                                                arrow={true}
-                                            >
-                                                <ChatIcon />
-                                            </Tooltip>
-                                        </CustomIconButton>
-                                        <DropdownMenu />
-                                    </div>
-                                </>
-                            ) : (
-                                <div className="loginSignup">
-                                    <LoginFormModal /> <SignupFormModal />
+                                            <ChatIcon />
+                                        </Tooltip>
+                                    </CustomIconButton>
+                                    <DropdownMenu />
                                 </div>
-                            )}
-                        </div>
+                            </>
+                        ) : (
+                            <div className="loginSignup">
+                                <LoginFormModal /> <SignupFormModal />
+                            </div>
+                        )}
                     </div>
-                    <div className="sidebarContentBody">
-                        <ChatList />
-                    </div>
                 </div>
+                <div className="sidebarContentBody">
+                    <ChatList />
+                </div>
+            </div>
 
-                <div className="newRoomFormContainer">
-                    <NewRoomForm socket={socket} />
-                </div>
+            <div className="newRoomFormContainer">
+                <NewRoomForm socket={socket} />
+            </div>
 
-                <div className="profileContainer">
-                    <Profile openProfile={openProfile} user={sessionUser} />
-                </div>
-            </>
-        )
+            <div className="profileContainer">
+                <Profile openProfile={openProfile} user={session.user} />
+            </div>
+        </>
     );
 };
 

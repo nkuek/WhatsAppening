@@ -20,8 +20,8 @@ const ChatRoom = ({ socket, user }) => {
     }, []);
 
     useEffect(() => {
-        if (chatRoom || user) setIsLoaded(true);
-    }, [chatRoom, user]);
+        if (chatRoom) setIsLoaded(true);
+    }, [chatRoom]);
 
     const handleNewMessage = (e) => {
         e.preventDefault();
@@ -33,7 +33,7 @@ const ChatRoom = ({ socket, user }) => {
         });
         setMessageInput('');
     };
-    return isLoaded && chatRoom ? (
+    return isLoaded && chatRoom && chatRoom.messages ? (
         <>
             <div className="chatRoomContainer">
                 <header className="chatRoomHeader">
@@ -43,23 +43,31 @@ const ChatRoom = ({ socket, user }) => {
                     <div className="chatRoomName">{chatRoom.name}</div>
                 </header>
                 <div className="chatRoomMessageList">
-                    {chatRoom.messages.map((message) =>
-                        message.authorId === user.id ? (
-                            <div
-                                key={message.id}
-                                className="chatRoomMessageContainer sent"
-                            >
-                                <div className="chatRoomMessage sent">
-                                    {message.body}
-                                </div>
+                    {chatRoom.messages.length === 0 ? (
+                        <div className="noMessagesContainer">
+                            <div className="callToAction1">
+                                This room has no messages yet!
                             </div>
-                        ) : (
-                            <div className="chatRoomMessageContainer received">
-                                <div classname="chatRoomMessageSender"></div>
-                                <div className="chatRoomMessage received">
-                                    {message.body}
+                        </div>
+                    ) : (
+                        chatRoom.messages.map((message) =>
+                            message.authorId === user.id ? (
+                                <div
+                                    key={message.id}
+                                    className="chatRoomMessageContainer sent"
+                                >
+                                    <div className="chatRoomMessage sent">
+                                        {message.body}
+                                    </div>
                                 </div>
-                            </div>
+                            ) : (
+                                <div className="chatRoomMessageContainer received">
+                                    <div classname="chatRoomMessageSender"></div>
+                                    <div className="chatRoomMessage received">
+                                        {message.body}
+                                    </div>
+                                </div>
+                            )
                         )
                     )}
                 </div>
