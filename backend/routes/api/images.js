@@ -10,7 +10,7 @@ router.post(
     asyncHandler(async (req, res) => {
         const imageUrl = await singlePublicFileUpload(req.file);
         console.log(imageUrl);
-        res.json(imageUrl);
+        return res.json(imageUrl);
     })
 );
 

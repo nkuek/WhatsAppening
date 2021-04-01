@@ -64,6 +64,7 @@ router.post(
     })
 );
 
+// Add profile picture
 router.put(
     '/',
     requireAuth,

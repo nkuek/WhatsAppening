@@ -9,8 +9,14 @@ module.exports = (sequelize, DataTypes) => {
         {}
     );
     Participant.associate = function (models) {
-        Participant.belongsTo(models.User, { foreignKey: 'userId' });
-        Participant.belongsTo(models.ChatRoom, { foreignKey: 'roomId' });
+        Participant.belongsTo(models.User, {
+            foreignKey: 'userId',
+            onDelete: 'CASCADE',
+        });
+        Participant.belongsTo(models.ChatRoom, {
+            foreignKey: 'roomId',
+            onDelete: 'CASCADE',
+        });
     };
     return Participant;
 };

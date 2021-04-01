@@ -45,6 +45,9 @@ module.exports = {
     },
 
     down: async (queryInterface, Sequelize) => {
-        return queryInterface.bulkDelete('Users');
+        return queryInterface
+            .bulkDelete('Messages')
+            .then(() => queryInterface.bulkDelete('ChatRooms'))
+            .then(() => queryInterface.bulkDelete('Users'));
     },
 };

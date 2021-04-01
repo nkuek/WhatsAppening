@@ -79,12 +79,14 @@ module.exports = (sequelize, DataTypes) => {
             through: 'Contact',
             foreignKey: 'user1Id',
             otherKey: 'user2Id',
+            onDelete: 'CASCADE',
         });
         User.belongsToMany(models.User, {
             as: 'user2contacts',
             through: 'Contact',
             foreignKey: 'user2Id',
             otherKey: 'user1Id',
+            onDelete: 'CASCADE',
         });
     };
     User.prototype.toSafeObject = function () {
