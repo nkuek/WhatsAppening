@@ -169,6 +169,8 @@
     color: white;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    height: calc(100% - 109px);
 }
 
 .chatListItem {
