@@ -1,31 +1,69 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Avatar } from '@material-ui/core';
+import { findUserRoom } from '../../store/chatroom';
 
 import './ChatRoom.css';
 const ChatRoom = ({ socket, user }) => {
+    const dispatch = useDispatch();
+
+    const [messageInput, setMessageInput] = useState('');
     const [isLoaded, setIsLoaded] = useState(false);
 
     const chatRoom = useSelector((state) => state.chatRoom);
 
-    const [messageInput, setMessageInput] = useState('');
+    useEffect(() => {
+        socket.on('load messages', (data) => {
+            console.log('dispatching');
+            dispatch(findUserRoom(data.chatRoomId));
+        });
+    }, []);
+
+    useEffect(() => {
+        if (chatRoom || user) setIsLoaded(true);
+    }, [chatRoom, user]);
+
     const handleNewMessage = (e) => {
         e.preventDefault();
         socket.emit('new message', {
             name: user.name,
             authorId: user.id,
             body: messageInput,
-            chatRoomId: 1,
+            chatRoomId: chatRoom.id,
         });
         setMessageInput('');
     };
-    return chatRoom ? (
+    return isLoaded && chatRoom ? (
         <>
             <div className="chatRoomContainer">
-                <div className="chatRoomHeader">
-                    <div className="chatRoomImage"></div>
+                <header className="chatRoomHeader">
+                    <div className="chatRoomImage">
+                        <Avatar src={chatRoom.imageUrl && chatRoom.imageUrl} />
+                    </div>
                     <div className="chatRoomName">{chatRoom.name}</div>
+                </header>
+                <div className="chatRoomMessageList">
+                    {chatRoom.messages.map((message) => (
+                        <div className="chatRoomMessage">{message.body}</div>
+                    ))}
                 </div>
-                <div>Hi</div>
+                <footer className="chatRoomMessageFooter">
+                    <form
+                        onSubmit={handleNewMessage}
+                        className="chatRoomMessageForm"
+                    >
+                        <div className="chatRoomMessageInputContainer">
+                            <input
+                                value={messageInput}
+                                onChange={(e) =>
+                                    setMessageInput(e.target.value)
+                                }
+                                placeholder="Type a message"
+                                className="chatRoomMessageInput"
+                            ></input>
+                        </div>
+                    </form>
+                </footer>
             </div>
         </>
     ) : (

@@ -41,9 +41,7 @@ router.put(
         const { chatRoomId } = req.body;
         const chatRoom = await ChatRoom.findByPk(chatRoomId);
         const messages = await chatRoom.getMessages();
-        chatRoom.messages = messages;
-        console.log(chatRoom);
-        return res.json(chatRoom);
+        return res.json({ chatRoom, messages });
     })
 );
 

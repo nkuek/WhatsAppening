@@ -36,7 +36,10 @@ export const findUserRoom = (chatRoomId) => async (dispatch) => {
         body: JSON.stringify({ chatRoomId }),
     });
 
-    dispatch(findRoom(res.data));
+    const { chatRoom, messages } = res.data;
+    chatRoom.messages = messages;
+
+    dispatch(findRoom(chatRoom));
 };
 
 const chatroomReducer = (state = null, action) => {

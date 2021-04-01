@@ -16,9 +16,9 @@ io.on('connection', (socket) => {
     socket.on('new message', (data) => {
         const { name, authorId, body, chatRoomId } = data;
         socket.join(chatRoomId);
-        socket.to(chatRoomId).emit();
         db.Message.create({ body, authorId, chatRoomId });
         console.log(name, body, chatRoomId);
+        io.to(chatRoomId).emit('load messages', { chatRoomId });
     });
 
     socket.on('user logged in', (data) => {

@@ -173,8 +173,12 @@
 
 .chatListItem {
     display: flex;
-    padding: 10px;
+    padding: 20px;
     cursor: pointer;
+}
+
+.chatListItem.selected {
+    background-color: #323739;
 }
 
 .chatListItem:hover {
