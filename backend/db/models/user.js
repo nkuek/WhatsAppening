@@ -56,11 +56,11 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = function (models) {
         User.hasMany(models.ChatRoom, {
             foreignKey: 'adminId',
-            as: 'admin',
+            as: 'Admin',
             onDelete: 'CASCADE',
         });
         User.belongsToMany(models.ChatRoom, {
-            as: 'participants',
+            as: 'Participants',
             through: 'Participant',
             foreignKey: 'userId',
             otherKey: 'roomId',
@@ -75,14 +75,14 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: 'CASCADE',
         });
         User.belongsToMany(models.User, {
-            as: 'contacts',
+            as: 'Contacts',
             through: 'Contact',
             foreignKey: 'user1Id',
             otherKey: 'user2Id',
             onDelete: 'CASCADE',
         });
         User.belongsToMany(models.User, {
-            as: 'user2contacts',
+            as: 'User2Contacts',
             through: 'Contact',
             foreignKey: 'user2Id',
             otherKey: 'user1Id',

@@ -41,10 +41,23 @@ router.put(
         const { chatRoomId } = req.body;
         const chatRoom = await ChatRoom.findByPk(chatRoomId);
         const messages = await chatRoom.getMessages();
+        const participants = await chatRoom.getParticipants();
 
-        // const users = await Promise.all(
-        //     messages.map(async (message) => message.getUser())
-        // );
+        let participantsInfo = participants.map((participant) => {
+            return {
+                name: participant.name,
+                profileUrl: participant.profileUrl,
+                phoneNumber: participant.phoneNumber,
+            };
+        });
+
+        const adminInfo = {
+            name: 'You',
+            profileUrl: req.user.profileUrl,
+            phoneNumber: req.user.phoneNumber,
+        };
+
+        const allParticipants = participantsInfo.concat(adminInfo);
 
         let messagesAndUsers = await Promise.all(
             messages.map(async (message) => {
@@ -53,7 +66,11 @@ router.put(
             })
         );
 
-        return res.json({ chatRoom, messagesAndUsers });
+        return res.json({
+            chatRoom,
+            messagesAndUsers,
+            participants: allParticipants,
+        });
     })
 );
 

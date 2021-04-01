@@ -83,12 +83,29 @@ router.put(
     '/chatrooms',
     asyncHandler(async (req, res) => {
         const { userId } = req.body;
-        const rooms = await ChatRoom.findAll({
-            where: {
-                adminId: userId,
-            },
-        });
-        return res.json({ rooms });
+        const user = await User.findByPk(userId);
+        const rooms = await user.getAdmin();
+        const userParticipant = await user.getParticipants();
+        const allRooms = rooms.concat(userParticipant);
+
+        roomsAndMessages = await Promise.all(
+            allRooms.map(async (room) => {
+                const messages = await room.getMessages({
+                    order: ['createdAt'],
+                });
+                return {
+                    ...room.dataValues,
+                    lastMessage: messages[messages.length - 1],
+                };
+            })
+        );
+
+        console.log(roomsAndMessages);
+        // const messages = await Promise.all(
+        //     allRooms.map(async (room) => room.getMessages())
+        // );
+
+        return res.json({ rooms: roomsAndMessages });
     })
 );
 

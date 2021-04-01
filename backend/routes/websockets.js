@@ -19,6 +19,7 @@ io.on('connection', (socket) => {
         db.Message.create({ body, authorId, chatRoomId });
         console.log(name, body, chatRoomId);
         io.to(chatRoomId).emit('load messages', { chatRoomId });
+        io.emit('reload chatlist');
     });
 
     socket.on('user logged in', (data) => {
