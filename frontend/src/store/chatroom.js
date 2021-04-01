@@ -3,6 +3,7 @@ import imageUploader from './images';
 
 const CREATE_ROOM = 'chatroom/createRoom';
 const FIND_ROOM = 'chatroom/findRoom';
+const RESET_STATE = 'chatroom/resetState';
 
 const createRoom = (room) => ({
     type: CREATE_ROOM,
@@ -12,6 +13,10 @@ const createRoom = (room) => ({
 const findRoom = (room) => ({
     type: FIND_ROOM,
     room,
+});
+
+const resetRoom = () => ({
+    type: RESET_STATE,
 });
 
 export const createNewRoom = (roomName, adminId, image) => async (dispatch) => {
@@ -42,12 +47,18 @@ export const findUserRoom = (chatRoomId) => async (dispatch) => {
     dispatch(findRoom(chatRoom));
 };
 
+export const resetUserRoomState = () => (dispatch) => {
+    dispatch(resetRoom());
+};
+
 const chatroomReducer = (state = null, action) => {
     switch (action.type) {
         case CREATE_ROOM:
             return action.room;
         case FIND_ROOM:
             return action.room;
+        case RESET_STATE:
+            return null;
         default:
             return state;
     }

@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import { removeUserRooms } from '../../store/chatlist';
+import { resetUserRoomState } from '../../store/chatroom';
 
 const CustomIconButton = withStyles({
     root: {
@@ -29,6 +30,7 @@ const DropdownMenu = () => {
         e.preventDefault();
         setShowDropdownMenu(false);
         dispatch(removeUserRooms());
+        dispatch(resetUserRoomState());
         dispatch(sessionActions.logout());
     };
 

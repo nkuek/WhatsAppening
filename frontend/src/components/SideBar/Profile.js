@@ -7,6 +7,7 @@ import { removeUserRooms } from '../../store/chatlist';
 import EditIcon from '@material-ui/icons/Edit';
 import ClearIcon from '@material-ui/icons/Clear';
 import { withStyles } from '@material-ui/styles';
+import { resetUserRoomState } from '../../store/chatroom';
 
 const CustomAvatar = withStyles({
     root: {
@@ -56,6 +57,7 @@ const Profile = ({ user }) => {
         e.preventDefault();
         openProfile();
         dispatch(removeUserRooms());
+        dispatch(resetUserRoomState());
         dispatch(sessionActions.logout());
     };
 
