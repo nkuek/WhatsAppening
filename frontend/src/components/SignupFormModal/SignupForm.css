@@ -4,9 +4,10 @@
     width: 800px;
     align-items: center;
     position: relative;
-    /* left: -330px; */
+    left: 0;
     height: auto;
     box-sizing: border-box;
+    transition: left 300ms ease-in-out;
 }
 .signupFormHeader {
     color: white;
@@ -15,7 +16,7 @@
 }
 
 .next {
-    left: -400px;
+    left: -375px;
 }
 
 .signupPage1 {
@@ -30,7 +31,6 @@
     position: relative;
     z-index: 20;
     margin-left: 120px;
-    margin-top: 50px;
 }
 
 .form2 {

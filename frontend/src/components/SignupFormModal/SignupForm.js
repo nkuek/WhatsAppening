@@ -70,15 +70,13 @@ function SignupFormPage({ showModal, setShowModal }) {
         document.querySelector('.signupFormContainer').classList.toggle('next');
     };
 
-    const handlePictureUpload = () => {
-        dispatch(sessionActions.addProfilePicture(image)).then(() =>
-            window.location.reload()
-        );
+    const handlePictureUpload = (e) => {
+        e.preventDefault();
+        dispatch(sessionActions.addProfilePicture(image));
     };
 
     const handleSkip = () => {
         dispatch(sessionActions.loadUserState());
-        window.location.reload();
     };
 
     return (

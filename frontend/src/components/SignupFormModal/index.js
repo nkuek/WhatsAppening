@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '../../context/Modal';
 import SignupForm from './SignupForm';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,8 +11,7 @@ function SignupFormModal() {
     const session = useSelector((state) => state.sesion);
 
     const handleClose = () => {
-        if (session.user) dispatch(sessionActions.loadUserState());
-        else dispatch(sessionActions.unloadUserState());
+        dispatch(sessionActions.loadUserState());
         setShowModal(false);
     };
 

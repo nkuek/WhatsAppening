@@ -72,8 +72,11 @@ export const addProfilePicture = (image) => async (dispatch) => {
         body: JSON.stringify({ imageUrl }),
     });
 
+    console.log('added url');
+    console.log(res);
+
     dispatch(loadUser());
-    dispatch(setUser(res.data));
+    dispatch(setUser(res.data.user));
 };
 
 export const logout = () => async (dispatch) => {
