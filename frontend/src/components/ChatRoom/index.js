@@ -82,8 +82,19 @@ const ChatRoom = ({ socket, user }) => {
                 </footer>
             </div>
         </>
+    ) : user ? (
+        <div className="noMessagesContainer">
+            <h1>Select or create a chatroom to view messages!</h1>
+        </div>
     ) : (
-        <h1>Select or create a chatroom to view messages!</h1>
+        <div className="noMessagesContainer">
+            <div className="welcomeMessage">
+                <div className="callToAction1">Welcome!</div>
+                <div className="callToAction2">
+                    Signup or login to find out WhatsAppening
+                </div>
+            </div>
+        </div>
     );
 };
 

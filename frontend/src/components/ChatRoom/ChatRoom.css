@@ -1,4 +1,5 @@
-.chatRoomContainer {
+.chatRoomContainer,
+.noMessagesContainer {
     /* flex: 65%; */
     height: 100vh;
     flex: 1 1;
@@ -6,6 +7,20 @@
     position: relative;
     z-index: 6;
     color: white;
+}
+
+.noMessagesContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcomeMessage {
+    text-align: center;
+}
+.callToAction1 {
+    font-size: 2em;
+    margin-bottom: 10px;
 }
 
 .chatRoomHeader {
