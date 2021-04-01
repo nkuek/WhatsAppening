@@ -20,6 +20,7 @@
     flex-direction: column;
     border-radius: 3px;
     padding: 10px;
+    align-items: center;
     box-sizing: border-box;
 }
 
@@ -33,6 +34,7 @@
     border-radius: 3px;
     box-sizing: border-box;
     border: 2px solid transparent;
+
 }
 
 .loginFormInputContainer input:focus {
@@ -40,7 +42,15 @@
     border: 2px solid #2878ff;
 }
 
+.loginLabelContainer {
+    display:flex;
+    margin-left: 100px;
+}
 
+.loginInput {
+    display: flex;
+    justify-content: center;
+}
 
 .loginFormHeader {
     font-size: 2em;
@@ -57,7 +67,7 @@
     border-radius: 10px;
     color: white;
     padding: 10px;
-    margin-left: 10px;
+    margin-left: 60px;
     margin-bottom: 5px;
     background-color: #2878ff;
 }

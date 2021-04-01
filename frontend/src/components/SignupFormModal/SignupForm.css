@@ -1,14 +1,71 @@
 .signupFormContainer {
     padding: 40px;
     display: flex;
-    width: 500px;
-    flex-direction: column;
+    width: 800px;
     align-items: center;
-
+    position: relative;
+    /* left: -330px; */
+    height: auto;
+    box-sizing: border-box;
 }
 .signupFormHeader {
     color: white;
     font-size: 2em;
+    text-align: center;
+}
+
+.next {
+    left: -330px;
+}
+
+.signupPage1 {
+    margin-left: 50px;
+}
+
+.signupPage2 {
+    box-sizing: border-box;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    position: relative;
+    z-index: 20;
+    margin-left: 120px;
+    margin-top: 50px;
+}
+
+.form2 {
+    display: flex;
+    height: 80%;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.2em;
+}
+
+.skipContainer {
+    display: flex;
+    justify-content: center;
+}
+.form2Info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.form2Info label {
+    margin: 10px;
+}
+
+.skipProfileUpload {
+    margin: 10px;
+    margin-top: 30px;
+    width: fit-content;
+    cursor: pointer;
+
+    text-align: center;
+}
+
+.skipProfileUpload:hover {
+    color: teal;
 }
 
 .formBody {
@@ -50,7 +107,8 @@
     border: 2px solid #2878ff;
 }
 
-.signupFormSubmit {
+.signupFormSubmit,
+.uploadButton {
     margin: 30px 50px;
     padding: 10px 20px;
     color: white;
@@ -58,7 +116,8 @@
     background-color: #2878ff;
 }
 
-.signupFormSubmit:hover {
+.signupFormSubmit:hover,
+.uploadButton:hover {
     background-color: #5895ff;
 }
 
@@ -122,6 +181,10 @@
 
 .fileInput:hover {
     opacity: 1;
+}
+
+.form2Input::after {
+    left: 18px;
 }
 
 .signupFormFooter {

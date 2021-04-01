@@ -59,7 +59,7 @@ const DropdownMenu = () => {
                 role={undefined}
                 style={{
                     positon: 'relative',
-                    zIndex: 2,
+                    zIndex: 10,
                     borderRadius: '5px',
                 }}
             >

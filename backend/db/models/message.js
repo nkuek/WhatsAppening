@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     Message.associate = function (models) {
         Message.belongsTo(models.User, { foreignKey: 'authorId' });
         Message.belongsTo(models.ChatRoom, { foreignKey: 'chatRoomId' });
-        Message.hasMany(models.Message, { foreignKey: 'messageId' });
+        Message.hasMany(models.MessageReaction, { foreignKey: 'messageId' });
     };
     return Message;
 };

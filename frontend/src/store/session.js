@@ -30,11 +30,7 @@ export const restoreUser = () => async (dispatch) => {
 };
 
 export const signup = (user) => async (dispatch) => {
-    const { name, phoneNumber, email, password, image, confirmPassword } = user;
-
-    let imageUrl;
-    if (image) imageUrl = await imageUploader(image);
-    console.log(imageUrl);
+    const { name, phoneNumber, email, password, confirmPassword } = user;
 
     const res = await fetch(`/api/users/`, {
         method: 'POST',
@@ -43,9 +39,17 @@ export const signup = (user) => async (dispatch) => {
             phoneNumber,
             email,
             password,
-            imageUrl,
             confirmPassword,
         }),
+    });
+};
+
+export const addProfilePicture = (image) => async (dispatch) => {
+    const imageUrl = await imageUploader(image);
+    console.log(imageUrl);
+    const res = await fetch('/api/users', {
+        method: 'PUT',
+        body: JSON.stringify({ imageUrl }),
     });
 
     dispatch(setUser(res.data));

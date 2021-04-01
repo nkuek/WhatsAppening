@@ -45,17 +45,15 @@ const validateSignup = [
 // Sign up
 router.post(
     '/',
-    singleMulterUpload('image'),
-    // validateSignup,
+    validateSignup,
     asyncHandler(async (req, res) => {
-        const { email, password, name, phoneNumber, imageUrl } = req.body;
+        const { email, password, name, phoneNumber } = req.body;
 
         const user = await User.signup({
             email,
             password,
             name,
             phoneNumber,
-            profileImageUrl: imageUrl,
         });
 
         await setTokenCookie(res, user);
@@ -68,6 +66,24 @@ router.post(
 
 router.put(
     '/',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        console.log(req.user.id);
+        const { imageUrl } = req.body;
+        const user = await User.findByPk(req.user.id);
+        console.log('before', user);
+        user.update({
+            profileUrl: imageUrl,
+        });
+
+        console.log('after');
+
+        return res.json({ user });
+    })
+);
+
+router.put(
+    '/chatrooms',
     asyncHandler(async (req, res) => {
         const { userId } = req.body;
         const rooms = await ChatRoom.findAll({

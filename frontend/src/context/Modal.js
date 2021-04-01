@@ -17,7 +17,7 @@ export function ModalProvider({ children }) {
             <ModalContext.Provider value={value}>
                 {children}
             </ModalContext.Provider>
-            <div style={{ position: 'absolute', zIndex: 5 }} ref={modalRef} />
+            <div style={{ position: 'absolute', zIndex: 20 }} ref={modalRef} />
         </>
     );
 }

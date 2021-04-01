@@ -21,8 +21,9 @@ io.on('connection', (socket) => {
         console.log(name, body, chatRoomId);
     });
 
-    socket.on('new user', () => {
-        socket.emit('load rooms');
+    socket.on('user logged in', (data) => {
+        console.log(data);
+        socket.emit('load rooms', { userId: data.userId });
     });
 
     socket.on('new room', async (data) => {

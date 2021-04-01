@@ -15,7 +15,9 @@ function App() {
     const user = useSelector((state) => state.session.user);
 
     useEffect(() => {
-        if (isLoaded && user) dispatch(getUserRooms(user.id));
+        if (isLoaded && user) {
+            dispatch(getUserRooms(user.id));
+        }
     }, [isLoaded, user, dispatch]);
 
     useEffect(() => {
@@ -27,10 +29,9 @@ function App() {
             dispatch(getUserRooms(data.adminId));
         });
 
-        socket.on('load rooms', () => {
-            console.log('loading rooms');
-            dispatch(getUserRooms(user.id));
-        });
+        // socket.on('load rooms', (data) => {
+        //     dispatch(getUserRooms(data.userId));
+        // });
 
         socket.emit('connection');
     }, []);

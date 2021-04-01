@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import './SignupForm.css';
 import LoginFormModal from '../LoginFormModal';
+import { Avatar } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 
-function SignupFormPage({ setShowModal }) {
+const CustomAvatar = withStyles({
+    root: {
+        width: '150px',
+        height: '150px',
+    },
+})(Avatar);
+
+function SignupFormPage({ showModal, setShowModal }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [email, setEmail] = useState('');
@@ -16,6 +25,12 @@ function SignupFormPage({ setShowModal }) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState([]);
+
+    const [formSubmitted, setFormSubmitted] = useState(false);
+
+    useEffect(() => {
+        if (formSubmitted) dispatch(sessionActions.restoreUser());
+    }, [formSubmitted]);
 
     if (sessionUser) return <Redirect to="/" />;
 
@@ -32,136 +47,156 @@ function SignupFormPage({ setShowModal }) {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            const formattedNumber = phoneNumber.replaceAll('-', '');
-            dispatch(
+
+            return dispatch(
                 sessionActions.signup({
-                    email,
                     name,
+                    email,
                     password,
-                    image,
-                    phoneNumber: formattedNumber,
                     confirmPassword,
+                    phoneNumber,
                 })
-            ).catch((res) => {
-                if (res.data && res.data.errors) setErrors(res.data.errors);
-            });
+            )
+                .then((res) => {
+                    if (!res.data.errors) {
+                        console.log('okay');
+                        nextPage();
+                    }
+                })
+                .catch(async (res) => {
+                    if (res.data && res.data.errors) {
+                        setErrors(res.data.errors);
+                    }
+                });
         }
-        if (errors.length === 0) {
-            setShowModal(false);
-        }
-        return setErrors([
-            'Confirm Password field must be the same as the Password field',
-        ]);
     };
 
-    const handleAccountClick = () => {
-        setShowModal(false);
-        return <LoginFormModal />;
+    const nextPage = () => {
+        console.log('next');
+        document.querySelector('.signupFormContainer').classList.toggle('next');
+    };
+
+    const handlePictureUpload = () => {
+        dispatch(sessionActions.addProfilePicture(image));
+    };
+
+    const handleSkip = () => {
+        window.location.reload();
     };
 
     return (
         <div className="signupFormContainer">
-            <div className="signupFormHeader">
-                <h1>Sign Up</h1>
-            </div>
-            <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                    ))}
-                </ul>
-                <div className="fileWrapper">
-                    <img
-                        className="imgPreview"
-                        src={
-                            !preview
-                                ? 'https://i.stack.imgur.com/l60Hf.png'
-                                : preview
-                        }
-                    ></img>
-                    <input
-                        className="fileInput"
-                        type="file"
-                        accept="image/gif,image/jpeg,image/jpg,image/png"
-                        onChange={updateFile}
-                    ></input>
+            <div className="signupPage1">
+                <div className="signupFormHeader">
+                    <h1>Sign Up</h1>
                 </div>
-                <div className="formBody">
-                    <div className="formInputContainer">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            placeholder="Email"
-                            id="email"
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="formInputContainer">
-                        <label htmlFor="name">Name</label>
-                        <input
-                            placeholder="Name"
-                            id="name"
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                        />
-                    </div>
+                <form className="form1" onSubmit={handleSubmit}>
+                    <ul>
+                        {errors.map((error, idx) => (
+                            <li key={idx}>{error}</li>
+                        ))}
+                    </ul>
+                    <div className="formBody">
+                        <div className="formInputContainer">
+                            <label htmlFor="email">Email</label>
+                            <input
+                                placeholder="Email"
+                                id="email"
+                                type="text"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="formInputContainer">
+                            <label htmlFor="name">Name</label>
+                            <input
+                                placeholder="Name"
+                                id="name"
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                        </div>
 
-                    <div className="formInputContainer">
-                        <label htmlFor="phonenumber">PhoneNumber</label>
-                        <input
-                            placeholder="Phone Number"
-                            id="phonenumber"
-                            type="text"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="formInputContainer">
-                        <label htmlFor="phonenumber">Password</label>
-                        <input
-                            placeholder="Password"
-                            id="password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="formInputContainer">
-                        <label htmlFor="confirmpassword">
-                            Confirm Password
-                        </label>
-                        <input
-                            placeholder="Confirm Password"
-                            id="confirmpassword"
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="signupFormFooter">
-                        <button className="signupFormSubmit" type="submit">
-                            Sign Up
-                        </button>
-                        <div
-                            onClick={handleAccountClick}
-                            className="hasAnAccount"
-                        >
-                            Already have an account?
+                        <div className="formInputContainer">
+                            <label htmlFor="phonenumber">PhoneNumber</label>
+                            <input
+                                placeholder="Phone Number"
+                                id="phonenumber"
+                                type="text"
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="formInputContainer">
+                            <label htmlFor="phonenumber">Password</label>
+                            <input
+                                placeholder="Password"
+                                id="password"
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="formInputContainer">
+                            <label htmlFor="confirmpassword">
+                                Confirm Password
+                            </label>
+                            <input
+                                placeholder="Confirm Password"
+                                id="confirmpassword"
+                                type="password"
+                                value={confirmPassword}
+                                onChange={(e) =>
+                                    setConfirmPassword(e.target.value)
+                                }
+                                required
+                            />
+                        </div>
+                        <div className="signupFormFooter">
+                            <button className="signupFormSubmit" type="submit">
+                                Sign Up
+                            </button>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            <div className="signupPage2">
+                <form onSubmit={handlePictureUpload} className="form2">
+                    <div className="fileWrapper">
+                        <CustomAvatar
+                            className="imgPreview"
+                            src={preview && preview}
+                        ></CustomAvatar>
+                        <input
+                            className="fileInput form2Input"
+                            type="file"
+                            accept="image/gif,image/jpeg,image/jpg,image/png"
+                            onChange={updateFile}
+                        ></input>
+                    </div>
+                    <label>Upload a Profile Picture</label>
+                    <div className="form2Info">
+                        <button className="uploadButton">Upload</button>
+                        <div className="skipContainer">
+                            <div
+                                onClick={handleSkip}
+                                className="skipProfileUpload"
+                            >
+                                Skip for now
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

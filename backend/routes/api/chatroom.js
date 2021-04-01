@@ -4,6 +4,7 @@ const { check } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
 const { handleValidationErrors } = require('../../utils/validation');
+const { requireAuth } = require('../../utils/auth');
 
 const router = express.Router();
 
@@ -18,6 +19,7 @@ const validateChatRoom = [
 
 router.post(
     '/',
+    requireAuth,
     validateChatRoom,
     asyncHandler(async (req, res) => {
         const { roomName, adminId, imageUrl } = req.body;
@@ -29,6 +31,19 @@ router.post(
         });
 
         return res.json({ chatroom });
+    })
+);
+
+router.put(
+    '/',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const { chatRoomId } = req.body;
+        const chatRoom = await ChatRoom.findByPk(chatRoomId);
+        const messages = await chatRoom.getMessages();
+        chatRoom.messages = messages;
+        console.log(chatRoom);
+        return res.json(chatRoom);
     })
 );
 
