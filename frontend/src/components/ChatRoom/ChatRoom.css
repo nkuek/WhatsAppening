@@ -99,9 +99,15 @@
 .chatRoomMessage {
     margin: 5px;
     width: fit-content;
-    padding: 30px;
+    padding: 10px 20px;
     border-radius: 10px;
 }
+
+/* .chatRoomMessage::after {
+    content: '';
+    position: relative;
+    left: 50px;
+} */
 
 .chatRoomMessageContainer.sent {
     display: flex;
@@ -109,16 +115,33 @@
 }
 
 .chatRoomMessage.sent::after {
-    position: absolute;
-    right: 30px;
-    top: -15px;
-    border-top: none;
-    border-right: 15px solid transparent;
-    border-left: 15px solid transparent;
-    border-bottom: 15px solid black;
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+    left: auto;
+	right: -8px;
+    top: 0px;
+	bottom: auto;
+	border: 10px solid;
+	border-color: #056162 transparent transparent transparent;
 }
 
 .chatRoomMessage.sent {
     background-color: #056162;
     position: relative;
 }
+
+/* Right triangle, left side slightly down */
+/* .tri-right.border.left-in:before {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  left: -40px;
+	right: auto;
+  top: 30px;
+	bottom: auto;
+	border: 20px solid;
+	border-color: #666 #666 transparent transparent;
+} */

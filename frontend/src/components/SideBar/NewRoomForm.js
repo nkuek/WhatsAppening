@@ -91,6 +91,11 @@ const NewRoomForm = ({ socket }) => {
                     ></input>
                 </div>
             </form>
+            <div className="contactsContainer">
+                <div className="contactsSearchContainer">
+                    <input></input>
+                </div>
+            </div>
         </>
     );
 };
