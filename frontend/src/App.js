@@ -6,7 +6,11 @@ import io from 'socket.io-client';
 import SideBar from './components/SideBar';
 import ChatRoom from './components/ChatRoom';
 
-export const socket = io('localhost:5000');
+export const socket = io(
+    process.env.NODE_ENV === 'development'
+        ? 'localhost:5000'
+        : 'https://whatsapp-ening.herokuapp.com/'
+);
 
 function App() {
     const dispatch = useDispatch();
