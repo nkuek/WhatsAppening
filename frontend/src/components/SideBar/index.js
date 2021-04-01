@@ -44,36 +44,34 @@ const SideBar = ({ socket }) => {
     return (
         <>
             <div className="sidebarContainer">
-                <div className="sidebarContent">
-                    <div className="sidebarContentHeader">
-                        {session.user && session.isLoaded ? (
-                            <>
-                                <ProfileButton
-                                    setShowProfile={setShowProfile}
-                                    showProfile={showProfile}
-                                    user={session.user}
-                                />
-                                <div className="sidebarButtonsContainer">
-                                    <CustomIconButton onClick={openNewRoomForm}>
-                                        <Tooltip
-                                            title="New Chat"
-                                            key="newChat"
-                                            placement="bottom"
-                                            className="tooltip"
-                                            arrow={true}
-                                        >
-                                            <ChatIcon />
-                                        </Tooltip>
-                                    </CustomIconButton>
-                                    <DropdownMenu />
-                                </div>
-                            </>
-                        ) : (
-                            <div className="loginSignup">
-                                <LoginFormModal /> <SignupFormModal />
+                <div className="sidebarContentHeader">
+                    {session.user && session.isLoaded ? (
+                        <>
+                            <ProfileButton
+                                setShowProfile={setShowProfile}
+                                showProfile={showProfile}
+                                user={session.user}
+                            />
+                            <div className="sidebarButtonsContainer">
+                                <CustomIconButton onClick={openNewRoomForm}>
+                                    <Tooltip
+                                        title="New Chat"
+                                        key="newChat"
+                                        placement="bottom"
+                                        className="tooltip"
+                                        arrow={true}
+                                    >
+                                        <ChatIcon />
+                                    </Tooltip>
+                                </CustomIconButton>
+                                <DropdownMenu />
                             </div>
-                        )}
-                    </div>
+                        </>
+                    ) : (
+                        <div className="loginSignup">
+                            <LoginFormModal /> <SignupFormModal />
+                        </div>
+                    )}
                 </div>
                 <div className="sidebarContentBody">
                     <ChatList />
