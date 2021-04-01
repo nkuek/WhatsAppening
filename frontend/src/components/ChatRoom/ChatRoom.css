@@ -33,6 +33,17 @@
     height: 59px;
     padding: 10px 16px;
     background-color: #2a2f32;
+    justify-content: space-between;
+}
+
+.chatRoomImageAndName {
+    display: flex;
+}
+
+.chatRoomNameContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .chatRoomMessageList {

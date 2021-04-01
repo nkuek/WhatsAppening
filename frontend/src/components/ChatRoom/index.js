@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Avatar } from '@material-ui/core';
+import { Avatar, IconButton } from '@material-ui/core';
 import { findUserRoom } from '../../store/chatroom';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 
 import './ChatRoom.css';
 const ChatRoom = ({ socket, user }) => {
@@ -36,10 +37,32 @@ const ChatRoom = ({ socket, user }) => {
         <>
             <div className="chatRoomContainer">
                 <header className="chatRoomHeader">
-                    <div className="chatRoomImage">
-                        <Avatar src={chatRoom.imageUrl && chatRoom.imageUrl} />
+                    <div className="chatRoomImageAndName">
+                        <div className="chatRoomImage">
+                            <Avatar
+                                src={chatRoom.imageUrl && chatRoom.imageUrl}
+                            />
+                        </div>
+                        <div className="chatRoomNameContainer">
+                            <div className="chatRoomName">{chatRoom.name}</div>
+                            {chatRoom.participants.length > 2 && (
+                                <div className="chatRoomParticipants">
+                                    {chatRoom.participants.map(
+                                        (participant) => (
+                                            <div className="chatRoomMember">
+                                                {participant.name}
+                                            </div>
+                                        )
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div className="chatRoomName">{chatRoom.name}</div>
+                    <div className="chatRoomAddParticipant">
+                        <IconButton>
+                            <GroupAddIcon style={{ color: 'white' }} />
+                        </IconButton>
+                    </div>
                 </header>
                 <div className="chatRoomMessageList">
                     {chatRoom.messages.length === 0 ? (
