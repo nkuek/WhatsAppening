@@ -70,6 +70,13 @@ const Profile = ({ user }) => {
             setShowEditName(false);
     };
 
+    const handleEditProfile = (e) => {
+        e.preventDefault();
+        dispatch(sessionActions.editUserProfile(name, image));
+        setImage('');
+        setShowEditName(false);
+    };
+
     useEffect(() => {
         if (showEditName) {
             document.addEventListener('click', closeEditName);
@@ -85,7 +92,8 @@ const Profile = ({ user }) => {
                 </IconButton>
                 <div className="profileTitle">Profile</div>
             </div>
-            <form className="profileBody">
+            <form onSubmit={handleEditProfile} className="profileBody">
+                <h1 className="profileDescription">Your Profile</h1>
                 <div className="fileWrapper">
                     <CustomAvatar
                         className="imgPreview"
@@ -136,8 +144,10 @@ const Profile = ({ user }) => {
                         )}
                     </div>
                 </div>
-                {showEditName && (
-                    <button className="editProfileSubmit">Edit</button>
+                {(showEditName || image) && (
+                    <button type="submit" className="editProfileSubmit">
+                        Edit
+                    </button>
                 )}
                 <div className="profileLogoutButtonContainer">
                     <button onClick={logout} className="profileLogoutButton">

@@ -87,6 +87,16 @@ export const logout = () => async (dispatch) => {
     return response;
 };
 
+export const editUserProfile = (name, image) => async (dispatch) => {
+    let imageUrl;
+    if (image) imageUrl = await imageUploader(image);
+    const response = await fetch('/api/users/edit', {
+        method: 'PUT',
+        body: JSON.stringify(imageUrl ? { name, imageUrl } : { name }),
+    });
+    dispatch(setUser(response.data.user));
+};
+
 const initialState = { user: null, contacts: [], isLoaded: false };
 
 function reducer(state = initialState, action) {

@@ -69,7 +69,6 @@ router.put(
     '/',
     requireAuth,
     asyncHandler(async (req, res) => {
-        console.log(req.user.id);
         const { imageUrl } = req.body;
         const user = await User.findByPk(req.user.id);
         console.log('before', user);
@@ -93,6 +92,18 @@ router.put(
             },
         });
         return res.json({ rooms });
+    })
+);
+
+router.put(
+    '/edit',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const { name, imageUrl } = req.body;
+        const user = await User.findByPk(req.user.id);
+        user.update({ name });
+        if (imageUrl) user.update({ profileUrl: imageUrl });
+        return res.json({ user });
     })
 );
 
