@@ -50,7 +50,6 @@ const Profile = ({ user }) => {
             };
             reader.readAsDataURL(file);
         }
-        console.log(file);
     };
 
     const logout = (e) => {

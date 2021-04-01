@@ -71,12 +71,9 @@ router.put(
     asyncHandler(async (req, res) => {
         const { imageUrl } = req.body;
         const user = await User.findByPk(req.user.id);
-        console.log('before', user);
         user.update({
             profileUrl: imageUrl,
         });
-
-        console.log('after');
 
         return res.json({ user });
     })

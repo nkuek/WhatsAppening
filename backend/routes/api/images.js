@@ -9,7 +9,6 @@ router.post(
     singleMulterUpload('image'),
     asyncHandler(async (req, res) => {
         const imageUrl = await singlePublicFileUpload(req.file);
-        console.log(imageUrl);
         return res.json(imageUrl);
     })
 );

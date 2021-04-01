@@ -66,14 +66,10 @@ export const unloadUserState = () => (dispatch) => {
 
 export const addProfilePicture = (image) => async (dispatch) => {
     const imageUrl = await imageUploader(image);
-    console.log(imageUrl);
     const res = await fetch('/api/users', {
         method: 'PUT',
         body: JSON.stringify({ imageUrl }),
     });
-
-    console.log('added url');
-    console.log(res);
 
     dispatch(loadUser());
     dispatch(setUser(res.data.user));

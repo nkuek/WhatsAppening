@@ -12,8 +12,6 @@ const imageUploader = async (image) => {
         body: formData,
     });
 
-    console.log(response);
-
     return response.data;
 };
 

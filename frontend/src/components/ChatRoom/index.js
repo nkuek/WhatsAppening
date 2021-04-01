@@ -14,7 +14,6 @@ const ChatRoom = ({ socket, user }) => {
 
     useEffect(() => {
         socket.on('load messages', (data) => {
-            console.log('dispatching');
             dispatch(findUserRoom(data.chatRoomId));
         });
     }, []);
