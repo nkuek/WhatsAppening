@@ -9,6 +9,11 @@
     color: white;
 }
 
+.chatRoomContainer {
+    background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url(https://web.whatsapp.com/img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d.png);
+    background-color: #455863;
+}
+
 .noMessagesContainer {
     display: flex;
     justify-content: center;
@@ -50,7 +55,7 @@
     display: flex;
     order: 2;
     position: relative;
-    height: calc(100% - 62px - 70px);
+    height: calc(100% - 62px - 58px);
     flex-direction: column;
 }
 
@@ -60,8 +65,8 @@
     box-sizing: border-box;
     order: 3;
     width: 100%;
-    min-height: 62px;
-    background-color: #2a2f32;
+    height: 62px;
+    background-color: #1E2428;
     display: flex;
     padding: 10px 0px;
 }
@@ -86,7 +91,8 @@
     width: 80%;
     outline-width: 0;
     color: #fff;
-    font-size: 1.2em;
+    font-size: 1em;
+    border-radius: 20px;
     background-color: #33383b;
 }
 
