@@ -13,6 +13,17 @@ export const addContact = (userId) => async (dispatch) => {
         body: JSON.stringify({ userId }),
     });
 
-    console.log(response);
-    // dispatch(getContacts())
+    dispatch(getContacts(response.data.contacts));
 };
+
+const initialState = { contacts: null, isLoaded: false };
+const contactReducer = (state = null, action) => {
+    switch (action.type) {
+        case GET_CONTACTS:
+            return { ...action.contacts, isLoaded: true };
+        default:
+            return state;
+    }
+};
+
+export default contactReducer;

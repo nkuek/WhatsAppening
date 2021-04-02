@@ -1,12 +1,15 @@
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
 import { Modal } from '../../context/Modal';
+import { addContact } from '../../store/userContacts';
 
 import './ConfirmContactModal.css';
 
 const ConfirmContactModal = ({ user, setShowModal }) => {
+    const dispatch = useDispatch();
+
     const handleAddContact = () => {
-        return;
+        dispatch(addContact(user.id));
+        setShowModal(false);
     };
 
     return (

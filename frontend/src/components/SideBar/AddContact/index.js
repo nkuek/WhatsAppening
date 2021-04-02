@@ -16,6 +16,11 @@ const UserSearch = () => {
     const [selectedUser, setSelectedUser] = useState('');
 
     const userSearch = useSelector((state) => state.userSearch);
+    const userContacts = useSelector((state) => state.userContacts);
+
+    useEffect(() => {
+        dispatch(searchUsers(userSearchInput));
+    }, [userContacts]);
 
     useEffect(() => {
         if (userSearchInput) {

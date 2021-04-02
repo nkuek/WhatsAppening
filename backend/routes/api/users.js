@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Contact } = require('../../db/models');
 const { Op } = require('sequelize');
 
 const router = express.Router();
@@ -135,12 +135,17 @@ router.put(
     asyncHandler(async (req, res) => {
         const user = req.user;
         const { searchInput } = req.body;
+        const contacts = await user.getUserContacts();
+        const contactIds = contacts.map((contact) => contact.id);
+
+        console.log(contactIds);
 
         const results = await User.findAll({
             where: {
                 isPublic: true,
                 id: {
                     [Op.ne]: user.id,
+                    [Op.notIn]: contactIds,
                 },
                 [Op.or]: {
                     name: {
@@ -164,15 +169,16 @@ router.put(
 router.post(
     '/contacts',
     requireAuth,
-    asyncHandler((req, res) => {
+    asyncHandler(async (req, res) => {
         const { userId } = req.body;
 
-        const loggedInUser = User.getCurrentUserById();
-        const userToAdd = User.findByPk(userId);
+        const loggedInUser = await User.getCurrentUserById(req.user.id);
+        const userToAdd = await User.findByPk(userId);
 
-        loggedInUser.addContact(userToAdd);
+        await loggedInUser.addUserContacts(userToAdd);
+        const contacts = await loggedInUser.getUserContacts();
 
-        console.log(loggedInUser);
+        return res.json({ contacts });
     })
 );
 

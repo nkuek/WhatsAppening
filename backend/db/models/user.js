@@ -78,7 +78,7 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: 'CASCADE',
         });
         User.belongsToMany(models.User, {
-            as: 'Contacts',
+            as: 'UserContacts',
             through: 'Contact',
             foreignKey: 'user1Id',
             otherKey: 'user2Id',
