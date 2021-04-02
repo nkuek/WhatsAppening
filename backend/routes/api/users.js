@@ -91,19 +91,24 @@ router.put(
         roomsAndMessages = await Promise.all(
             allRooms.map(async (room) => {
                 const messages = await room.getMessages();
+                let lastMessage = [];
+                if (messages.length > 0) {
+                    lastMessage = messages[messages.length - 1];
+                    const lastMessageAuthor = await lastMessage.getUser();
+                    lastMessage.dataValues.author = lastMessageAuthor.name;
+                }
                 return {
                     ...room.dataValues,
-                    lastMessage: messages[messages.length - 1],
+                    lastMessage: messages[messages.length - 1] || null,
                 };
             })
         );
         roomsAndMessages.sort((a, b) => {
             if (a.lastMessage && b.lastMessage)
                 return b.lastMessage.createdAt - a.lastMessage.createdAt;
+            else return b.createdAt - a.createdAt;
         });
-        console.log(roomsAndMessages);
 
-        console.log(roomsAndMessages);
         // const messages = await Promise.all(
         //     allRooms.map(async (room) => room.getMessages())
         // );

@@ -1,12 +1,9 @@
-const { singleMulterUpload, singlePublicFileUpload } = require('../awsS3');
 const db = require('../db/models');
 const io = require('socket.io')({
     cors: {
         origin: '*',
     },
 });
-
-// io.use(singleMulterUpload('image'));
 
 io.on('connection', (socket) => {
     console.log('a user has connected');
