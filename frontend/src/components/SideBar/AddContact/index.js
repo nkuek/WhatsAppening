@@ -4,6 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { Avatar, IconButton } from '@material-ui/core';
 import { searchUsers, clearSearchUsers } from '../../../store/usersearch';
+import ConfirmContactModal from '../../ConfirmContactModal';
 
 import './AddContact.css';
 
@@ -11,6 +12,8 @@ const UserSearch = () => {
     const dispatch = useDispatch();
 
     const [userSearchInput, setUserSearchInput] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [selectedUser, setSelectedUser] = useState('');
 
     const userSearch = useSelector((state) => state.userSearch);
 
@@ -22,8 +25,6 @@ const UserSearch = () => {
             return () => clearTimeout(timer);
         }
     }, [userSearchInput]);
-
-    console.log(userSearch);
 
     const resetForm = () => {
         document
@@ -39,6 +40,11 @@ const UserSearch = () => {
 
     const handleUserSearch = (e) => {
         setUserSearchInput(e.target.value);
+    };
+
+    const handleContactClick = (user) => {
+        setSelectedUser(user);
+        setShowModal(true);
     };
 
     return (
@@ -69,7 +75,10 @@ const UserSearch = () => {
                 <div className="searchResults">
                     {userSearch.isLoaded &&
                         userSearch.users.map((user) => (
-                            <div className="userResult">
+                            <div
+                                onClick={() => handleContactClick(user)}
+                                className="userResult"
+                            >
                                 <div className="userResultProfileImage">
                                     <Avatar src={user.profileUrl} />
                                 </div>
@@ -85,6 +94,12 @@ const UserSearch = () => {
                         ))}
                 </div>
             </div>
+            {showModal && (
+                <ConfirmContactModal
+                    user={selectedUser}
+                    setShowModal={setShowModal}
+                />
+            )}
         </>
     );
 };

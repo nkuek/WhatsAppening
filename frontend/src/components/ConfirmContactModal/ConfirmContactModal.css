@@ -1,0 +1,41 @@
+.confirmContactContainer {
+    padding: 40px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.confirmContactMessage {
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.confirmContactButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.confirmContactButton,
+.cancelContactButton {
+    padding: 15px 30px;
+    border-radius: 10px;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.confirmContactButton {
+    background-color: #008578;
+}
+
+.confirmContactButton:hover {
+    background-color: #00a292;
+}
+
+.cancelContactButton {
+    background-color: red;
+}
+
+.cancelContactButton:hover {
+    background-color: rgb(255, 67, 67);
+}

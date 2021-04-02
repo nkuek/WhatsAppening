@@ -101,14 +101,14 @@ export const editUserPrivacy = (isPublic) => async (dispatch) => {
     dispatch(setUser(response.data.user));
 };
 
-const initialState = { user: null, contacts: [], isLoaded: false };
+const initialState = { user: null, isLoaded: false };
 
 function reducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER:
             return { ...state, user: action.payload };
         case REMOVE_USER:
-            return { ...state, user: null, contacts: [] };
+            return { ...state, user: null };
         case LOAD_USER:
             return { ...state, isLoaded: true };
         case UNLOAD_USER:

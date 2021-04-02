@@ -161,4 +161,19 @@ router.put(
     })
 );
 
+router.post(
+    '/contacts',
+    requireAuth,
+    asyncHandler((req, res) => {
+        const { userId } = req.body;
+
+        const loggedInUser = User.getCurrentUserById();
+        const userToAdd = User.findByPk(userId);
+
+        loggedInUser.addContact(userToAdd);
+
+        console.log(loggedInUser);
+    })
+);
+
 module.exports = router;

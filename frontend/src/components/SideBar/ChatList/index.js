@@ -46,8 +46,6 @@ const ChatList = () => {
         setSelectedItem(chatId);
     };
 
-    console.log(selectedItem);
-
     useEffect(() => {
         if (user) {
             socket.on('load messages', () => {
