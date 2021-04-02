@@ -44,6 +44,18 @@ const DropdownMenu = () => {
         setShowDropdownMenu(false);
     };
 
+    const addContact = () => {
+        document
+            .querySelector('.addContactFormContainer')
+            .classList.toggle('show');
+        setShowDropdownMenu(false);
+    };
+
+    const openProfile = () => {
+        document.querySelector('.profileContainer').classList.toggle('show');
+        setShowDropdownMenu(false);
+    };
+
     return (
         <>
             <CustomIconButton
@@ -83,6 +95,18 @@ const DropdownMenu = () => {
                                     className="dropdownItem"
                                 >
                                     <div>Create New Room</div>
+                                </li>
+                                <li
+                                    onClick={addContact}
+                                    className="dropdownItem"
+                                >
+                                    <div>Add a contact</div>
+                                </li>
+                                <li
+                                    onClick={openProfile}
+                                    className="dropdownItem"
+                                >
+                                    <div>My Profile</div>
                                 </li>
                                 <li onClick={logout} className="dropdownItem">
                                     <div>Logout</div>

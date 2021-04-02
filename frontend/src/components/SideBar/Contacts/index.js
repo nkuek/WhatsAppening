@@ -20,11 +20,14 @@ const ContactsSearch = () => {
         document
             .querySelector('.addContactFormContainer')
             .classList.add('show');
+        document
+            .querySelector('.newRoomFormContainer')
+            .classList.remove('show');
     };
     return (
         <>
             <div className="contactBody">
-                <h1 className="newRoomFormDescription">Contacts</h1>
+                <h1 className="newRoomFormDescription">Add participants</h1>
                 <div className="newRoomFormInputContainer">
                     <input
                         value={contactSearch}

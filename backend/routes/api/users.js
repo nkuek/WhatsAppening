@@ -2,11 +2,10 @@ const express = require('express');
 const { check } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 
-const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
-const { ChatRoom } = require('../../db/models');
+const { Op } = require('sequelize');
 
 const router = express.Router();
 
@@ -127,6 +126,38 @@ router.put(
         if (imageUrl) user.update({ profileUrl: imageUrl });
         if (isPublic) user.update({ isPublic });
         return res.json({ user });
+    })
+);
+
+router.put(
+    '/search',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const user = req.user;
+        const { searchInput } = req.body;
+
+        const results = await User.findAll({
+            where: {
+                isPublic: true,
+                id: {
+                    [Op.ne]: user.id,
+                },
+                [Op.or]: {
+                    name: {
+                        [Op.iLike]: `%${searchInput}%`,
+                    },
+                    email: {
+                        [Op.iLike]: `%${searchInput}%`,
+                        [Op.not]: user.email,
+                    },
+                    phoneNumber: {
+                        [Op.iLike]: `%${searchInput}%`,
+                        [Op.not]: user.phoneNumber,
+                    },
+                },
+            },
+        });
+        return res.json({ results });
     })
 );
 

@@ -1,22 +1,44 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import { IconButton } from '@material-ui/core';
+import { Avatar, IconButton } from '@material-ui/core';
+import { searchUsers, clearSearchUsers } from '../../../store/usersearch';
+
+import './AddContact.css';
 
 const UserSearch = () => {
-    const [userSearch, setUserSearch] = useState('');
+    const dispatch = useDispatch();
+
+    const [userSearchInput, setUserSearchInput] = useState('');
+
+    const userSearch = useSelector((state) => state.userSearch);
+
+    useEffect(() => {
+        if (userSearchInput) {
+            const timer = setTimeout(() => {
+                dispatch(searchUsers(userSearchInput));
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [userSearchInput]);
+
+    console.log(userSearch);
 
     const resetForm = () => {
         document
             .querySelector('.addContactFormContainer')
             .classList.toggle('show');
+
+        document.querySelector('.newRoomFormContainer').classList.add('show');
         setTimeout(() => {
-            setUserSearch('');
+            setUserSearchInput('');
+            dispatch(clearSearchUsers());
         }, 500);
     };
 
     const handleUserSearch = (e) => {
-        setUserSearch(e.target.value);
+        setUserSearchInput(e.target.value);
     };
 
     return (
@@ -30,7 +52,7 @@ const UserSearch = () => {
             <div className="addContactBody">
                 <div className="newRoomFormInputContainer">
                     <input
-                        value={userSearch}
+                        value={userSearchInput}
                         onChange={handleUserSearch}
                         placeholder="Search for a user"
                     ></input>
@@ -43,6 +65,24 @@ const UserSearch = () => {
                             cursor: 'pointer',
                         }}
                     />
+                </div>
+                <div className="searchResults">
+                    {userSearch.isLoaded &&
+                        userSearch.users.map((user) => (
+                            <div className="userResult">
+                                <div className="userResultProfileImage">
+                                    <Avatar src={user.profileUrl} />
+                                </div>
+                                <div className="userResultInfoContainer">
+                                    <div className="userResultInfo">
+                                        {user.name}
+                                    </div>
+                                    <div className="userResultInfo">
+                                        {user.phoneNumber}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                 </div>
             </div>
         </>

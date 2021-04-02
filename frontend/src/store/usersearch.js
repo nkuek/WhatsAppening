@@ -1,10 +1,15 @@
 import { fetch } from './csrf';
 
 const FIND_USERS = 'users/findUsers';
+const CLEAR_STATE = 'users/clearState';
 
 const findUsers = (users) => ({
-    type: findUsers,
+    type: FIND_USERS,
     users,
+});
+
+const clearState = () => ({
+    type: CLEAR_STATE,
 });
 
 export const searchUsers = (searchInput) => async (dispatch) => {
@@ -13,14 +18,20 @@ export const searchUsers = (searchInput) => async (dispatch) => {
         body: JSON.stringify({ searchInput }),
     });
 
-    dispatch(response.data.users);
+    dispatch(findUsers(response.data.results));
+};
+
+export const clearSearchUsers = () => (dispatch) => {
+    dispatch(clearState());
 };
 
 const initialState = { users: null, isLoaded: false };
 const userSearchReducer = (state = initialState, action) => {
     switch (action.type) {
         case FIND_USERS:
-            return { ...state, users: action.users };
+            return { users: action.users, isLoaded: true };
+        case CLEAR_STATE:
+            return initialState;
         default:
             return state;
     }

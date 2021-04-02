@@ -23,6 +23,7 @@
 
 .noMessagesContainer h1 {
     font-size: 2em;
+    text-align: center;
     /* background-color: black; */
 }
 
@@ -30,8 +31,12 @@
     text-align: center;
 }
 .callToAction1 {
-    font-size: 2em;
+    font-size: 3em;
     margin-bottom: 10px;
+}
+
+.callToAction2 {
+    font-size: 1.5em;
 }
 
 .chatRoomHeader {
