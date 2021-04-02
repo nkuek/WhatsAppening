@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Avatar, IconButton } from '@material-ui/core';
 import { findUserRoom } from '../../store/chatroom';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import SendIcon from '@material-ui/icons/Send';
 
 import './ChatRoom.css';
 const ChatRoom = ({ socket, user }) => {
@@ -107,6 +108,16 @@ const ChatRoom = ({ socket, user }) => {
                                 placeholder="Type a message"
                                 className="chatRoomMessageInput"
                             ></input>
+                            <SendIcon
+                                onClick={handleNewMessage}
+                                style={{
+                                    color: 'white',
+                                    position: 'relative',
+                                    right: '40px',
+                                    top: '8px',
+                                    cursor: 'pointer',
+                                }}
+                            />
                         </div>
                     </form>
                 </footer>
