@@ -39,6 +39,9 @@ const Profile = ({ user }) => {
         }, 500);
     };
 
+    console.log(showEditName);
+    console.log(editNameRef);
+
     const updateFile = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -65,8 +68,10 @@ const Profile = ({ user }) => {
     };
 
     const closeEditName = (e) => {
-        if (e.target !== editNameRef.current && showEditName)
-            setShowEditName(false);
+        if (showEditName) {
+            if (e.target === editNameRef.current) setShowEditName(false);
+        }
+        return;
     };
 
     const handleEditProfile = (e) => {
@@ -91,7 +96,12 @@ const Profile = ({ user }) => {
                 </IconButton>
                 <div className="profileTitle">Profile</div>
             </div>
-            <form onSubmit={handleEditProfile} className="profileBody">
+            <form
+                onClick={closeEditName}
+                onSubmit={handleEditProfile}
+                className="profileBody"
+                ref={editNameRef}
+            >
                 <h1 className="profileDescription">Your Profile</h1>
                 <div className="fileWrapper">
                     <CustomAvatar
@@ -105,7 +115,7 @@ const Profile = ({ user }) => {
                         accept="image/gif,image/jpeg,image/jpg,image/png"
                     ></input>
                 </div>
-                <div onClick={closeEditName} className="profileInformation">
+                <div className="profileInformation">
                     <div className="profileName">Your Name</div>
                     <div className="userNameAndEdit">
                         {!showEditName && (
@@ -125,7 +135,6 @@ const Profile = ({ user }) => {
                         {showEditName && (
                             <>
                                 <input
-                                    ref={editNameRef}
                                     className="userNameEdit"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
@@ -144,7 +153,11 @@ const Profile = ({ user }) => {
                     </div>
                 </div>
                 {(showEditName || image) && (
-                    <button type="submit" className="editProfileSubmit">
+                    <button
+                        onClick={handleEditProfile}
+                        type="submit"
+                        className="editProfileSubmit"
+                    >
                         Edit
                     </button>
                 )}

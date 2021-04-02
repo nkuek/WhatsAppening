@@ -86,10 +86,12 @@ export const logout = () => async (dispatch) => {
 export const editUserProfile = (name, image) => async (dispatch) => {
     let imageUrl;
     if (image) imageUrl = await imageUploader(image);
+    console.log(image);
     const response = await fetch('/api/users/edit', {
         method: 'PUT',
-        body: JSON.stringify(imageUrl ? { name, imageUrl } : { name }),
+        body: JSON.stringify({ name, imageUrl }),
     });
+    console.log('editing');
     dispatch(setUser(response.data.user));
 };
 
