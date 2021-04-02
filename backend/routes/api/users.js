@@ -138,8 +138,6 @@ router.put(
         const contacts = await user.getUserContacts();
         const contactIds = contacts.map((contact) => contact.id);
 
-        console.log(contactIds);
-
         const results = await User.findAll({
             where: {
                 isPublic: true,
@@ -179,6 +177,17 @@ router.post(
         const contacts = await loggedInUser.getUserContacts();
 
         return res.json({ contacts });
+    })
+);
+
+router.put(
+    '/contacts',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const loggedInUser = await User.getCurrentUserById(req.user.id);
+        const userContacts = await loggedInUser.getUserContacts();
+
+        return res.json({ userContacts });
     })
 );
 

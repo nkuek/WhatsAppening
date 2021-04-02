@@ -16,11 +16,20 @@ export const addContact = (userId) => async (dispatch) => {
     dispatch(getContacts(response.data.contacts));
 };
 
+export const findContacts = (userId) => async (dispatch) => {
+    const response = await fetch('/api/users/contacts', {
+        method: 'PUT',
+        body: JSON.stringify({ userId }),
+    });
+
+    dispatch(getContacts(response.data.userContacts));
+};
+
 const initialState = { contacts: null, isLoaded: false };
-const contactReducer = (state = null, action) => {
+const contactReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_CONTACTS:
-            return { ...action.contacts, isLoaded: true };
+            return { contacts: [...action.contacts], isLoaded: true };
         default:
             return state;
     }

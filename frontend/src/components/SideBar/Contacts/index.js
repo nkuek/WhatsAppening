@@ -1,11 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import { findContacts } from '../../../store/userContacts';
 
 import './Contacts.css';
+import { Avatar } from '@material-ui/core';
 
 const ContactsSearch = () => {
+    const dispatch = useDispatch();
     const [contactSearch, setContactSearch] = useState('');
+
+    const userContacts = useSelector((state) => state.userContacts);
+    const session = useSelector((state) => state.session);
+
+    useEffect(() => {
+        if (session.user) dispatch(findContacts(session.user.id));
+    }, [session.user]);
 
     const handleContactSearch = (e) => {
         setContactSearch(e.target.value);
@@ -60,6 +71,24 @@ const ContactsSearch = () => {
                         />
                         Add a contact
                     </div>
+                </div>
+                <div className="userContacts">
+                    {userContacts.isLoaded &&
+                        userContacts.contacts.map((contact) => (
+                            <div className="userResult">
+                                <div className="userResultProfileImage">
+                                    <Avatar src={contact.profileUrl} />
+                                </div>
+                                <div className="userResultInfoContainer">
+                                    <div className="userResultInfo">
+                                        {contact.name}
+                                    </div>
+                                    <div className="userResultInfo">
+                                        {contact.phoneNumber}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                 </div>
             </div>
         </>
