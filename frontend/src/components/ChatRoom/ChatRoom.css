@@ -21,6 +21,11 @@
     align-items: center;
 }
 
+.noMessagesContainer h1 {
+    font-size: 2em;
+    /* background-color: black; */
+}
+
 .welcomeMessage {
     text-align: center;
 }

@@ -116,7 +116,7 @@ function SignupFormPage({ showModal, setShowModal }) {
                         </div>
 
                         <div className="formInputContainer">
-                            <label htmlFor="phonenumber">PhoneNumber</label>
+                            <label htmlFor="phonenumber">Phone Number</label>
                             <input
                                 placeholder="Phone Number"
                                 id="phonenumber"

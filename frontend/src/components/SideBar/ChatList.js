@@ -6,6 +6,7 @@ import { getUserRooms } from '../../store/chatlist';
 import { socket } from '../../App';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 dayjs.extend(relativeTime);
 
@@ -16,11 +17,27 @@ const ChatList = () => {
     const chatList = useSelector((state) => state.chatList);
     const user = useSelector((state) => state.session.user);
 
-    const handleChatListClick = (chatId) => {
-        dispatch(findUserRoom(chatId));
-        document.getElementById(chatId).classList.toggle('selected');
-        if (selectedItem)
+    useEffect(() => {
+        if (chatList.length > 0) {
+            const firstChatId = chatList[0].id;
+            setSelectedItem(firstChatId);
+            document.getElementById(firstChatId).classList.toggle('selected');
+            dispatch(findUserRoom(firstChatId));
+        }
+    }, []);
+
+    const handleChatListClick = (chatId, chatRoom) => {
+        if (selectedItem !== chatId) dispatch(findUserRoom(chatId));
+        selectedItem &&
             document.getElementById(selectedItem).classList.toggle('selected');
+        if (!document.getElementById(chatId).classList.contains('selected')) {
+            document.getElementById(chatId).classList.add('selected');
+        }
+        if (!chatRoom.isRead) {
+            socket.emit('read message', { chatRoomId: chatId });
+            document.getElementById(selectedItem).classList.add('selected');
+        }
+
         setSelectedItem(chatId);
     };
 
@@ -39,15 +56,6 @@ const ChatList = () => {
         }
     }, [user]);
 
-    useEffect(() => {
-        if (chatList.length > 0) {
-            const firstChatId = chatList[0].id;
-            setSelectedItem(firstChatId);
-            document.getElementById(firstChatId).classList.toggle('selected');
-            dispatch(findUserRoom(firstChatId));
-        }
-    }, []);
-
     return (
         <div className="chatListContainer">
             {chatList.length > 0 &&
@@ -55,8 +63,12 @@ const ChatList = () => {
                     <div
                         key={chatRoom.id}
                         id={chatRoom.id}
-                        onClick={() => handleChatListClick(chatRoom.id)}
-                        className="chatListItem"
+                        onClick={() =>
+                            handleChatListClick(chatRoom.id, chatRoom)
+                        }
+                        className={`chatListItem ${
+                            !chatRoom.isRead ? 'unread' : 'selected'
+                        }`}
                     >
                         <div className="chatListImage">
                             <Avatar src={chatRoom.imageUrl} />
@@ -80,7 +92,14 @@ const ChatList = () => {
                                             chatRoom.lastMessage.createdAt
                                         ).fromNow(true)} ago`}
                                 </div>
-                                <div className="chatListNewMessage"></div>
+                                {!chatRoom.isRead && (
+                                    <FiberManualRecordIcon
+                                        style={{
+                                            color: '#2878FF',
+                                            marginLeft: '5px',
+                                        }}
+                                    />
+                                )}
                             </div>
                         </div>
                     </div>

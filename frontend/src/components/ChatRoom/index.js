@@ -31,6 +31,7 @@ const ChatRoom = ({ socket, user }) => {
             authorId: user.id,
             body: messageInput,
             chatRoomId: chatRoom.id,
+            currentUserId: user.id,
         });
         setMessageInput('');
     };

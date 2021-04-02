@@ -229,6 +229,10 @@
     box-sizing: border-box;
 }
 
+.chatListItem.unread {
+    background-color: #5e6364;
+}
+
 .chatListItem.selected {
     background-color: #323739;
 }
@@ -251,7 +255,7 @@
 
 
 .chatListRecentMessage {
-    color: gray
+    color: rgb(163, 163, 163)
 }
 
 .userNameAndEdit {
