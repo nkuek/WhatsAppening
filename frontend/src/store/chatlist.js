@@ -18,7 +18,6 @@ export const getUserRooms = (userId) => async (dispatch) => {
         body: JSON.stringify({ userId }),
     });
     const { rooms } = res.data;
-    console.log(rooms);
 
     return dispatch(getRooms(rooms));
 };

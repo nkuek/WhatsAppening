@@ -4,6 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { findUserRoom } from '../../store/chatroom';
 import { getUserRooms } from '../../store/chatlist';
 import { socket } from '../../App';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 const ChatList = () => {
     const dispatch = useDispatch();
@@ -28,6 +32,11 @@ const ChatList = () => {
             socket.on('reload chatlist', () => {
                 dispatch(getUserRooms(user.id));
             });
+
+            setInterval(() => {
+                console.log('refreshing content!');
+                dispatch(getUserRooms(user.id));
+            }, 60000);
         }
     }, [user]);
 
@@ -54,11 +63,25 @@ const ChatList = () => {
                             <Avatar src={chatRoom.imageUrl} />
                         </div>
                         <div className="chatListInfo">
-                            <div className="chatListName">{chatRoom.name}</div>
-                            <div className="chatListRecentMessage">
-                                {chatRoom.lastMessage
-                                    ? chatRoom.lastMessage.body
-                                    : 'This room has no messages yet!'}
+                            <div className="chatListNameAndMessage">
+                                <div className="chatListName">
+                                    {chatRoom.name}
+                                </div>
+                                <div className="chatListRecentMessage">
+                                    {chatRoom.lastMessage
+                                        ? `${chatRoom.lastMessage.author}: ${chatRoom.lastMessage.body}`
+                                        : 'This room has no messages yet!'}
+                                </div>
+                            </div>
+
+                            <div className="chatListRecentMessageTimeContainer">
+                                <div className="chatListRecentMessageTime">
+                                    {chatRoom.lastMessage &&
+                                        `${dayjs(
+                                            chatRoom.lastMessage.createdAt
+                                        ).fromNow(true)} ago`}
+                                </div>
+                                <div className="chatListNewMessage"></div>
                             </div>
                         </div>
                     </div>

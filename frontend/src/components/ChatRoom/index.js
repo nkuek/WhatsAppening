@@ -111,7 +111,7 @@ const ChatRoom = ({ socket, user }) => {
                             <SendIcon
                                 onClick={handleNewMessage}
                                 style={{
-                                    color: 'white',
+                                    color: '#2878FF',
                                     position: 'relative',
                                     right: '40px',
                                     top: '8px',

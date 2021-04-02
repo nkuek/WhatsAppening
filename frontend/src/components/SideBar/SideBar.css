@@ -239,6 +239,19 @@
 
 .chatListInfo {
     margin-left: 10px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chatListRecentMessageTimeContainer {
+    display: flex;
+}
+
+
+.chatListRecentMessage {
+    color: gray
 }
 
 .userNameAndEdit {
