@@ -90,15 +90,18 @@ router.put(
 
         roomsAndMessages = await Promise.all(
             allRooms.map(async (room) => {
-                const messages = await room.getMessages({
-                    order: ['createdAt'],
-                });
+                const messages = await room.getMessages();
                 return {
                     ...room.dataValues,
                     lastMessage: messages[messages.length - 1],
                 };
             })
         );
+        roomsAndMessages.sort((a, b) => {
+            if (a.lastMessage && b.lastMessage)
+                return b.lastMessage.createdAt - a.lastMessage.createdAt;
+        });
+        console.log(roomsAndMessages);
 
         console.log(roomsAndMessages);
         // const messages = await Promise.all(
