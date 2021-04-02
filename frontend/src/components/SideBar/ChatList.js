@@ -34,7 +34,6 @@ const ChatList = () => {
             });
 
             setInterval(() => {
-                console.log('refreshing content!');
                 dispatch(getUserRooms(user.id));
             }, 60000);
         }

@@ -39,9 +39,6 @@ const Profile = ({ user }) => {
         }, 500);
     };
 
-    console.log(showEditName);
-    console.log(editNameRef);
-
     const updateFile = (e) => {
         const file = e.target.files[0];
         if (file) {
