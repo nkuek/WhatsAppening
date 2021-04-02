@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { Avatar, IconButton } from '@material-ui/core';
-import { createNewRoom } from '../../store/chatroom';
+import { createNewRoom } from '../../../store/chatroom';
 import { withStyles } from '@material-ui/styles';
 import CheckIcon from '@material-ui/icons/Check';
-import SearchIcon from '@material-ui/icons/Search';
+import ContactsSearch from '../Contacts';
+
+import './NewRoomForm.css';
 
 const CustomAvatar = withStyles({
     root: {
@@ -21,7 +23,6 @@ const NewRoomForm = ({ socket }) => {
     const [roomName, setRoomName] = useState('');
     const [image, setImage] = useState('');
     const [preview, setPreview] = useState(user && user.profileUrl);
-    const [contactSearch, setContactSearch] = useState('');
 
     const updateFile = (e) => {
         const file = e.target.files[0];
@@ -59,18 +60,6 @@ const NewRoomForm = ({ socket }) => {
         );
         resetForm();
         openNewRoomForm();
-    };
-
-    const handleContactSearch = (e) => {
-        setContactSearch(e.target.value);
-        if (e.target.value)
-            document
-                .querySelector('.contactsContainer')
-                .classList.add('searching');
-        else
-            document
-                .querySelector('.contactsContainer')
-                .classList.remove('searching');
     };
 
     return (
@@ -117,25 +106,7 @@ const NewRoomForm = ({ socket }) => {
                     />
                 </div>
             </form>
-            <div className="contactsContainer">
-                <h1 className="newRoomFormDescription">Contacts</h1>
-                <div className="newRoomFormInputContainer">
-                    <input
-                        value={contactSearch}
-                        onChange={handleContactSearch}
-                        placeholder="Search or start a new chat"
-                    ></input>
-                    <SearchIcon
-                        style={{
-                            color: 'white',
-                            position: 'relative',
-                            left: '-365px',
-                            top: '8px',
-                            cursor: 'pointer',
-                        }}
-                    />
-                </div>
-            </div>
+            <ContactsSearch />
         </>
     );
 };

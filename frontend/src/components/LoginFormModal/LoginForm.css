@@ -39,7 +39,7 @@
 
 .loginFormInputContainer input:focus {
     padding-left: 10px;
-    border: 2px solid #2878ff;
+    border: 2px solid var(--button-color);
 }
 
 .loginLabelContainer {
@@ -69,20 +69,20 @@
     padding: 10px;
     margin-left: 60px;
     margin-bottom: 5px;
-    background-color: #2878ff;
+    background-color: var(--button-color);
 }
 
 .loginFormButton:hover {
-    background-color: #5895ff;
+    background-color: var(--button-hover);
 }
 
 .loginButton {
     border-radius: 5px;
-    background-color: #2878ff;
+    background-color: var(--button-color);
     color: white;
     padding: 5px 10px
 }
 
 .loginButton:hover {
-    background-color: #5895ff;
+    background-color: var(--button-hover);
 }

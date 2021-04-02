@@ -1,0 +1,49 @@
+.chatListContainer {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: calc(100% - 109px);
+    min-width: 252px;
+
+}
+
+.chatListItem {
+    display: flex;
+    padding: 20px;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    border-top: thin solid rgb(77, 77, 77);
+    box-sizing: border-box;
+}
+
+.chatListItem.unread {
+    background-color: #5e6364;
+}
+
+.chatListItem.selected {
+    background-color: #323739;
+}
+
+.chatListItem:hover {
+    background-color: #2d3134;
+}
+
+.chatListInfo {
+    margin-left: 10px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chatListRecentMessageTimeContainer {
+    display: flex;
+}
+
+
+.chatListRecentMessage {
+    color: rgb(163, 163, 163)
+}

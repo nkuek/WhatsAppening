@@ -14,18 +14,21 @@ module.exports = {
                     profileUrl:
                         'https://d92mrp7hetgfk.cloudfront.net/images/sites/misc/App_Academy_logo-8/original.png?1567098952',
                     phoneNumber: '5555555555',
+                    isPublic: true,
                 },
                 {
                     email: faker.internet.email(),
                     name: faker.name.findName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
                     phoneNumber: '5555555556',
+                    isPublic: true,
                 },
                 {
                     email: faker.internet.email(),
                     name: faker.name.findName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
                     phoneNumber: '5555555557',
+                    isPublic: true,
                 },
                 {
                     email: faker.internet.email(),
@@ -38,6 +41,7 @@ module.exports = {
                     name: faker.name.findName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
                     phoneNumber: '5555555559',
+                    isPublic: true,
                 },
             ],
             {}

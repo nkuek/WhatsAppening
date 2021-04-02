@@ -29,6 +29,10 @@ module.exports = {
             profileUrl: {
                 type: Sequelize.STRING,
             },
+            isPublic: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false,
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,

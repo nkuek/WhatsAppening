@@ -1,12 +1,14 @@
 import { Avatar } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { findUserRoom } from '../../store/chatroom';
-import { getUserRooms } from '../../store/chatlist';
-import { socket } from '../../App';
+import { findUserRoom } from '../../../store/chatroom';
+import { getUserRooms } from '../../../store/chatlist';
+import { socket } from '../../../App';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+
+import './ChatList.css';
 
 dayjs.extend(relativeTime);
 
@@ -21,7 +23,7 @@ const ChatList = () => {
         if (chatList.length > 0) {
             const firstChatId = chatList[0].id;
             setSelectedItem(firstChatId);
-            document.getElementById(firstChatId).classList.toggle('selected');
+            document.getElementById(firstChatId).classList.add('selected');
             dispatch(findUserRoom(firstChatId));
         }
     }, []);
@@ -67,7 +69,7 @@ const ChatList = () => {
                             handleChatListClick(chatRoom.id, chatRoom)
                         }
                         className={`chatListItem ${
-                            !chatRoom.isRead ? 'unread' : 'selected'
+                            !chatRoom.isRead ? 'unread' : ''
                         }`}
                     >
                         <div className="chatListImage">

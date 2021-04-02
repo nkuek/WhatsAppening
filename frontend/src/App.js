@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from './store/session';
 import { getUserRooms } from './store/chatlist';
@@ -33,7 +33,7 @@ function App() {
         });
 
         socket.emit('connection');
-    }, []);
+    }, [dispatch]);
 
     return (
         <>

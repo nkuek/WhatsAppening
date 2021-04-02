@@ -1,0 +1,43 @@
+.profileBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.profilePicture img {
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+}
+
+.default img {
+    object-fit: cover;
+}
+
+.profileInformation {
+    box-sizing: border-box;
+    padding: 30px;
+    width: 100%;
+}
+
+.profileName {
+    color: #009184;
+    margin-bottom: 20px;
+}
+
+.userName {
+    color: white;
+}
+
+
+.profileLogoutButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.profileLogoutButton:hover,
+.editProfileSubmit:hover {
+    background-color: var(--button-hover);
+}

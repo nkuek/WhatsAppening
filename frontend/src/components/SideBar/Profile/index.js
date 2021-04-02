@@ -2,12 +2,14 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Avatar, IconButton } from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import * as sessionActions from '../../store/session';
-import { removeUserRooms } from '../../store/chatlist';
+import * as sessionActions from '../../../store/session';
+import { removeUserRooms } from '../../../store/chatlist';
 import EditIcon from '@material-ui/icons/Edit';
 import ClearIcon from '@material-ui/icons/Clear';
 import { withStyles } from '@material-ui/styles';
-import { resetUserRoomState } from '../../store/chatroom';
+import { resetUserRoomState } from '../../../store/chatroom';
+
+import './Profile.css';
 
 const CustomAvatar = withStyles({
     root: {
@@ -31,8 +33,9 @@ const Profile = ({ user }) => {
 
     const resetForm = () => {
         openProfile();
+        document.getElementById('profilePictureInput').value = '';
         setTimeout(() => {
-            setImage(null);
+            setImage('');
             if (user && user.profileUrl) setPreview(user.profileUrl);
             setName(user.name);
             setShowEditName(false);
@@ -108,6 +111,7 @@ const Profile = ({ user }) => {
                     <input
                         onChange={updateFile}
                         className="fileInput"
+                        id="profilePictureInput"
                         type="file"
                         accept="image/gif,image/jpeg,image/jpg,image/png"
                     ></input>

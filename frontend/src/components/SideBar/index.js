@@ -6,12 +6,11 @@ import { IconButton } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/styles';
 
-import ProfileButton from './ProfileButton';
+import ProfileButton from './Profile/ProfileButton';
 import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
 import NewRoomForm from './NewRoomForm';
 import DropdownMenu from './DropdownMenu';
-import getUserRooms from '../../store/chatlist';
 
 import './SideBar.css';
 import Profile from './Profile';
