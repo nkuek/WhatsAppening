@@ -43,7 +43,20 @@
     display: flex;
 }
 
+@media only screen and (max-width: 1000px) {
+    .chatListRecentMessageTime {
+        display: none;
+    }
+}
 
 .chatListRecentMessage {
-    color: rgb(163, 163, 163)
+    color: rgb(163, 163, 163);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
+}
+
+.chatListRecentMessageTime {
+    font-size: .9em;
 }

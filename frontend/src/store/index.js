@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import chatListReducer from './chatlist';
 import session from './session';
 import chatroomReducer from './chatroom';
+import userSearchReducer from './usersearch';
 
 const rootReducer = combineReducers({
     session,
     chatList: chatListReducer,
     chatRoom: chatroomReducer,
+    userSearch: userSearchReducer,
 });
 
 let enhancer;
