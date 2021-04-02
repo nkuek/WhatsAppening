@@ -8,11 +8,22 @@ const io = require('socket.io')({
 io.on('connection', (socket) => {
     socket.emit('new user');
 
-    socket.on('new message', (data) => {
-        const { name, authorId, body, chatRoomId } = data;
+    socket.on('new message', async (data) => {
+        const { name, authorId, body, chatRoomId, currentUserId } = data;
         socket.join(chatRoomId);
         db.Message.create({ body, authorId, chatRoomId });
+
+        const chatRoom = await db.ChatRoom.findByPk(chatRoomId);
+        if (currentUserId !== authorId) chatRoom.update({ isRead: false });
+
         io.to(chatRoomId).emit('load messages', { chatRoomId });
+        io.emit('reload chatlist');
+    });
+
+    socket.on('read message', async (data) => {
+        const { chatRoomId } = data;
+        const chatRoom = await db.ChatRoom.findByPk(chatRoomId);
+        chatRoom.update({ isRead: true });
         io.emit('reload chatlist');
     });
 

@@ -19,6 +19,7 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 references: { model: 'ChatRooms' },
             },
+
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE,
