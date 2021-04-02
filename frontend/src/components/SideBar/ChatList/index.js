@@ -33,15 +33,20 @@ const ChatList = () => {
         selectedItem &&
             document.getElementById(selectedItem).classList.toggle('selected');
         if (!document.getElementById(chatId).classList.contains('selected')) {
-            document.getElementById(chatId).classList.add('selected');
+            document.getElementById(chatId).classList.toggle('selected');
+            selectedItem &&
+                document
+                    .getElementById(selectedItem)
+                    .classList.remove('selected');
         }
         if (!chatRoom.isRead) {
             socket.emit('read message', { chatRoomId: chatId });
-            document.getElementById(selectedItem).classList.add('selected');
         }
 
         setSelectedItem(chatId);
     };
+
+    console.log(selectedItem);
 
     useEffect(() => {
         if (user) {
@@ -52,10 +57,13 @@ const ChatList = () => {
                 dispatch(getUserRooms(user.id));
             });
 
-            setInterval(() => {
+            const timer = setInterval(() => {
                 dispatch(getUserRooms(user.id));
             }, 60000);
+
+            return () => clearTimeout(timer);
         }
+        return;
     }, [user]);
 
     return (
@@ -70,7 +78,7 @@ const ChatList = () => {
                         }
                         className={`chatListItem ${
                             !chatRoom.isRead ? 'unread' : ''
-                        }`}
+                        } ${chatRoom.id === selectedItem ? 'selected' : ''}`}
                     >
                         <div className="chatListImage">
                             <Avatar src={chatRoom.imageUrl} />

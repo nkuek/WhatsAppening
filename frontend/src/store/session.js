@@ -83,12 +83,20 @@ export const logout = () => async (dispatch) => {
     return response;
 };
 
-export const editUserProfile = (name, image) => async (dispatch) => {
+export const editUserProfile = (name, image, isPublic) => async (dispatch) => {
     let imageUrl;
     if (image) imageUrl = await imageUploader(image);
     const response = await fetch('/api/users/edit', {
         method: 'PUT',
-        body: JSON.stringify({ name, imageUrl }),
+        body: JSON.stringify({ name, imageUrl, isPublic }),
+    });
+    dispatch(setUser(response.data.user));
+};
+
+export const editUserPrivacy = (isPublic) => async (dispatch) => {
+    const response = await fetch('/api/users/edit', {
+        method: 'PUT',
+        body: JSON.stringify({ isPublic }),
     });
     dispatch(setUser(response.data.user));
 };

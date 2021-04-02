@@ -43,6 +43,9 @@
     background-color: var(--button-hover);
 }
 
+.editProfileSubmit {
+    margin-bottom: 20px;
+}
 
 .profileLogoutButton,
 .editProfileSubmit  {
@@ -62,4 +65,9 @@
     padding: 5px;
     border-radius: 5px;
     width: 100%;
+}
+
+.editButtonContainer {
+    display: flex;
+    justify-content: center;
 }

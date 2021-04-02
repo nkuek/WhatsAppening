@@ -121,10 +121,11 @@ router.put(
     '/edit',
     requireAuth,
     asyncHandler(async (req, res) => {
-        const { name, imageUrl } = req.body;
+        const { name, imageUrl, isPublic } = req.body;
         const user = await User.findByPk(req.user.id);
-        user.update({ name });
+        if (name) user.update({ name });
         if (imageUrl) user.update({ profileUrl: imageUrl });
+        if (isPublic) user.update({ isPublic });
         return res.json({ user });
     })
 );

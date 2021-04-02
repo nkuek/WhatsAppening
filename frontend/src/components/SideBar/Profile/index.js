@@ -85,6 +85,11 @@ const Profile = ({ user }) => {
         setShowEditName(false);
     };
 
+    const handlePrivacyEdit = (e) => {
+        setIsPublic(e.target.value);
+        dispatch(sessionActions.editUserPrivacy(e.target.value));
+    };
+
     useEffect(() => {
         if (showEditName) {
             document.addEventListener('click', closeEditName);
@@ -156,26 +161,26 @@ const Profile = ({ user }) => {
                             </>
                         )}
                     </div>
+                    {(showEditName || image) && (
+                        <div className="editButtonContainer">
+                            <button
+                                onClick={handleEditProfile}
+                                type="submit"
+                                className="editProfileSubmit"
+                            >
+                                Edit
+                            </button>
+                        </div>
+                    )}
                     <div className="editPrivacyContainer">
                         <div className="userPrivacy">Privacy Setting</div>
-                        <select
-                            value={isPublic}
-                            onChange={(e) => setIsPublic(e.target.value)}
-                        >
+                        <select value={isPublic} onChange={handlePrivacyEdit}>
                             <option value={true}>Public</option>
                             <option value={false}>Private</option>
                         </select>
                     </div>
                 </div>
-                {(showEditName || image) && (
-                    <button
-                        onClick={handleEditProfile}
-                        type="submit"
-                        className="editProfileSubmit"
-                    >
-                        Edit
-                    </button>
-                )}
+
                 <div className="profileLogoutButtonContainer">
                     <button onClick={logout} className="profileLogoutButton">
                         Logout
