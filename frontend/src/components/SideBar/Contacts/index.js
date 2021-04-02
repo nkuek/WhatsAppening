@@ -39,7 +39,7 @@ const ContactsSearch = () => {
                             color: 'white',
                             position: 'absolute',
                             left: '30px',
-                            top: '50px',
+                            top: '70px',
                             cursor: 'pointer',
                         }}
                     />

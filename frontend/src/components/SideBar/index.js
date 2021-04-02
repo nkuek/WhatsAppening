@@ -44,7 +44,12 @@ const SideBar = ({ socket }) => {
     return (
         <>
             <div className="sidebarContainer">
-                <div className="sidebarContentHeader">
+                <div
+                    style={{
+                        justifyContent: !session.user && 'center',
+                    }}
+                    className="sidebarContentHeader"
+                >
                     {session.user && session.isLoaded ? (
                         <>
                             <ProfileButton

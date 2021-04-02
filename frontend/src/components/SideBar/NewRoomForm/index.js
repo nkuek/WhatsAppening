@@ -49,7 +49,6 @@ const NewRoomForm = ({ socket }) => {
         document
             .querySelector('.newRoomFormContainer')
             .classList.toggle('show');
-        document.querySelector('.sidebarContainer').classList.toggle('hidden');
         resetForm();
     };
 

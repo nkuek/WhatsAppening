@@ -9,6 +9,7 @@
     box-sizing: border-box;
     top: 0;
     transition: top 400ms;
+    padding-top: 20px;
 }
 
 .addContactForm {
@@ -47,7 +48,7 @@
 
 
 .searching {
-    top: -320px;
+    top: -413px;
     min-height: 100%;
-    height: auto;
+    /* height: auto; */
 }
