@@ -2,16 +2,17 @@
     display: flex;
     background-color: #131C21;
     flex-direction: column;
-    align-items: center;
     /* height: 100%; */
-    padding-bottom: 25px;
+}
+
+.newRoomFormDescription {
+    text-align: center;
 }
 
 .newRoomFormInputContainer {
-    display: flex;
     box-sizing: border-box;
     margin-top: 10px;
-    width: 80%;
+    width: 100%;
 }
 
 .newRoomFormInputContainer input {
@@ -22,8 +23,9 @@
     font: inherit;
     border-radius: 20px;
     border: 1px solid gray;
-    width: 100%;
     font-size: .8em;
+    width: 80%;
+    margin: 0 auto
 }
 
 .newRoomFormInputContainer input:focus {

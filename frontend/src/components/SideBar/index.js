@@ -11,6 +11,7 @@ import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
 import NewRoomForm from './NewRoomForm';
 import DropdownMenu from './DropdownMenu';
+import AddContact from './AddContact';
 
 import './SideBar.css';
 import Profile from './Profile';
@@ -83,6 +84,10 @@ const SideBar = ({ socket }) => {
 
             <div className="profileContainer">
                 <Profile openProfile={openProfile} user={session.user} />
+            </div>
+
+            <div className="addContactFormContainer">
+                <AddContact />
             </div>
         </>
     );

@@ -24,10 +24,14 @@ const Profile = ({ user }) => {
     const [preview, setPreview] = useState(null);
     const [name, setName] = useState('');
     const [showEditName, setShowEditName] = useState(false);
+    const [isPublic, setIsPublic] = useState('');
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (user) setName(user.name);
+        if (user) {
+            setName(user.name);
+            setIsPublic(user.isPublic);
+        }
         if (user && user.profileUrl) setPreview(user.profileUrl);
     }, [user]);
 
@@ -151,6 +155,16 @@ const Profile = ({ user }) => {
                                 />
                             </>
                         )}
+                    </div>
+                    <div className="editPrivacyContainer">
+                        <div className="userPrivacy">Privacy Setting</div>
+                        <select
+                            value={isPublic}
+                            onChange={(e) => setIsPublic(e.target.value)}
+                        >
+                            <option value={true}>Public</option>
+                            <option value={false}>Private</option>
+                        </select>
                     </div>
                 </div>
                 {(showEditName || image) && (

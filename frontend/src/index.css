@@ -27,6 +27,7 @@ button {
 
 input {
     border: none;
+    display: block;
 }
 
 input:focus {

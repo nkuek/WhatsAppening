@@ -89,6 +89,7 @@ const NewRoomForm = ({ socket }) => {
                 </div>
                 <div className="newRoomFormInputContainer">
                     <input
+                        required
                         value={roomName}
                         onChange={(e) => setRoomName(e.target.value)}
                         type="text"
@@ -98,8 +99,8 @@ const NewRoomForm = ({ socket }) => {
                         style={{
                             color: 'white',
                             position: 'relative',
-                            left: '-365px',
-                            top: '5px',
+                            top: '-30px',
+                            left: '30px',
                             cursor: 'pointer',
                         }}
                         onClick={handleNewRoomSubmit}

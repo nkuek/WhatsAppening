@@ -21,7 +21,8 @@
     width: 100%;
 }
 
-.profileName {
+.profileName,
+.userPrivacy {
     color: #009184;
     margin-bottom: 20px;
 }
@@ -40,4 +41,25 @@
 .profileLogoutButton:hover,
 .editProfileSubmit:hover {
     background-color: var(--button-hover);
+}
+
+
+.profileLogoutButton,
+.editProfileSubmit  {
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--button-color);
+}
+
+.userNameAndEdit {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.userNameEdit {
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
 }
