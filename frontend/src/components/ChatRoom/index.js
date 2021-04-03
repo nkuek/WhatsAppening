@@ -14,6 +14,13 @@ const ChatRoom = ({ socket, user }) => {
 
     const chatRoom = useSelector((state) => state.chatRoom);
 
+    const getParticipantsFirstNames = (participantList) => {
+        const firstNames = participantList.map(
+            (participant) => participant.name.split(' ')[0]
+        );
+        return firstNames.join(', ');
+    };
+
     useEffect(() => {
         socket.on('load messages', (data) => {
             dispatch(findUserRoom(data.chatRoomId));
@@ -47,17 +54,14 @@ const ChatRoom = ({ socket, user }) => {
                         </div>
                         <div className="chatRoomNameContainer">
                             <div className="chatRoomName">{chatRoom.name}</div>
-                            {chatRoom.participants.length > 2 && (
-                                <div className="chatRoomParticipants">
-                                    {chatRoom.participants.map(
-                                        (participant) => (
-                                            <div className="chatRoomMember">
-                                                {participant.name}
-                                            </div>
-                                        )
-                                    )}
-                                </div>
-                            )}
+                            {chatRoom.participants.length > 2 &&
+                                chatRoom.participants.length < 5 && (
+                                    <div className="chatRoomParticipants">
+                                        {getParticipantsFirstNames(
+                                            chatRoom.participants
+                                        )}
+                                    </div>
+                                )}
                         </div>
                     </div>
                     <div className="chatRoomAddParticipant">

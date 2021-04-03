@@ -62,6 +62,10 @@
     justify-content: center;
 }
 
+.chatRoomParticipants {
+    display: flex;
+}
+
 .chatRoomMessageList {
     display: flex;
     order: 2;
