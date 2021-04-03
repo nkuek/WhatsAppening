@@ -14,6 +14,7 @@
     margin-top: 10px;
     width: 100%;
     margin-bottom: 10px;
+    height: 37px;
 }
 
 .newRoomFormInputContainer input {
@@ -60,4 +61,21 @@
     margin-right: 10px;
     position: relative;
     left: -2px;
+}
+
+.newRoomFormSubmitContainer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.newRoomFormSubmit {
+    padding: 10px 20px;
+    background-color: var(--button-color);
+    border-radius: 10px;
+    color: white;
+}
+
+.newRoomFormSubmit:hover {
+    background-color: var(--button-hover);
 }

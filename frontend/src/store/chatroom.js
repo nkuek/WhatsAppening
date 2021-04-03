@@ -19,7 +19,12 @@ const resetRoom = () => ({
     type: RESET_STATE,
 });
 
-export const createNewRoom = (roomName, adminId, image) => async (dispatch) => {
+export const createNewRoom = (
+    roomName,
+    adminId,
+    image,
+    selectedContacts
+) => async (dispatch) => {
     let imageUrl;
     if (image) {
         imageUrl = await imageUploader(image);
@@ -27,7 +32,7 @@ export const createNewRoom = (roomName, adminId, image) => async (dispatch) => {
 
     const response = await fetch('/api/chatrooms', {
         method: 'POST',
-        body: JSON.stringify({ roomName, adminId, imageUrl }),
+        body: JSON.stringify({ roomName, adminId, imageUrl, selectedContacts }),
     });
 
     const room = response.data;

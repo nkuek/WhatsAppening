@@ -80,34 +80,50 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
                 </div>
                 <div className="userContacts">
                     {userContacts.isLoaded &&
-                        userContacts.contacts.map(
-                            (contact) =>
-                                !selectedContacts
-                                    .map(
-                                        (selectedContact) =>
-                                            selectedContact.name
+                        userContacts.contacts
+                            .filter((contact) => {
+                                if (contactSearch) {
+                                    return (
+                                        contact.name
+                                            .toLowerCase()
+                                            .split(' ')
+                                            .includes(
+                                                contactSearch.toLowerCase()
+                                            ) ||
+                                        contact.phoneNumber === contactSearch
+                                    );
+                                } else return contact;
+                            })
+                            .map(
+                                (contact) =>
+                                    !selectedContacts
+                                        .map(
+                                            (selectedContact) =>
+                                                selectedContact.name
+                                        )
+                                        .includes(contact.name) && (
+                                        <div
+                                            onClick={() =>
+                                                handleContactClick(contact)
+                                            }
+                                            className="userResult"
+                                        >
+                                            <div className="userResultProfileImage">
+                                                <Avatar
+                                                    src={contact.profileUrl}
+                                                />
+                                            </div>
+                                            <div className="userResultInfoContainer">
+                                                <div className="userResultInfo">
+                                                    {contact.name}
+                                                </div>
+                                                <div className="userResultInfo">
+                                                    {contact.phoneNumber}
+                                                </div>
+                                            </div>
+                                        </div>
                                     )
-                                    .includes(contact.name) && (
-                                    <div
-                                        onClick={() =>
-                                            handleContactClick(contact)
-                                        }
-                                        className="userResult"
-                                    >
-                                        <div className="userResultProfileImage">
-                                            <Avatar src={contact.profileUrl} />
-                                        </div>
-                                        <div className="userResultInfoContainer">
-                                            <div className="userResultInfo">
-                                                {contact.name}
-                                            </div>
-                                            <div className="userResultInfo">
-                                                {contact.phoneNumber}
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                        )}
+                            )}
                 </div>
             </div>
         </>

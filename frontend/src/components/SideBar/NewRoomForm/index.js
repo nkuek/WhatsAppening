@@ -59,6 +59,7 @@ const NewRoomForm = ({ socket }) => {
             setRoomName('');
             setImage(null);
             setPreview(null);
+            setSelectedContacts([]);
             document.querySelector('.fileInput').value = '';
         }, 500);
     };
@@ -71,9 +72,9 @@ const NewRoomForm = ({ socket }) => {
 
     const handleNewRoomSubmit = (e) => {
         e.preventDefault();
-        dispatch(createNewRoom(roomName, user.id, image)).then(() =>
-            socket.emit('new room', { adminId: user.id })
-        );
+        dispatch(
+            createNewRoom(roomName, user.id, image, selectedContacts)
+        ).then(() => socket.emit('new room', { adminId: user.id }));
         resetForm();
         openNewRoomForm();
     };
@@ -153,6 +154,11 @@ const NewRoomForm = ({ socket }) => {
                             </div>
                         ))}
                 </div>
+                {(roomName || selectedContacts.length > 0) && (
+                    <div className="newRoomFormSubmitContainer">
+                        <button className="newRoomFormSubmit">Create</button>
+                    </div>
+                )}
             </form>
             <ContactsSearch
                 selectedContacts={selectedContacts}

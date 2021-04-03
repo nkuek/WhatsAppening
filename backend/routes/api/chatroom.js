@@ -22,13 +22,20 @@ router.post(
     requireAuth,
     validateChatRoom,
     asyncHandler(async (req, res) => {
-        const { roomName, adminId, imageUrl } = req.body;
+        const { roomName, adminId, imageUrl, selectedContacts } = req.body;
+
+        console.log(selectedContacts);
 
         const chatroom = await ChatRoom.create({
             name: roomName,
             adminId,
             imageUrl,
         });
+
+        const contactIds = selectedContacts.map((contact) => contact.id);
+        contactIds.forEach(async (id) => await chatroom.addParticipant(id));
+
+        console.log(chatroom);
 
         return res.json({ chatroom });
     })
