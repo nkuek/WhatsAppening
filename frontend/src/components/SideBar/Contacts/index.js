@@ -7,7 +7,7 @@ import { findContacts } from '../../../store/userContacts';
 import './Contacts.css';
 import { Avatar } from '@material-ui/core';
 
-const ContactsSearch = () => {
+const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
     const dispatch = useDispatch();
     const [contactSearch, setContactSearch] = useState('');
 
@@ -27,6 +27,7 @@ const ContactsSearch = () => {
                 .querySelector('.contactBody')
                 .classList.remove('searching');
     };
+
     const showUserSearch = () => {
         document
             .querySelector('.addContactFormContainer')
@@ -35,6 +36,11 @@ const ContactsSearch = () => {
             .querySelector('.newRoomFormContainer')
             .classList.remove('show');
     };
+
+    const handleContactClick = (contact) => {
+        setSelectedContacts([...selectedContacts, contact]);
+    };
+
     return (
         <>
             <div className="contactBody">
@@ -74,21 +80,34 @@ const ContactsSearch = () => {
                 </div>
                 <div className="userContacts">
                     {userContacts.isLoaded &&
-                        userContacts.contacts.map((contact) => (
-                            <div className="userResult">
-                                <div className="userResultProfileImage">
-                                    <Avatar src={contact.profileUrl} />
-                                </div>
-                                <div className="userResultInfoContainer">
-                                    <div className="userResultInfo">
-                                        {contact.name}
+                        userContacts.contacts.map(
+                            (contact) =>
+                                !selectedContacts
+                                    .map(
+                                        (selectedContact) =>
+                                            selectedContact.name
+                                    )
+                                    .includes(contact.name) && (
+                                    <div
+                                        onClick={() =>
+                                            handleContactClick(contact)
+                                        }
+                                        className="userResult"
+                                    >
+                                        <div className="userResultProfileImage">
+                                            <Avatar src={contact.profileUrl} />
+                                        </div>
+                                        <div className="userResultInfoContainer">
+                                            <div className="userResultInfo">
+                                                {contact.name}
+                                            </div>
+                                            <div className="userResultInfo">
+                                                {contact.phoneNumber}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="userResultInfo">
-                                        {contact.phoneNumber}
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                                )
+                        )}
                 </div>
             </div>
         </>

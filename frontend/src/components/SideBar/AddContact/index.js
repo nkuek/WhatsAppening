@@ -19,17 +19,11 @@ const UserSearch = () => {
     const userContacts = useSelector((state) => state.userContacts);
 
     useEffect(() => {
-        dispatch(searchUsers(userSearchInput));
-    }, [userContacts]);
-
-    console.log(userSearchInput);
-
-    useEffect(() => {
         if (!userSearchInput) dispatch(clearSearchUsers());
         else {
             const timer = setTimeout(() => {
                 dispatch(searchUsers(userSearchInput));
-            }, 1000);
+            }, 500);
             return () => clearTimeout(timer);
         }
     }, [userSearchInput]);

@@ -13,6 +13,7 @@
     box-sizing: border-box;
     margin-top: 10px;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .newRoomFormInputContainer input {
@@ -30,4 +31,33 @@
 
 .newRoomFormInputContainer input:focus {
     border-color: var(--button-color)
+}
+
+.selectedContactsContainer {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: .8em;
+}
+
+.selectedContactsItem {
+    display: flex;
+    align-items: center;
+    margin: 5px 20px;
+}
+
+.selectedContactInfo {
+    display: flex;
+    align-items: center;
+    margin: auto 0;
+    background-color: #1e2429;
+    height: 35px;
+    padding-right: 10px;
+    border-radius: 20px;
+}
+
+.selectedContactProfileImage {
+    margin-right: 10px;
+    position: relative;
+    left: -2px;
 }

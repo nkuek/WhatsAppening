@@ -5,6 +5,8 @@ import { Avatar, IconButton } from '@material-ui/core';
 import { createNewRoom } from '../../../store/chatroom';
 import { withStyles } from '@material-ui/styles';
 import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+
 import ContactsSearch from '../Contacts';
 
 import './NewRoomForm.css';
@@ -16,6 +18,20 @@ const CustomAvatar = withStyles({
     },
 })(Avatar);
 
+const CustomCloseIcon = withStyles({
+    root: {
+        '&:hover': {
+            backgroundColor: 'gray',
+        },
+        borderRadius: '100%',
+        marginLeft: '10px',
+        cursor: 'pointer',
+        height: '12px',
+        width: '12px',
+        padding: '2px',
+    },
+})(CloseIcon);
+
 const NewRoomForm = ({ socket }) => {
     const user = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
@@ -23,6 +39,7 @@ const NewRoomForm = ({ socket }) => {
     const [roomName, setRoomName] = useState('');
     const [image, setImage] = useState('');
     const [preview, setPreview] = useState(user && user.profileUrl);
+    const [selectedContacts, setSelectedContacts] = useState([]);
 
     const updateFile = (e) => {
         const file = e.target.files[0];
@@ -61,6 +78,13 @@ const NewRoomForm = ({ socket }) => {
         openNewRoomForm();
     };
 
+    const handleRemoveContactFromState = (contactId) => {
+        const newSelectedContacts = selectedContacts.filter(
+            (contact) => contact.id !== contactId
+        );
+        setSelectedContacts(newSelectedContacts);
+    };
+
     return (
         <>
             <div className="newRoomFormHeader">
@@ -94,19 +118,46 @@ const NewRoomForm = ({ socket }) => {
                         type="text"
                         placeholder="Room Name"
                     ></input>
-                    <CheckIcon
-                        style={{
-                            color: 'white',
-                            position: 'relative',
-                            top: '-30px',
-                            left: '30px',
-                            cursor: 'pointer',
-                        }}
-                        onClick={handleNewRoomSubmit}
-                    />
+                    {roomName && (
+                        <CheckIcon
+                            style={{
+                                color: 'white',
+                                position: 'relative',
+                                top: '-30px',
+                                left: '30px',
+                                cursor: 'pointer',
+                            }}
+                            onClick={handleNewRoomSubmit}
+                        />
+                    )}
+                </div>
+                <div className="selectedContactsContainer">
+                    {selectedContacts &&
+                        selectedContacts.map((contact) => (
+                            <div className="selectedContactsItem">
+                                <div className="selectedContactInfo">
+                                    <div className="selectedContactProfileImage">
+                                        <Avatar src={contact.profileUrl} />
+                                    </div>
+                                    <div className="selectedContactName">
+                                        {contact.name}
+                                    </div>
+                                    <CustomCloseIcon
+                                        onClick={() =>
+                                            handleRemoveContactFromState(
+                                                contact.id
+                                            )
+                                        }
+                                    />
+                                </div>
+                            </div>
+                        ))}
                 </div>
             </form>
-            <ContactsSearch />
+            <ContactsSearch
+                selectedContacts={selectedContacts}
+                setSelectedContacts={setSelectedContacts}
+            />
         </>
     );
 };
