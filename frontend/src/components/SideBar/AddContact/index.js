@@ -78,6 +78,7 @@ const UserSearch = () => {
                     {userSearch.isLoaded &&
                         userSearch.users.map((user) => (
                             <div
+                                key={user.id}
                                 onClick={() => handleContactClick(user)}
                                 className="userResult"
                             >

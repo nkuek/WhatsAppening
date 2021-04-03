@@ -18,6 +18,19 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
         if (session.user) dispatch(findContacts(session.user.id));
     }, [session.user]);
 
+    const contactFilter = (contactsList) => {
+        return contactsList.filter((contact) => {
+            if (contactSearch) {
+                return (
+                    contact.name
+                        .toLowerCase()
+                        .includes(contactSearch.toLowerCase()) ||
+                    contact.phoneNumber.includes(contactSearch)
+                );
+            } else return contact;
+        });
+    };
+
     const handleContactSearch = (e) => {
         setContactSearch(e.target.value);
         if (e.target.value)
@@ -80,50 +93,34 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
                 </div>
                 <div className="userContacts">
                     {userContacts.isLoaded &&
-                        userContacts.contacts
-                            .filter((contact) => {
-                                if (contactSearch) {
-                                    return (
-                                        contact.name
-                                            .toLowerCase()
-                                            .split(' ')
-                                            .includes(
-                                                contactSearch.toLowerCase()
-                                            ) ||
-                                        contact.phoneNumber === contactSearch
-                                    );
-                                } else return contact;
-                            })
-                            .map(
-                                (contact) =>
-                                    !selectedContacts
-                                        .map(
-                                            (selectedContact) =>
-                                                selectedContact.name
-                                        )
-                                        .includes(contact.name) && (
-                                        <div
-                                            onClick={() =>
-                                                handleContactClick(contact)
-                                            }
-                                            className="userResult"
-                                        >
-                                            <div className="userResultProfileImage">
-                                                <Avatar
-                                                    src={contact.profileUrl}
-                                                />
+                        contactFilter(userContacts.contacts).map(
+                            (contact) =>
+                                !selectedContacts
+                                    .map(
+                                        (selectedContact) =>
+                                            selectedContact.name
+                                    )
+                                    .includes(contact.name) && (
+                                    <div
+                                        onClick={() =>
+                                            handleContactClick(contact)
+                                        }
+                                        className="userResult"
+                                    >
+                                        <div className="userResultProfileImage">
+                                            <Avatar src={contact.profileUrl} />
+                                        </div>
+                                        <div className="userResultInfoContainer">
+                                            <div className="userResultInfo">
+                                                {contact.name}
                                             </div>
-                                            <div className="userResultInfoContainer">
-                                                <div className="userResultInfo">
-                                                    {contact.name}
-                                                </div>
-                                                <div className="userResultInfo">
-                                                    {contact.phoneNumber}
-                                                </div>
+                                            <div className="userResultInfo">
+                                                {contact.phoneNumber}
                                             </div>
                                         </div>
-                                    )
-                            )}
+                                    </div>
+                                )
+                        )}
                 </div>
             </div>
         </>
