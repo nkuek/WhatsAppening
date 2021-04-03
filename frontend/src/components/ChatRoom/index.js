@@ -4,10 +4,12 @@ import { Avatar, IconButton } from '@material-ui/core';
 import { findUserRoom } from '../../store/chatroom';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import SendIcon from '@material-ui/icons/Send';
+import dayjs from 'dayjs';
 
 import './ChatRoom.css';
 const ChatRoom = ({ socket, user }) => {
     const dispatch = useDispatch();
+    const chatMessageList = document.querySelector('.chatRoomMessageList');
 
     const [messageInput, setMessageInput] = useState('');
     const [isLoaded, setIsLoaded] = useState(false);
@@ -24,11 +26,15 @@ const ChatRoom = ({ socket, user }) => {
     useEffect(() => {
         socket.on('load messages', (data) => {
             dispatch(findUserRoom(data.chatRoomId));
+            chatMessageList.scrollTop = chatMessageList.scrollHeight;
         });
     }, [socket, dispatch]);
 
     useEffect(() => {
-        if (chatRoom) setIsLoaded(true);
+        if (chatRoom) {
+            setIsLoaded(true);
+            chatMessageList.scrollTop = chatMessageList.scrollHeight;
+        }
     }, [chatRoom]);
 
     const handleNewMessage = (e) => {
@@ -82,19 +88,36 @@ const ChatRoom = ({ socket, user }) => {
                                     className="chatRoomMessageContainer sent"
                                 >
                                     <div className="chatRoomMessage sent">
-                                        {message.body}
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="chatRoomMessageContainer received">
-                                    <div className="chatMessageArrow"></div>
-                                    <div className="chatRoomMessage received">
-                                        <div className="chatRoomMessageSender">
-                                            {message.author}
-                                        </div>
                                         <div className="chatRoomMessageBody">
                                             {message.body}
                                         </div>
+                                        <span className="chatRoomMessageTime">
+                                            {dayjs(message.createdAt).format(
+                                                'HH:mm'
+                                            )}
+                                        </span>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div
+                                    key={message.id}
+                                    className="chatRoomMessageContainer received"
+                                >
+                                    <div className="chatMessageArrow"></div>
+                                    <div className="chatRoomMessage received">
+                                        <div className="chatRoomMessageText">
+                                            <div className="chatRoomMessageSender">
+                                                {message.author}
+                                            </div>
+                                            <div className="chatRoomMessageBody">
+                                                {message.body}
+                                            </div>
+                                        </div>
+                                        <span className="chatRoomMessageTime">
+                                            {dayjs(message.createdAt).format(
+                                                'HH:mm'
+                                            )}
+                                        </span>
                                     </div>
                                 </div>
                             )
@@ -131,11 +154,11 @@ const ChatRoom = ({ socket, user }) => {
             </div>
         </>
     ) : user ? (
-        <div className="noMessagesContainer">
+        <div className="chatRoomMessageList noMessagesContainer">
             <h1>Select or create a chatroom to view messages!</h1>
         </div>
     ) : (
-        <div className="noMessagesContainer">
+        <div className="chatRoomMessageList noMessagesContainer">
             <div className="welcomeMessage">
                 <div className="callToAction1">Welcome!</div>
                 <div className="callToAction2">

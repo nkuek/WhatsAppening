@@ -1,5 +1,5 @@
 .chatRoomContainer,
-.noMessagesContainer {
+.noMessagesContainer.chatRoomMessageList {
     /* flex: 65%; */
     height: 100vh;
     flex: 1 1;
@@ -10,12 +10,12 @@
 }
 
 .chatRoomContainer,
-.noMessagesContainer {
+.noMessagesContainer.chatRoomMessageList {
     background: linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8) ), url(https://web.whatsapp.com/img/bg-chat-tile-dark_a4be512e7195b6b733d9110b408f075d.png);
     background-color: #455863;
 }
 
-.noMessagesContainer {
+.noMessagesContainer.chatRoomMessageList {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,6 +72,7 @@
     position: relative;
     height: calc(100% - 62px - 58px);
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .chatRoomMessageFooter {
@@ -122,6 +123,8 @@
     width: fit-content;
     padding: 10px 20px;
     border-radius: 10px;
+    display: flex;
+    max-width: 30%;
 }
 
 /* .chatRoomMessage::after {
@@ -175,16 +178,10 @@
 	border-color: #262d31 transparent transparent transparent;
 }
 
-/* Right triangle, left side slightly down */
-/* .tri-right.border.left-in:before {
-	content: ' ';
-	position: absolute;
-	width: 0;
-	height: 0;
-  left: -40px;
-	right: auto;
-  top: 30px;
-	bottom: auto;
-	border: 20px solid;
-	border-color: #666 #666 transparent transparent;
-} */
+.chatRoomMessageTime {
+    font-size: .7em;
+    display: flex;
+    align-items: flex-end;
+    margin-left: 20px;
+    position: relative;
+}

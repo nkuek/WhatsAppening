@@ -42,6 +42,7 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
     };
 
     const showUserSearch = () => {
+        document.querySelector('.searchInput').focus();
         document
             .querySelector('.addContactFormContainer')
             .classList.add('show');
@@ -102,6 +103,7 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
                                     )
                                     .includes(contact.name) && (
                                     <div
+                                        key={contact.id}
                                         onClick={() =>
                                             handleContactClick(contact)
                                         }

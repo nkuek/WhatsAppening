@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import { addContact } from '../../store/userContacts';
+import { clearSearchUsers } from '../../store/usersearch';
 
 import './ConfirmContactModal.css';
 
@@ -14,6 +15,7 @@ const ConfirmContactModal = ({ user, setShowModal }) => {
             .querySelector('.addContactFormContainer')
             .classList.remove('show');
         document.querySelector('.newRoomFormContainer').classList.add('show');
+        dispatch(clearSearchUsers());
     };
 
     return (

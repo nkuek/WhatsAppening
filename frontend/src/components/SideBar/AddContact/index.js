@@ -16,7 +16,6 @@ const UserSearch = () => {
     const [selectedUser, setSelectedUser] = useState('');
 
     const userSearch = useSelector((state) => state.userSearch);
-    const userContacts = useSelector((state) => state.userContacts);
 
     useEffect(() => {
         if (!userSearchInput) dispatch(clearSearchUsers());
@@ -60,6 +59,7 @@ const UserSearch = () => {
             <div className="addContactBody">
                 <div className="newRoomFormInputContainer">
                     <input
+                        className="searchInput"
                         value={userSearchInput}
                         onChange={handleUserSearch}
                         placeholder="Search for a user"

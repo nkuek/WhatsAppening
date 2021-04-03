@@ -13,23 +13,16 @@ import './ChatList.css';
 dayjs.extend(relativeTime);
 
 const ChatList = () => {
+    const chatMessageList = document.querySelector('.chatRoomMessageList');
     const dispatch = useDispatch();
     const [selectedItem, setSelectedItem] = useState('');
 
     const chatList = useSelector((state) => state.chatList);
     const user = useSelector((state) => state.session.user);
 
-    useEffect(() => {
-        if (chatList.length > 0) {
-            const firstChatId = chatList[0].id;
-            setSelectedItem(firstChatId);
-            document.getElementById(firstChatId).classList.add('selected');
-            dispatch(findUserRoom(firstChatId));
-        }
-    }, []);
-
     const handleChatListClick = (chatId, chatRoom) => {
         if (selectedItem !== chatId) dispatch(findUserRoom(chatId));
+
         selectedItem &&
             document.getElementById(selectedItem).classList.toggle('selected');
         if (!document.getElementById(chatId).classList.contains('selected')) {
