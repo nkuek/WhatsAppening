@@ -90,9 +90,14 @@ const ChatRoom = ({ socket, user }) => {
                                 </div>
                             ) : (
                                 <div className="chatRoomMessageContainer received">
-                                    <div classname="chatRoomMessageSender"></div>
+                                    <div className="chatMessageArrow"></div>
                                     <div className="chatRoomMessage received">
-                                        {message.body}
+                                        <div className="chatRoomMessageSender">
+                                            {message.author}
+                                        </div>
+                                        <div className="chatRoomMessageBody">
+                                            {message.body}
+                                        </div>
                                     </div>
                                 </div>
                             )

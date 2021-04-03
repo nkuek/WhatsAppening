@@ -153,6 +153,29 @@
     position: relative;
 }
 
+.chatRoomMessage.received {
+    background-color: #262d31;
+    box-sizing: border-box;
+    width: fit-content;
+}
+
+.chatRoomMessageSender {
+    font-size: .8em;
+}
+
+.chatMessageArrow {
+	content: ' ';
+	position: relative;
+	width: 0;
+	height: 0;
+    left: 15px;
+	right: auto;
+    top: 5px;
+	bottom: auto;
+	border: 10px solid;
+	border-color: #262d31 transparent transparent transparent;
+}
+
 /* Right triangle, left side slightly down */
 /* .tri-right.border.left-in:before {
 	content: ' ';
