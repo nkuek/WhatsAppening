@@ -10,6 +10,10 @@ const ConfirmContactModal = ({ user, setShowModal }) => {
     const handleAddContact = () => {
         dispatch(addContact(user.id));
         setShowModal(false);
+        document
+            .querySelector('.addContactFormContainer')
+            .classList.remove('show');
+        document.querySelector('.newRoomFormContainer').classList.add('show');
     };
 
     return (

@@ -54,14 +54,11 @@ const ChatRoom = ({ socket, user }) => {
                         </div>
                         <div className="chatRoomNameContainer">
                             <div className="chatRoomName">{chatRoom.name}</div>
-                            {chatRoom.participants.length > 2 &&
-                                chatRoom.participants.length < 5 && (
-                                    <div className="chatRoomParticipants">
-                                        {getParticipantsFirstNames(
-                                            chatRoom.participants
-                                        )}
-                                    </div>
+                            <div className="chatRoomParticipants">
+                                {getParticipantsFirstNames(
+                                    chatRoom.participants
                                 )}
+                            </div>
                         </div>
                     </div>
                     <div className="chatRoomAddParticipant">
