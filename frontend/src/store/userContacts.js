@@ -22,6 +22,15 @@ export const findContacts = (userId) => async (dispatch) => {
         body: JSON.stringify({ userId }),
     });
 
+    const { userContacts } = response.data;
+    userContacts.sort((a, b) => {
+        const first = a.name.toLowerCase();
+        const second = b.name.toLowerCase();
+        if (first < second) return -1;
+        if (first > second) return 1;
+        return 0;
+    });
+
     dispatch(getContacts(response.data.userContacts));
 };
 
