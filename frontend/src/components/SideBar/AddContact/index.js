@@ -22,8 +22,11 @@ const UserSearch = () => {
         dispatch(searchUsers(userSearchInput));
     }, [userContacts]);
 
+    console.log(userSearchInput);
+
     useEffect(() => {
-        if (userSearchInput) {
+        if (!userSearchInput) dispatch(clearSearchUsers());
+        else {
             const timer = setTimeout(() => {
                 dispatch(searchUsers(userSearchInput));
             }, 1000);
