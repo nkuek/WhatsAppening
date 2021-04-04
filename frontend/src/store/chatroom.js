@@ -40,10 +40,10 @@ export const createNewRoom = (
     return room;
 };
 
-export const findUserRoom = (chatRoomId) => async (dispatch) => {
+export const findUserRoom = (chatRoomId, limit) => async (dispatch) => {
     const res = await fetch('/api/chatrooms', {
         method: 'PUT',
-        body: JSON.stringify({ chatRoomId }),
+        body: JSON.stringify({ chatRoomId, limit }),
     });
 
     const { chatRoom, messagesAndUsers, participants } = res.data;
@@ -57,12 +57,13 @@ export const resetUserRoomState = () => (dispatch) => {
     dispatch(resetRoom());
 };
 
-const chatroomReducer = (state = null, action) => {
+const initialState = { room: null, isLoaded: false };
+const chatroomReducer = (state = initialState, action) => {
     switch (action.type) {
         case CREATE_ROOM:
-            return action.room;
+            return { room: action.room, isLoaded: true };
         case FIND_ROOM:
-            return action.room;
+            return { room: action.room, isLoaded: true };
         case RESET_STATE:
             return null;
         default:
