@@ -1,3 +1,9 @@
+.noMessagesContainer {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
 .chatRoomContainer,
 .noMessagesContainer.chatRoomMessageList {
     /* flex: 65%; */
@@ -20,6 +26,7 @@
     justify-content: center;
     align-items: center;
 }
+
 
 .noMessagesContainer h1 {
     font-size: 2em;
@@ -102,7 +109,9 @@
 }
 
 .chatRoomMessageInput {
-    padding: 15px;
+    padding: 20px;
+    padding-right: 55px;
+    box-sizing: border-box;
     border: none;
     width: 80%;
     outline-width: 0;

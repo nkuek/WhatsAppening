@@ -39,6 +39,7 @@ const NewRoomForm = ({ socket }) => {
     const [roomName, setRoomName] = useState('');
     const [image, setImage] = useState('');
     const [preview, setPreview] = useState(user && user.profileUrl);
+    const [errors, setErrors] = useState([]);
     const [selectedContacts, setSelectedContacts] = useState([]);
 
     const updateFile = (e) => {
@@ -60,6 +61,7 @@ const NewRoomForm = ({ socket }) => {
             setImage(null);
             setPreview(null);
             setSelectedContacts([]);
+            setErrors([]);
             document.querySelector('.fileInput').value = '';
         }, 500);
     };
@@ -72,11 +74,17 @@ const NewRoomForm = ({ socket }) => {
 
     const handleNewRoomSubmit = (e) => {
         e.preventDefault();
-        dispatch(
+        return dispatch(
             createNewRoom(roomName, user.id, image, selectedContacts)
-        ).then(() => socket.emit('new room', { adminId: user.id }));
-        resetForm();
-        openNewRoomForm();
+        )
+            .then(() => {
+                socket.emit('new room', { adminId: user.id });
+                resetForm();
+                openNewRoomForm();
+            })
+            .catch((res) => {
+                if (res.data && res.data.errors) setErrors(res.data.errors);
+            });
     };
 
     const handleRemoveContactFromState = (contactId) => {
@@ -111,9 +119,16 @@ const NewRoomForm = ({ socket }) => {
                         accept="image/gif,image/jpeg,image/jpg,image/png"
                     ></input>
                 </div>
+                {errors.length > 0 && (
+                    <ul className="errors newRoom">
+                        {errors.map((error, idx) => (
+                            <li key={idx}>{error}</li>
+                        ))}
+                    </ul>
+                )}
                 <div className="newRoomFormInputContainer">
                     <input
-                        required
+                        // required
                         value={roomName}
                         onChange={(e) => setRoomName(e.target.value)}
                         type="text"

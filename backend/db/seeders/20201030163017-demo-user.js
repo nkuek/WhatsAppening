@@ -35,6 +35,7 @@ module.exports = {
                     name: faker.name.findName(),
                     hashedPassword: bcrypt.hashSync(faker.internet.password()),
                     phoneNumber: '5555555558',
+                    isPublic: true,
                 },
                 {
                     email: faker.internet.email(),

@@ -48,3 +48,10 @@ li {
 #root {
     display: flex;
 }
+
+.errors {
+    color: red;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto
+}

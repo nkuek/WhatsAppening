@@ -9,12 +9,13 @@ io.on('connection', (socket) => {
     socket.emit('new user');
 
     socket.on('new message', async (data) => {
-        const { name, authorId, body, chatRoomId, currentUserId } = data;
+        const { name, authorId, body, chatRoomId } = data;
         socket.join(chatRoomId);
         db.Message.create({ body, authorId, chatRoomId });
 
         const chatRoom = await db.ChatRoom.findByPk(chatRoomId);
-        if (currentUserId !== authorId) chatRoom.update({ isRead: false });
+
+        chatRoom.update({ isRead: false });
 
         io.to(chatRoomId).emit('load messages', { chatRoomId });
         io.emit('reload chatlist');
@@ -22,9 +23,10 @@ io.on('connection', (socket) => {
 
     socket.on('read message', async (data) => {
         const { chatRoomId } = data;
+        console.log('reading');
         const chatRoom = await db.ChatRoom.findByPk(chatRoomId);
         chatRoom.update({ isRead: true });
-        io.emit('reload chatlist');
+        socket.emit('reload chatlist');
     });
 
     socket.on('user logged in', (data) => {

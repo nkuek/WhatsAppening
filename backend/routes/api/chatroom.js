@@ -14,6 +14,9 @@ const validateChatRoom = [
         .withMessage('Chat room name cannot be empty.')
         .isLength({ max: 50 })
         .withMessage('Chat room name cannot exceed 50 characters.'),
+    check('selectedContacts')
+        .isLength({ min: 1 })
+        .withMessage('Chat room must have at least one other participant.'),
     handleValidationErrors,
 ];
 
@@ -23,6 +26,8 @@ router.post(
     validateChatRoom,
     asyncHandler(async (req, res) => {
         const { roomName, adminId, imageUrl, selectedContacts } = req.body;
+
+        console.log(selectedContacts);
 
         const chatroom = await ChatRoom.create({
             name: roomName,

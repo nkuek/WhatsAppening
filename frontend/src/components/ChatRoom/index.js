@@ -9,7 +9,6 @@ import dayjs from 'dayjs';
 import './ChatRoom.css';
 const ChatRoom = ({ socket, user }) => {
     const dispatch = useDispatch();
-    const chatMessageList = document.querySelector('.chatRoomMessageList');
 
     const [messageInput, setMessageInput] = useState('');
     const [isLoaded, setIsLoaded] = useState(false);
@@ -26,6 +25,9 @@ const ChatRoom = ({ socket, user }) => {
     useEffect(() => {
         socket.on('load messages', (data) => {
             dispatch(findUserRoom(data.chatRoomId));
+            const chatMessageList = document.querySelector(
+                '.chatRoomMessageList'
+            );
             chatMessageList.scrollTop = chatMessageList.scrollHeight;
         });
     }, [socket, dispatch]);
@@ -33,8 +35,9 @@ const ChatRoom = ({ socket, user }) => {
     useEffect(() => {
         if (chatRoom) {
             setIsLoaded(true);
-            chatMessageList.scrollTop = chatMessageList.scrollHeight;
         }
+        const chatMessageList = document.querySelector('.chatRoomMessageList');
+        chatMessageList.scrollTop = chatMessageList.scrollHeight;
     }, [chatRoom]);
 
     const handleNewMessage = (e) => {
@@ -44,7 +47,6 @@ const ChatRoom = ({ socket, user }) => {
             authorId: user.id,
             body: messageInput,
             chatRoomId: chatRoom.id,
-            currentUserId: user.id,
         });
         setMessageInput('');
     };

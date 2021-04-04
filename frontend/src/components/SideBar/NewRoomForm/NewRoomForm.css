@@ -79,3 +79,7 @@
 .newRoomFormSubmit:hover {
     background-color: var(--button-hover);
 }
+
+.errors.newRoom {
+    font-size: .9em;
+}

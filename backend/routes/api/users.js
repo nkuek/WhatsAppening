@@ -27,7 +27,7 @@ const validateSignup = [
         .withMessage('Password must be 6 characters or more.')
         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
         .withMessage(
-            'Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'
+            'Password must contain at least 1 lowercase letter, uppercase letter, number, and special character.'
         ),
     check('confirmPassword')
         .exists({ checkFalsy: true })
