@@ -72,6 +72,7 @@ const ChatList = () => {
                     >
                         <div className="readStatus">
                             {!chatRoom.isRead &&
+                                chatRoom.lastMessage &&
                                 chatRoom.lastMessage.authorId !== user.id && (
                                     <FiberManualRecordIcon
                                         style={{

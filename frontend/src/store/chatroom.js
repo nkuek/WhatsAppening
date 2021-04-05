@@ -40,10 +40,10 @@ export const createNewRoom = (
     return room;
 };
 
-export const findUserRoom = (chatRoomId, limit) => async (dispatch) => {
+export const findUserRoom = (chatRoomId) => async (dispatch) => {
     const res = await fetch('/api/chatrooms', {
         method: 'PUT',
-        body: JSON.stringify({ chatRoomId, limit }),
+        body: JSON.stringify({ chatRoomId }),
     });
 
     const { chatRoom, messagesAndUsers, participants } = res.data;

@@ -21,6 +21,10 @@ io.on('connection', (socket) => {
         io.emit('reload chatlist');
     });
 
+    socket.on('delete message', async (data) => {
+        const { messageId } = data;
+    });
+
     socket.on('read message', async (data) => {
         const { chatRoomId } = data;
         console.log('reading');

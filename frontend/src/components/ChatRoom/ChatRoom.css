@@ -40,6 +40,7 @@
 .callToAction1 {
     font-size: 3em;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .callToAction2 {
@@ -171,6 +172,7 @@
     width: fit-content;
 }
 
+
 .chatRoomMessageSender {
     font-size: .8em;
 }
@@ -193,4 +195,27 @@
     align-items: flex-end;
     margin-left: 20px;
     position: relative;
+}
+
+.messageDropdown {
+    position: absolute;
+    z-index: 799;
+}
+
+.messageDropdownMenu {
+    position:absolute;
+    background-color: #056162;
+    opacity: .8;
+    left: 5px;
+    top: 10px;
+    z-index: 800;
+}
+
+.dropdownList.message {
+    width: 100px;
+}
+
+.dropdownItem.message {
+    justify-content: center;
+    display: flex;
 }

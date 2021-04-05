@@ -47,11 +47,11 @@ router.put(
     '/',
     requireAuth,
     asyncHandler(async (req, res) => {
-        const { chatRoomId, limit = 1 } = req.body;
+        const { chatRoomId } = req.body;
         const chatRoom = await ChatRoom.findByPk(chatRoomId);
         const messages = await chatRoom.getMessages({
-            order: [['createdAt', 'DESC']],
-            limit: limit * 25,
+            // order: [['createdAt', 'DESC']],
+            // limit: limit * 25,
         });
         const participants = await chatRoom.getParticipants();
 

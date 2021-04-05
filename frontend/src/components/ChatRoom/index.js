@@ -4,71 +4,57 @@ import { Avatar, IconButton } from '@material-ui/core';
 import { findUserRoom } from '../../store/chatroom';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import SendIcon from '@material-ui/icons/Send';
-import dayjs from 'dayjs';
 
 import './ChatRoom.css';
+import SentMessage from './SentMessage';
+import ReceivedMessage from './ReceivedMessage';
 const ChatRoom = ({ socket, user }) => {
     const dispatch = useDispatch();
     const chatRoom = useSelector((state) => state.chatRoom);
 
     const [messageInput, setMessageInput] = useState('');
-    const [scrolling, setScrolling] = useState(false);
-    const [limit, setLimit] = useState(0);
-    const [messagesLength, setMessagesLength] = useState(25);
+    const [hoveredMessage, setHoveredMessage] = useState(null);
 
     const getParticipantsFirstNames = (participantList) => {
-        const firstNames = participantList.map(
-            (participant) => participant.name.split(' ')[0]
-        );
-        return firstNames.join(', ');
+        if (participantList) {
+            const firstNames =
+                participantList &&
+                participantList.map(
+                    (participant) => participant.name.split(' ')[0]
+                );
+            return firstNames.join(', ');
+        }
     };
 
     useEffect(() => {
-        console.log('setting messages');
-        if (chatRoom.isLoaded) {
-            setMessagesLength(chatRoom.room.messages.length);
-            console.log(chatRoom.room.messages.length);
-        }
-    }, [chatRoom]);
-
-    useEffect(() => {
+        const chatMessageList = document.querySelector('.chatRoomMessageList');
         socket.on('load messages', (data) => {
             dispatch(findUserRoom(data.chatRoomId));
-            // const chatMessageList = document.querySelector(
-            //     '.chatRoomMessageList'
-            // );
+            chatMessageList.scrollTop = chatMessageList.scrollHeight;
         });
     }, [socket, dispatch]);
 
     useEffect(() => {
-        console.log('limit', limit);
-        // if (chatRoom.isLoaded) setMessagesLength(chatRoom.room.messages.length);
         const chatMessageList = document.querySelector('.chatRoomMessageList');
-        setScrolling(false);
-        if (!scrolling)
-            chatMessageList.scrollTop = chatMessageList.scrollHeight;
-        console.log('messagesLength', messagesLength);
-        console.log('limit bound', limit * 25);
-        const loadMore = () => {
-            if (
-                chatRoom.room &&
-                chatMessageList.scrollTop === 0 &&
-                messagesLength + 1 >= limit * 25
-            ) {
-                setLimit((prev) => prev + 1);
-                setTimeout(() => {
-                    setScrolling(true);
-                    dispatch(findUserRoom(chatRoom.room.id, limit + 2));
-                    chatMessageList.scrollTop = 1220 / limit - 1;
-                }, 500);
-            }
-        };
-        chatMessageList.addEventListener('scroll', loadMore);
-        return () => chatMessageList.removeEventListener('scroll', loadMore);
-    }, [chatRoom]);
+        chatMessageList.scrollTop = chatMessageList.scrollHeight;
+    }, [chatRoom.room]);
+
+    // useEffect(() => {
+    //     const chatMessageList = document.querySelector('.chatRoomMessageList');
+    //     const loadMore = () => {
+    //         if (chatRoom.room && chatMessageList.scrollTop === 0) {
+    //             setTimeout(() => {
+    //                 dispatch(findUserRoom(chatRoom.room.id));
+    //             }, 500);
+    //         }
+    //     };
+    //     chatMessageList.addEventListener('scroll', loadMore);
+    //     return () => chatMessageList.removeEventListener('scroll', loadMore);
+    // }, [chatRoom]);
 
     const handleNewMessage = (e) => {
         e.preventDefault();
+        if (!messageInput) return;
         socket.emit('new message', {
             name: user.name,
             authorId: user.id,
@@ -108,57 +94,22 @@ const ChatRoom = ({ socket, user }) => {
                     </div>
                 </header>
                 <div className="chatRoomMessageList">
-                    {chatRoom.room.messages.length === 0 ? (
+                    {chatRoom.room.messages &&
+                    chatRoom.room.messages.length === 0 ? (
                         <div className="noMessagesContainer">
                             <div className="callToAction1">
                                 This room has no messages yet!
                             </div>
                         </div>
                     ) : (
-                        chatRoom.room.messages
-                            .slice(0)
-                            .reverse()
-                            .map((message) =>
-                                message.authorId === user.id ? (
-                                    <div
-                                        key={message.id}
-                                        className="chatRoomMessageContainer sent"
-                                    >
-                                        <div className="chatRoomMessage sent">
-                                            <div className="chatRoomMessageBody">
-                                                {message.body}
-                                            </div>
-                                            <span className="chatRoomMessageTime">
-                                                {dayjs(
-                                                    message.createdAt
-                                                ).format('HH:mm')}
-                                            </span>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div
-                                        key={message.id}
-                                        className="chatRoomMessageContainer received"
-                                    >
-                                        <div className="chatMessageArrow"></div>
-                                        <div className="chatRoomMessage received">
-                                            <div className="chatRoomMessageText">
-                                                <div className="chatRoomMessageSender">
-                                                    {message.author}
-                                                </div>
-                                                <div className="chatRoomMessageBody">
-                                                    {message.body}
-                                                </div>
-                                            </div>
-                                            <span className="chatRoomMessageTime">
-                                                {dayjs(
-                                                    message.createdAt
-                                                ).format('HH:mm')}
-                                            </span>
-                                        </div>
-                                    </div>
-                                )
+                        chatRoom.room.messages &&
+                        chatRoom.room.messages.map((message) =>
+                            user.id === message.authorId ? (
+                                <SentMessage message={message} />
+                            ) : (
+                                <ReceivedMessage message={message} />
                             )
+                        )
                     )}
                 </div>
                 <footer className="chatRoomMessageFooter">
