@@ -24,6 +24,7 @@
     height: 100vh;
     position: relative;
     z-index: 2;
+    background-color: #131C21;
     border-right: thin solid rgb(77, 77, 77);
 }
 .sidebarContentHeader {
@@ -33,6 +34,10 @@
     padding: 0px 10px;
     height: 59px;
     background-color: #2a2f32;
+}
+
+.sidebarContentBody {
+    overflow-y: auto;
 }
 
 
@@ -57,7 +62,6 @@
     flex: 1;
 }
 
-.sidebarContentBody,
 .profileBody,
 .addContactBody {
     background-color: #131C21;
