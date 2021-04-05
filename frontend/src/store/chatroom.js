@@ -65,7 +65,7 @@ const chatroomReducer = (state = initialState, action) => {
         case FIND_ROOM:
             return { room: action.room, isLoaded: true };
         case RESET_STATE:
-            return null;
+            return initialState;
         default:
             return state;
     }

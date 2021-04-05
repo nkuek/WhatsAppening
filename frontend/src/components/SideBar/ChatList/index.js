@@ -24,7 +24,7 @@ const ChatList = () => {
         const selectedElement = document.getElementById(selectedItem);
         const clickedChat = document.getElementById(chatId);
 
-        if (selectedItem !== chatId) dispatch(findUserRoom(chatId, 1));
+        if (selectedItem !== chatId) dispatch(findUserRoom(chatId));
 
         selectedItem && selectedElement.classList.toggle('selected');
         if (!clickedChat.classList.contains('selected')) {

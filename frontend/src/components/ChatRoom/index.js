@@ -9,12 +9,12 @@ import dayjs from 'dayjs';
 import './ChatRoom.css';
 const ChatRoom = ({ socket, user }) => {
     const dispatch = useDispatch();
+    const chatRoom = useSelector((state) => state.chatRoom);
 
     const [messageInput, setMessageInput] = useState('');
     const [scrolling, setScrolling] = useState(false);
-    const [limit, setLimit] = useState(1);
-
-    const chatRoom = useSelector((state) => state.chatRoom);
+    const [limit, setLimit] = useState(0);
+    const [messagesLength, setMessagesLength] = useState(25);
 
     const getParticipantsFirstNames = (participantList) => {
         const firstNames = participantList.map(
@@ -24,27 +24,42 @@ const ChatRoom = ({ socket, user }) => {
     };
 
     useEffect(() => {
+        console.log('setting messages');
+        if (chatRoom.isLoaded) {
+            setMessagesLength(chatRoom.room.messages.length);
+            console.log(chatRoom.room.messages.length);
+        }
+    }, [chatRoom]);
+
+    useEffect(() => {
         socket.on('load messages', (data) => {
-            console.log(limit);
             dispatch(findUserRoom(data.chatRoomId));
-            const chatMessageList = document.querySelector(
-                '.chatRoomMessageList'
-            );
-            chatMessageList.scrollTop = chatMessageList.scrollHeight;
+            // const chatMessageList = document.querySelector(
+            //     '.chatRoomMessageList'
+            // );
         });
     }, [socket, dispatch]);
 
     useEffect(() => {
+        console.log('limit', limit);
+        // if (chatRoom.isLoaded) setMessagesLength(chatRoom.room.messages.length);
         const chatMessageList = document.querySelector('.chatRoomMessageList');
         setScrolling(false);
         if (!scrolling)
             chatMessageList.scrollTop = chatMessageList.scrollHeight;
+        console.log('messagesLength', messagesLength);
+        console.log('limit bound', limit * 25);
         const loadMore = () => {
-            if (chatRoom.room && chatMessageList.scrollTop === 0) {
+            if (
+                chatRoom.room &&
+                chatMessageList.scrollTop === 0 &&
+                messagesLength + 1 >= limit * 25
+            ) {
+                setLimit((prev) => prev + 1);
                 setTimeout(() => {
                     setScrolling(true);
-                    setLimit((prev) => prev + 1);
-                    dispatch(findUserRoom(chatRoom.room.id, limit));
+                    dispatch(findUserRoom(chatRoom.room.id, limit + 2));
+                    chatMessageList.scrollTop = 1220 / limit - 1;
                 }, 500);
             }
         };
@@ -62,7 +77,7 @@ const ChatRoom = ({ socket, user }) => {
         });
         setMessageInput('');
     };
-    return chatRoom.room && chatRoom.isLoaded ? (
+    return chatRoom.isLoaded ? (
         <>
             <div className="chatRoomContainer">
                 <header className="chatRoomHeader">
