@@ -36,6 +36,7 @@ const ChatList = () => {
         }
 
         setSelectedItem(chatId);
+        sessionStorage.removeItem('chatScrollPosition');
     };
 
     useEffect(() => {

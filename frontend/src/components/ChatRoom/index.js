@@ -13,7 +13,6 @@ const ChatRoom = ({ socket, user }) => {
     const chatRoom = useSelector((state) => state.chatRoom);
 
     const [messageInput, setMessageInput] = useState('');
-    const [hoveredMessage, setHoveredMessage] = useState(null);
 
     const getParticipantsFirstNames = (participantList) => {
         if (participantList) {
@@ -28,15 +27,20 @@ const ChatRoom = ({ socket, user }) => {
 
     useEffect(() => {
         const chatMessageList = document.querySelector('.chatRoomMessageList');
+        const chatScrollPosition = sessionStorage.getItem('chatScrollPosition');
         socket.on('load messages', (data) => {
+            if (chatScrollPosition)
+                chatMessageList.scrollTop = chatScrollPosition;
+            else chatMessageList.scrollTop = chatMessageList.scrollHeight;
             dispatch(findUserRoom(data.chatRoomId));
-            chatMessageList.scrollTop = chatMessageList.scrollHeight;
         });
     }, [socket, dispatch]);
 
     useEffect(() => {
         const chatMessageList = document.querySelector('.chatRoomMessageList');
-        chatMessageList.scrollTop = chatMessageList.scrollHeight;
+        const chatScrollPosition = sessionStorage.getItem('chatScrollPosition');
+        if (chatScrollPosition) chatMessageList.scrollTop = chatScrollPosition;
+        else chatMessageList.scrollTop = chatMessageList.scrollHeight;
     }, [chatRoom.room]);
 
     // useEffect(() => {
