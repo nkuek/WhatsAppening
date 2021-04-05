@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DeleteIcon from '@material-ui/icons/Delete';
 import {
     Popper,
     Paper,
@@ -11,6 +10,7 @@ import { withStyles } from '@material-ui/styles';
 import { socket } from '../../App';
 
 import './ChatRoom.css';
+import ConfirmDeleteMessage from './ConfirmDeleteMessage';
 
 const CustomIconButton = withStyles({
     root: {
@@ -23,10 +23,12 @@ const CustomIconButton = withStyles({
 
 const MessageDropdown = ({
     messageId,
+    chatRoomId,
     showDropdownMenu,
     setShowDropdownMenu,
     setMessageHover,
 }) => {
+    const [showModal, setShowModal] = useState(false);
     const anchorRef = useRef(null);
 
     const toggleDropdownMenu = () => {
@@ -34,7 +36,7 @@ const MessageDropdown = ({
     };
 
     const handleDeleteMessage = () => {
-        socket.emit('delete message', { messageId });
+        setShowModal(true);
     };
 
     const handleClickAway = () => {
@@ -89,6 +91,13 @@ const MessageDropdown = ({
                     </ClickAwayListener>
                 </Paper>
             </Popper>
+            {showModal && (
+                <ConfirmDeleteMessage
+                    chatRoomId={chatRoomId}
+                    messageId={messageId}
+                    setShowModal={setShowModal}
+                />
+            )}
         </>
     );
 };

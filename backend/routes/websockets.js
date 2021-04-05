@@ -22,7 +22,13 @@ io.on('connection', (socket) => {
     });
 
     socket.on('delete message', async (data) => {
-        const { messageId } = data;
+        const { messageId, chatRoomId } = data;
+        console.log(messageId);
+        const message = await db.Message.findByPk(messageId);
+        const chatRoom = await db.ChatRoom.findByPk(chatRoomId);
+        await chatRoom.removeMessage(messageId);
+        message.destroy();
+        io.to(chatRoomId).emit('load messages', { chatRoomId });
     });
 
     socket.on('read message', async (data) => {

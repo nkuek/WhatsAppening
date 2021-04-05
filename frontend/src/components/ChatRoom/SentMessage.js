@@ -36,6 +36,7 @@ const Message = ({ message, user }) => {
             >
                 {messageHover && (
                     <MessageDropdown
+                        chatRoomId={message.chatRoomId}
                         showDropdownMenu={showDropdownMenu}
                         setShowDropdownMenu={setShowDropdownMenu}
                         messageId={message.id}
