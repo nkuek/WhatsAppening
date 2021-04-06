@@ -25,3 +25,22 @@
     display: flex;
     flex-direction: column;
 }
+
+.logoContainer i {
+    font-size: 5rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .callToAction1 {
+        font-size: 2rem;
+    }
+
+    .callToAction2 {
+        font-size: 1rem;
+    }
+
+    .logoContainer i {
+        font-size: 3rem;
+    }
+
+}

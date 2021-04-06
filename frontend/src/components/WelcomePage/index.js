@@ -13,10 +13,7 @@ const WelcomePage = () => {
                         Login or signup to find out WhatsAppening
                     </div>
                     <div className="logoContainer">
-                        <i
-                            style={{ fontSize: '5rem' }}
-                            class="far fa-comment-dots"
-                        ></i>
+                        <i class="far fa-comment-dots"></i>
                     </div>
                 </div>
                 <div className="loginSignup">
