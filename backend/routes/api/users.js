@@ -105,6 +105,10 @@ router.put(
         roomsAndMessages.sort((a, b) => {
             if (a.lastMessage && b.lastMessage)
                 return b.lastMessage.createdAt - a.lastMessage.createdAt;
+            else if (a.lastMessage && !b.lastMessage)
+                return b.createdAt - a.lastMessage.createdAt;
+            else if (!a.lastMessage && b.lastMessage)
+                return b.lastMessage.createdAt - a.createdAt;
             else return b.createdAt - a.createdAt;
         });
 
