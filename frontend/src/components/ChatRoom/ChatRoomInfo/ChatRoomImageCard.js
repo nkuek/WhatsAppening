@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/styles';
 import { Avatar, IconButton } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';

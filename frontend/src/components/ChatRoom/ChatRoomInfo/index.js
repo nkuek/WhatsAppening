@@ -15,6 +15,8 @@ const ChatRoomInfo = ({ chatRoom }) => {
     const [showEditName, setShowEditName] = useState(false);
     const [showEditDescription, setShowEditDescription] = useState(false);
 
+    const editFormRef = useRef(null);
+
     useEffect(() => {
         setPreview(chatRoom.imageUrl);
         setRoomName(chatRoom.name);
@@ -28,6 +30,7 @@ const ChatRoomInfo = ({ chatRoom }) => {
             setPreview(chatRoom.imageUrl);
             setRoomName(chatRoom.name);
             setShowEditName(false);
+            setShowEditDescription(false);
         }, 500);
     };
 
@@ -36,6 +39,13 @@ const ChatRoomInfo = ({ chatRoom }) => {
             .querySelector('.chatRoomInfoContainer')
             .classList.remove('display');
         resetForm();
+    };
+
+    const closeForm = (e) => {
+        if (e.target === editFormRef.current)
+            if (showEditName) setShowEditName(false);
+        if (e.target === editFormRef.current && showEditDescription)
+            setShowEditDescription(false);
     };
 
     const handleEditDescription = () => {
@@ -50,7 +60,7 @@ const ChatRoomInfo = ({ chatRoom }) => {
                 </IconButton>
                 <div className="chatRoomInfoHeader">Group Info</div>
             </div>
-            <form>
+            <form onClick={closeForm}>
                 <ChatRoomImageCard
                     preview={preview}
                     setPreview={setPreview}

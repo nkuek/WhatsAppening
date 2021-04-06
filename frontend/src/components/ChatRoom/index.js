@@ -74,7 +74,7 @@ const ChatRoom = ({ socket, user }) => {
     const handleShowChatRoomInfo = () => {
         document
             .querySelector('.chatRoomInfoContainer')
-            .classList.toggle('display');
+            .classList.add('display');
     };
 
     return chatRoom.isLoaded ? (

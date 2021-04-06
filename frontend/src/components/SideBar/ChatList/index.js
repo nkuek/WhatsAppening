@@ -19,10 +19,6 @@ const ChatList = () => {
         const selectedElement = document.getElementById(selectedItem);
         const clickedChat = document.getElementById(chatId);
 
-        document
-            .querySelector('.chatRoomInfoContainer')
-            .classList.remove('display');
-
         if (selectedItem !== chatId) dispatch(findUserRoom(chatId));
 
         selectedItem &&
