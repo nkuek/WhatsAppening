@@ -8,6 +8,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import ClearIcon from '@material-ui/icons/Clear';
 import { withStyles } from '@material-ui/styles';
 import { resetUserRoomState } from '../../../store/chatroom';
+import { removeUserContactsState } from '../../../store/userContacts';
 
 import './Profile.css';
 
@@ -31,8 +32,8 @@ const Profile = ({ user }) => {
         if (user) {
             setName(user.name);
             setIsPublic(user.isPublic);
+            setPreview(user.profileUrl);
         }
-        if (user && user.profileUrl) setPreview(user.profileUrl);
     }, [user]);
 
     const resetForm = () => {
@@ -64,6 +65,7 @@ const Profile = ({ user }) => {
         openProfile();
         dispatch(removeUserRooms());
         dispatch(resetUserRoomState());
+        dispatch(removeUserContactsState());
         dispatch(sessionActions.logout());
     };
 

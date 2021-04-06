@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
             adminId: DataTypes.INTEGER,
             imageUrl: DataTypes.STRING,
             isRead: DataTypes.BOOLEAN,
+            description: DataTypes.STRING,
         },
         {}
     );

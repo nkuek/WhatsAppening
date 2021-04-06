@@ -14,6 +14,7 @@ const ChatList = () => {
 
     const chatList = useSelector((state) => state.chatList);
     const user = useSelector((state) => state.session.user);
+    const chatRoom = useSelector((state) => state.chatRoom);
 
     const handleChatListClick = (chatId, chatRoom) => {
         const selectedElement = document.getElementById(selectedItem);
@@ -37,6 +38,10 @@ const ChatList = () => {
         setSelectedItem(chatId);
         sessionStorage.removeItem('chatScrollPosition');
     };
+
+    useEffect(() => {
+        if (chatRoom.isLoaded && user) dispatch(getUserRooms(user.id));
+    }, [user, chatRoom]);
 
     useEffect(() => {
         if (user) {

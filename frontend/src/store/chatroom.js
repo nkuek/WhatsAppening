@@ -57,6 +57,28 @@ export const resetUserRoomState = () => (dispatch) => {
     dispatch(resetRoom());
 };
 
+export const editUserRoom = (
+    chatRoomId,
+    roomName,
+    description,
+    image
+) => async (dispatch) => {
+    let imageUrl;
+
+    if (image) imageUrl = await imageUploader(image);
+
+    const res = await fetch('/api/chatrooms/edit', {
+        method: 'PUT',
+        body: JSON.stringify({ chatRoomId, roomName, description, imageUrl }),
+    });
+
+    const { chatRoom, messagesAndUsers, participants } = res.data;
+    chatRoom.messages = messagesAndUsers;
+    chatRoom.participants = participants;
+
+    dispatch(findRoom(chatRoom));
+};
+
 const initialState = { room: null, isLoaded: false };
 const chatroomReducer = (state = initialState, action) => {
     switch (action.type) {

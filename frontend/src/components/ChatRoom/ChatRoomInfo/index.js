@@ -5,17 +5,17 @@ import { Avatar, IconButton } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
 import ChatRoomImageCard from './ChatRoomImageCard';
+import { editUserRoom } from '../../../store/chatroom';
 import './ChatRoomInfo.css';
 
 const ChatRoomInfo = ({ chatRoom }) => {
+    const dispatch = useDispatch();
     const [description, setDescription] = useState('');
     const [preview, setPreview] = useState(chatRoom && chatRoom.imageUrl);
     const [image, setImage] = useState(null);
     const [roomName, setRoomName] = useState(chatRoom && chatRoom.name);
     const [showEditName, setShowEditName] = useState(false);
     const [showEditDescription, setShowEditDescription] = useState(false);
-
-    const editFormRef = useRef(null);
 
     useEffect(() => {
         setPreview(chatRoom.imageUrl);
@@ -41,15 +41,10 @@ const ChatRoomInfo = ({ chatRoom }) => {
         resetForm();
     };
 
-    const closeForm = (e) => {
-        if (e.target === editFormRef.current)
-            if (showEditName) setShowEditName(false);
-        if (e.target === editFormRef.current && showEditDescription)
-            setShowEditDescription(false);
-    };
-
-    const handleEditDescription = () => {
-        return;
+    const handleEditDescription = (e) => {
+        e.preventDefault();
+        dispatch(editUserRoom(chatRoom.id, roomName, description));
+        setShowEditDescription(false);
     };
 
     return (
@@ -60,60 +55,66 @@ const ChatRoomInfo = ({ chatRoom }) => {
                 </IconButton>
                 <div className="chatRoomInfoHeader">Group Info</div>
             </div>
-            <form onClick={closeForm}>
-                <ChatRoomImageCard
-                    preview={preview}
-                    setPreview={setPreview}
-                    image={image}
-                    setImage={setImage}
-                    roomName={roomName}
-                    setRoomName={setRoomName}
-                    showEditName={showEditName}
-                    setShowEditName={setShowEditName}
-                />
-                <div className="chatRoomDescriptionContainer">
-                    <div className="chatRoomDescriptionLabel">Description</div>
-                    <div className="chatRoomDescriptionAndEdit">
-                        {!showEditDescription ? (
-                            <>
-                                <div className="chatRoomDescription">
-                                    {chatRoom.description
-                                        ? chatRoom.description
-                                        : 'Add group description'}
-                                </div>
-                                <EditIcon
-                                    style={{
-                                        color: 'rgb(163, 163, 163)',
-                                        cursor: 'pointer',
-                                    }}
-                                    onClick={() => setShowEditDescription(true)}
-                                />
-                            </>
-                        ) : (
-                            <>
-                                <textarea
-                                    className="chatRoomCardDescriptionEdit"
-                                    value={description}
-                                    onChange={(e) =>
-                                        setDescription(e.target.value)
-                                    }
-                                ></textarea>
-                                <ClearIcon
-                                    style={{
-                                        position: 'absolute',
-                                        right: '10px',
-                                        top: '7px',
-                                        color: 'black',
-                                        cursor: 'pointer',
-                                    }}
-                                    onClick={() =>
-                                        setShowEditDescription(false)
-                                    }
-                                />
-                            </>
-                        )}
-                    </div>
+            <ChatRoomImageCard
+                preview={preview}
+                setPreview={setPreview}
+                image={image}
+                setImage={setImage}
+                roomName={roomName}
+                setRoomName={setRoomName}
+                showEditName={showEditName}
+                setShowEditName={setShowEditName}
+            />
+            <form className="chatRoomDescriptionContainer">
+                <div className="chatRoomDescriptionLabel">Description</div>
+                <div className="chatRoomDescriptionAndEdit">
+                    {!showEditDescription ? (
+                        <>
+                            <div className="chatRoomDescription">
+                                {chatRoom.description
+                                    ? chatRoom.description
+                                    : 'Add group description'}
+                            </div>
+                            <EditIcon
+                                style={{
+                                    color: 'rgb(163, 163, 163)',
+                                    cursor: 'pointer',
+                                }}
+                                onClick={() => setShowEditDescription(true)}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <input
+                                className="chatRoomCardDescriptionEdit"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            ></input>
+                            <ClearIcon
+                                style={{
+                                    position: 'absolute',
+                                    right: '5px',
+                                    top: '0px',
+                                    color: 'black',
+                                    cursor: 'pointer',
+                                }}
+                                onClick={() => setShowEditDescription(false)}
+                            />
+                        </>
+                    )}
                 </div>
+                {showEditDescription && (
+                    <div className="chatRoomEditButtonContainer">
+                        <button
+                            onClick={handleEditDescription}
+                            style={{ fontSize: '16px' }}
+                            type="submit"
+                            className="chatRoomEditNameSubmit"
+                        >
+                            Edit
+                        </button>
+                    </div>
+                )}
             </form>
             <div className="chatRoomParticipantsCard">
                 <div className="chatRoomParticipantsLabelContainer">
@@ -121,21 +122,22 @@ const ChatRoomInfo = ({ chatRoom }) => {
                         Participants
                     </div>
                 </div>
-                {chatRoom.participants.map((participant) => (
-                    <div
-                        style={{ margin: '10px 0px', color: 'white' }}
-                        className="selectedContactsItem"
-                    >
-                        <div className="selectedContactInfo">
-                            <div className="selectedContactProfileImage">
-                                <Avatar src={participant.profileUrl} />
-                            </div>
-                            <div className="selectedContactName">
-                                {participant.name}
+                {chatRoom.participants &&
+                    chatRoom.participants.map((participant) => (
+                        <div
+                            style={{ margin: '10px 0px', color: 'white' }}
+                            className="selectedContactsItem"
+                        >
+                            <div className="selectedContactInfo">
+                                <div className="selectedContactProfileImage">
+                                    <Avatar src={participant.profileUrl} />
+                                </div>
+                                <div className="selectedContactName">
+                                    {participant.name}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
             </div>
         </>
     );

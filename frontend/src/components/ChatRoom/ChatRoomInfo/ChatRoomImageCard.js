@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/styles';
 import { Avatar, IconButton } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
+import { editUserRoom } from '../../../store/chatroom';
 
 const CustomAvatar = withStyles({
     root: {
@@ -39,13 +40,23 @@ const ChatRoomImageCard = ({
 
     const chatRoom = useSelector((state) => state.chatRoom);
 
-    const handleEditChatRoomInfo = () => {
-        return;
+    const handleEditChatRoomInfo = (e) => {
+        e.preventDefault();
+        dispatch(
+            editUserRoom(
+                chatRoom.room.id,
+                roomName,
+                chatRoom.room.description,
+                image
+            )
+        );
+        setShowEditName(false);
+        setImage('');
     };
 
     return (
         chatRoom.isLoaded && (
-            <>
+            <form onSubmit={handleEditChatRoomInfo}>
                 <div className="chatRoomImageCard">
                     <div className="fileWrapper chatRoom">
                         <CustomAvatar
@@ -110,7 +121,7 @@ const ChatRoomImageCard = ({
                         </div>
                     )}
                 </div>
-            </>
+            </form>
         )
     );
 };

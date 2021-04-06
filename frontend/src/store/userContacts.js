@@ -1,10 +1,15 @@
 import { fetch } from './csrf';
 
 const GET_CONTACTS = 'contacts/getContacts';
+const REMOVE_CONTACTS = 'contact/removeContacts';
 
 const getContacts = (contacts) => ({
     type: GET_CONTACTS,
     contacts,
+});
+
+const removeContacts = () => ({
+    type: REMOVE_CONTACTS,
 });
 
 export const addContact = (userId) => async (dispatch) => {
@@ -34,11 +39,17 @@ export const findContacts = (userId) => async (dispatch) => {
     dispatch(getContacts(response.data.userContacts));
 };
 
+export const removeUserContactsState = () => (dispatch) => {
+    dispatch(removeContacts());
+};
+
 const initialState = { contacts: null, isLoaded: false };
 const contactReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_CONTACTS:
             return { contacts: [...action.contacts], isLoaded: true };
+        case REMOVE_CONTACTS:
+            return initialState;
         default:
             return state;
     }

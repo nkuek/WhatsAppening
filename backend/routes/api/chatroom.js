@@ -88,4 +88,54 @@ router.put(
     })
 );
 
+router.put(
+    '/edit',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const { chatRoomId, roomName, description, imageUrl } = req.body;
+        const chatRoom = await ChatRoom.findByPk(chatRoomId);
+
+        if (roomName) await chatRoom.update({ name: roomName });
+        if (description) await chatRoom.update({ description });
+        if (imageUrl) await chatRoom.update({ imageUrl });
+
+        const messages = await chatRoom.getMessages({
+            order: [['createdAt', 'DESC']],
+        });
+        const participants = await chatRoom.getParticipants();
+        const admin = await chatRoom.getAdmin();
+
+        let participantsInfo = participants.map((participant) => {
+            return {
+                id: participant.id,
+                name: participant.name,
+                profileUrl: participant.profileUrl,
+                phoneNumber: participant.phoneNumber,
+            };
+        });
+
+        const adminInfo = {
+            id: admin.id,
+            name: admin.name,
+            profileUrl: admin.profileUrl,
+            phoneNumber: admin.phoneNumber,
+        };
+
+        const allParticipants = participantsInfo.concat(adminInfo);
+
+        let messagesAndUsers = await Promise.all(
+            messages.map(async (message) => {
+                let user = await message.getUser();
+                return { ...message.dataValues, author: user.name };
+            })
+        );
+
+        return res.json({
+            chatRoom,
+            messagesAndUsers,
+            participants: allParticipants,
+        });
+    })
+);
+
 module.exports = router;

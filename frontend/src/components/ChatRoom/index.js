@@ -80,7 +80,11 @@ const ChatRoom = ({ socket, user }) => {
     return chatRoom.isLoaded ? (
         <>
             <div className="chatRoomContainer">
-                <header className="chatRoomHeader">
+                <header
+                    onClick={handleShowChatRoomInfo}
+                    style={{ cursor: 'pointer' }}
+                    className="chatRoomHeader"
+                >
                     <div className="chatRoomImageAndName">
                         <div className="chatRoomImage">
                             <Avatar

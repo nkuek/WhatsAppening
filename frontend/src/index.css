@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 /* TODO Add site wide styles */
 :root {
-    --button-color: #2878ff;
-    --button-hover: #5895ff
+    --button-color: #0c65ff;
+    --button-hover: #3b83ff;
 }
 
 html,
