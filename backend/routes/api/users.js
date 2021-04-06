@@ -4,7 +4,7 @@ const asyncHandler = require('express-async-handler');
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Contact } = require('../../db/models');
+const { User, ChatRoom, Participant } = require('../../db/models');
 const { Op } = require('sequelize');
 
 const router = express.Router();
@@ -108,9 +108,45 @@ router.put(
             else return b.createdAt - a.createdAt;
         });
 
-        // const messages = await Promise.all(
-        //     allRooms.map(async (room) => room.getMessages())
-        // );
+        return res.json({ rooms: roomsAndMessages });
+    })
+);
+
+router.delete(
+    '/chatrooms',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const { chatRoomId } = req.body;
+        const chatRoom = await ChatRoom.findByPk(chatRoomId);
+        const user = await User.findByPk(req.user.id);
+
+        await chatRoom.setParticipants([]);
+        await chatRoom.destroy({ cascade: true });
+
+        const rooms = await user.getAdmin();
+        const userParticipant = await user.getParticipants();
+        const allRooms = rooms.concat(userParticipant);
+
+        roomsAndMessages = await Promise.all(
+            allRooms.map(async (room) => {
+                const messages = await room.getMessages();
+                let lastMessage = [];
+                if (messages.length > 0) {
+                    lastMessage = messages[messages.length - 1];
+                    const lastMessageAuthor = await lastMessage.getUser();
+                    lastMessage.dataValues.author = lastMessageAuthor.name;
+                }
+                return {
+                    ...room.dataValues,
+                    lastMessage: messages[messages.length - 1] || null,
+                };
+            })
+        );
+        roomsAndMessages.sort((a, b) => {
+            if (a.lastMessage && b.lastMessage)
+                return b.lastMessage.createdAt - a.lastMessage.createdAt;
+            else return b.createdAt - a.createdAt;
+        });
 
         return res.json({ rooms: roomsAndMessages });
     })

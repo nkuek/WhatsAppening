@@ -38,6 +38,7 @@
 
 .sidebarContentBody {
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 

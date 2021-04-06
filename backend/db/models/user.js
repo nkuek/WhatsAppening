@@ -60,18 +60,17 @@ module.exports = (sequelize, DataTypes) => {
         User.hasMany(models.ChatRoom, {
             foreignKey: 'adminId',
             as: 'Admin',
-            onDelete: 'CASCADE',
         });
         User.belongsToMany(models.ChatRoom, {
             as: 'Participants',
             through: 'Participant',
             foreignKey: 'userId',
             otherKey: 'roomId',
-            onDelete: 'CASCADE',
         });
         User.hasMany(models.Message, {
             foreignKey: 'authorId',
             onDelete: 'CASCADE',
+            hooks: true,
         });
         User.hasMany(models.MessageReaction, {
             foreignKey: 'userId',

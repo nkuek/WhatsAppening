@@ -107,13 +107,16 @@ const ChatRoom = ({ socket, user }) => {
                         </div>
                     ) : (
                         chatRoom.room.messages &&
-                        chatRoom.room.messages.map((message) =>
-                            user.id === message.authorId ? (
-                                <SentMessage message={message} />
-                            ) : (
-                                <ReceivedMessage message={message} />
+                        chatRoom.room.messages
+                            .slice(0)
+                            .reverse()
+                            .map((message) =>
+                                user.id === message.authorId ? (
+                                    <SentMessage message={message} />
+                                ) : (
+                                    <ReceivedMessage message={message} />
+                                )
                             )
-                        )
                     )}
                 </div>
                 <footer className="chatRoomMessageFooter">

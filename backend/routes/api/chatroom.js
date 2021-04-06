@@ -50,8 +50,7 @@ router.put(
         const { chatRoomId } = req.body;
         const chatRoom = await ChatRoom.findByPk(chatRoomId);
         const messages = await chatRoom.getMessages({
-            // order: [['createdAt', 'DESC']],
-            // limit: limit * 25,
+            order: [['createdAt', 'DESC']],
         });
         const participants = await chatRoom.getParticipants();
 

@@ -2,9 +2,18 @@
     color: white;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
     min-width: 252px;
+    position: relative;
+}
 
+.chatListDropdown {
+    position: absolute;
+    z-index: 799;
+}
+
+.chatListDropdownMenu {
+    left: 350px;
+    top: 25px;
 }
 
 .chatListItem,

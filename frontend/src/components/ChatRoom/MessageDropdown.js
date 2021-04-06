@@ -7,7 +7,6 @@ import {
     ClickAwayListener,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
-import { socket } from '../../App';
 
 import './ChatRoom.css';
 import ConfirmDeleteMessage from './ConfirmDeleteMessage';
