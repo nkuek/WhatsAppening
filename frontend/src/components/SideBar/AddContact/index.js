@@ -101,6 +101,7 @@ const UserSearch = () => {
                 <ConfirmContactModal
                     user={selectedUser}
                     setShowModal={setShowModal}
+                    setUserSearchInput={setUserSearchInput}
                 />
             )}
         </>

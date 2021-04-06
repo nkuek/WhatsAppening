@@ -5,12 +5,13 @@ import { clearSearchUsers } from '../../store/usersearch';
 
 import './ConfirmContactModal.css';
 
-const ConfirmContactModal = ({ user, setShowModal }) => {
+const ConfirmContactModal = ({ user, setShowModal, setUserSearchInput }) => {
     const dispatch = useDispatch();
 
     const handleAddContact = () => {
         dispatch(addContact(user.id));
         setShowModal(false);
+        setUserSearchInput('');
         document
             .querySelector('.addContactFormContainer')
             .classList.remove('show');
