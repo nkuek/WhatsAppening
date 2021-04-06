@@ -123,6 +123,7 @@
     .chatRoomMessageContainer {
         padding: 0em 2em;
     }
+
 }
 
 .chatRoomMessage {
@@ -131,7 +132,7 @@
     padding: 10px 20px;
     border-radius: 10px;
     display: flex;
-    max-width: 60ch;
+    max-width: 40ch;
 }
 
 .chatRoomMessageContainer.sent {

@@ -54,4 +54,10 @@
         font-size: 3rem;
     }
 
+    .loginButton,
+    .signupButton,
+    .demoUserButton {
+        padding: .7em 1.4em;
+        font-size: .8em;
+    }
 }

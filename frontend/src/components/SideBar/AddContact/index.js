@@ -62,7 +62,7 @@ const UserSearch = () => {
                         className="searchInput"
                         value={userSearchInput}
                         onChange={handleUserSearch}
-                        placeholder="Search for a user"
+                        placeholder="Search users by name or phone number"
                     ></input>
                     <SearchIcon
                         style={{
