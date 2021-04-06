@@ -7,8 +7,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/styles';
 
 import ProfileButton from './Profile/ProfileButton';
-import SignupFormModal from '../SignupFormModal';
-import LoginFormModal from '../LoginFormModal';
 import NewRoomForm from './NewRoomForm';
 import DropdownMenu from './DropdownMenu';
 import AddContact from './AddContact';
@@ -50,7 +48,7 @@ const SideBar = ({ socket }) => {
                     }}
                     className="sidebarContentHeader"
                 >
-                    {session.user && session.isLoaded ? (
+                    {session.user && session.isLoaded && (
                         <>
                             <ProfileButton
                                 setShowProfile={setShowProfile}
@@ -72,10 +70,6 @@ const SideBar = ({ socket }) => {
                                 <DropdownMenu />
                             </div>
                         </>
-                    ) : (
-                        <div className="loginSignup">
-                            <LoginFormModal /> <SignupFormModal />
-                        </div>
                     )}
                 </div>
                 <div className="sidebarContentBody">

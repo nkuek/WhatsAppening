@@ -5,6 +5,7 @@ import { getUserRooms } from './store/chatlist';
 import io from 'socket.io-client';
 import SideBar from './components/SideBar';
 import ChatRoom from './components/ChatRoom';
+import WelcomePage from './components/WelcomePage';
 
 export const socket = io(
     process.env.NODE_ENV === 'development'
@@ -37,8 +38,14 @@ function App() {
 
     return (
         <>
-            <SideBar socket={socket} />
-            <ChatRoom socket={socket} user={session.user} />
+            {session.user ? (
+                <>
+                    <SideBar socket={socket} />
+                    <ChatRoom socket={socket} user={session.user} />
+                </>
+            ) : (
+                <WelcomePage />
+            )}
         </>
     );
 }

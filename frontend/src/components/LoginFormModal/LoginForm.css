@@ -80,8 +80,8 @@
     border-radius: 5px;
     background-color: var(--button-color);
     color: white;
-    padding: 5px 10px;
-    margin-right: 20px;
+    padding: .7em 4em;
+    margin: 1em 0em
 }
 
 .loginButton:hover {
