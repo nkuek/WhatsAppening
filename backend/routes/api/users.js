@@ -177,7 +177,6 @@ router.put(
         const { searchInput } = req.body;
         const contacts = await user.getUserContacts();
         const contactIds = contacts.map((contact) => contact.id);
-        console.log(contactIds);
 
         const results = await User.findAll({
             where: {

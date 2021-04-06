@@ -27,8 +27,6 @@ router.post(
     asyncHandler(async (req, res) => {
         const { roomName, adminId, imageUrl, selectedContacts } = req.body;
 
-        console.log(selectedContacts);
-
         const chatroom = await ChatRoom.create({
             name: roomName,
             adminId,
