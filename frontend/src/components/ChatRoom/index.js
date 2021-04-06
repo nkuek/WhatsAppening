@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Avatar, IconButton } from '@material-ui/core';
 import { findUserRoom } from '../../store/chatroom';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import InfoIcon from '@material-ui/icons/Info';
 import SendIcon from '@material-ui/icons/Send';
 
 import './ChatRoom.css';
 import SentMessage from './SentMessage';
 import ReceivedMessage from './ReceivedMessage';
+import ChatRoomInfo from './ChatRoomInfo';
+
 const ChatRoom = ({ socket, user }) => {
     const dispatch = useDispatch();
     const chatRoom = useSelector((state) => state.chatRoom);
@@ -18,10 +20,11 @@ const ChatRoom = ({ socket, user }) => {
         if (participantList) {
             const firstNames =
                 participantList &&
-                participantList.map(
-                    (participant) => participant.name.split(' ')[0]
-                );
-            return firstNames.join(', ');
+                participantList.map((participant) => {
+                    if (participant.id === user.id) return 'You';
+                    else return participant.name.split(' ')[0];
+                });
+            return firstNames.sort().join(', ');
         }
     };
 
@@ -67,6 +70,13 @@ const ChatRoom = ({ socket, user }) => {
         });
         setMessageInput('');
     };
+
+    const handleShowChatRoomInfo = () => {
+        document
+            .querySelector('.chatRoomInfoContainer')
+            .classList.toggle('display');
+    };
+
     return chatRoom.isLoaded ? (
         <>
             <div className="chatRoomContainer">
@@ -92,8 +102,8 @@ const ChatRoom = ({ socket, user }) => {
                         </div>
                     </div>
                     <div className="chatRoomAddParticipant">
-                        <IconButton>
-                            <GroupAddIcon style={{ color: 'white' }} />
+                        <IconButton onClick={handleShowChatRoomInfo}>
+                            <InfoIcon style={{ color: 'white' }} />
                         </IconButton>
                     </div>
                 </header>
@@ -146,6 +156,9 @@ const ChatRoom = ({ socket, user }) => {
                         </div>
                     </form>
                 </footer>
+            </div>
+            <div className="chatRoomInfoContainer">
+                <ChatRoomInfo chatRoom={chatRoom.room} />
             </div>
         </>
     ) : user ? (

@@ -1,0 +1,118 @@
+.chatRoomInfoContainer {
+    background-color: #0d1317;
+    box-sizing: border-box;
+    max-width: 420px;
+    width: 0%;
+    transition: width 200ms ease-in;
+
+    /* display: none; */
+}
+
+.chatRoomInfoContainer.display {
+    width: 35%;
+    display: initial;
+    border-left: thin solid rgb(77, 77, 77);
+}
+
+.chatRoomInfoHeaderContainer {
+    display: flex;
+    align-items: center;
+    color: white;
+    background-color: #2a2f32;
+    height: 59px;
+}
+
+.fileWrapper.chatRoom {
+    margin-bottom: 0px;
+}
+
+.chatRoomImageCard {
+    background-color: #131c21;
+    box-sizing: border-box;
+    padding: 1em;
+    padding-bottom: 0;
+}
+
+.chatRoomNameCardContainer {
+    color: rgb(163, 163, 163);
+    background-color: #131c21;
+    padding: 1em 2em;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+}
+
+.chatRoomCardNameEdit {
+    margin-bottom: .5em;
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    padding-right: 40px;
+}
+
+
+.chatRoomNameAndEdit {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5em;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.chatRoomDescriptionContainer {
+    color: rgb(163, 163, 163);
+    padding: 1em 2em;
+    background-color: #131c21;
+    font-size: .8rem;
+    margin-bottom: 1em;
+}
+
+.chatRoomDescriptionLabel {
+    color: #009184;
+    margin-bottom: .3em;
+}
+
+.chatRoomEditButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.chatRoomEditNameSubmit {
+    background-color: var(--button-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.chatRoomEditNameSubmit:hover {
+    background-color: var(--button-hover);
+}
+
+.chatRoomDescriptionAndEdit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.chatRoomCardDescriptionEdit {
+    width: 100%;
+    padding: 5px;
+    padding-right: 40px;
+    font-size: .8rem;
+}
+
+.chatRoomParticipantsCard {
+    background-color: #131c21;
+    padding: 1em 2em;
+}
+
+.chatRoomParticipantsCard.selectedContactsItem {
+    margin: 5px 0px;
+}
+
+.chatRoomParticipantsLabel {
+    color: #009184;
+}

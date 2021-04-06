@@ -53,9 +53,11 @@ router.put(
             order: [['createdAt', 'DESC']],
         });
         const participants = await chatRoom.getParticipants();
+        const admin = await chatRoom.getAdmin();
 
         let participantsInfo = participants.map((participant) => {
             return {
+                id: participant.id,
                 name: participant.name,
                 profileUrl: participant.profileUrl,
                 phoneNumber: participant.phoneNumber,
@@ -63,9 +65,10 @@ router.put(
         });
 
         const adminInfo = {
-            name: 'You',
-            profileUrl: req.user.profileUrl,
-            phoneNumber: req.user.phoneNumber,
+            id: admin.id,
+            name: admin.name,
+            profileUrl: admin.profileUrl,
+            phoneNumber: admin.phoneNumber,
         };
 
         const allParticipants = participantsInfo.concat(adminInfo);

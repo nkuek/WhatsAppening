@@ -19,6 +19,10 @@ const ChatList = () => {
         const selectedElement = document.getElementById(selectedItem);
         const clickedChat = document.getElementById(chatId);
 
+        document
+            .querySelector('.chatRoomInfoContainer')
+            .classList.remove('display');
+
         if (selectedItem !== chatId) dispatch(findUserRoom(chatId));
 
         selectedItem &&
@@ -61,6 +65,7 @@ const ChatList = () => {
             {chatList.length > 0 &&
                 chatList.map((chatRoom) => (
                     <ChatListItem
+                        key={chatRoom.id}
                         chatRoom={chatRoom}
                         showDropdownMenu={showDropdownMenu}
                         setShowDropdownMenu={setShowDropdownMenu}

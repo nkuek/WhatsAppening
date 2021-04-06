@@ -21,7 +21,6 @@ const ChatListItem = ({
 
     return (
         <div
-            key={chatRoom.id}
             id={chatRoom.id}
             onMouseEnter={() => setChatListHover(true)}
             onMouseLeave={() => {

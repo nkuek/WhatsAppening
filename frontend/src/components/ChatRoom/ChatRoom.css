@@ -125,7 +125,14 @@
 .chatRoomMessageContainer {
     height: fit-content;
     display: flex;
-    padding: 0px 100px;
+    padding: 0em 5em;
+}
+
+@media only screen and (max-width: 1500px) {
+
+    .chatRoomMessageContainer {
+        padding: 0em 2em;
+    }
 }
 
 .chatRoomMessage {
@@ -136,12 +143,6 @@
     display: flex;
     max-width: 30%;
 }
-
-/* .chatRoomMessage::after {
-    content: '';
-    position: relative;
-    left: 50px;
-} */
 
 .chatRoomMessageContainer.sent {
     display: flex;

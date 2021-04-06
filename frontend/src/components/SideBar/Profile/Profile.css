@@ -63,6 +63,7 @@
 
 .userNameEdit {
     padding: 5px;
+    padding-right: 40px;
     border-radius: 5px;
     width: 100%;
 }
