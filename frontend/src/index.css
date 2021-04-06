@@ -16,6 +16,15 @@ textarea {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
+a {
+    color: inherit
+}
+
+a:visited {
+    font: inherit;
+    color: inherit;
+}
+
 body {
     overflow: hidden;
 }

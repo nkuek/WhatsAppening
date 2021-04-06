@@ -2,9 +2,11 @@ import { useState } from 'react';
 import MessageDropdown from './MessageDropdown';
 import dayjs from 'dayjs';
 
-const Message = ({ message, user }) => {
+const Message = ({ message }) => {
     const [messageHover, setMessageHover] = useState(false);
     const [showDropdownMenu, setShowDropdownMenu] = useState(false);
+    const linkRegEx = /((http|ftp|https)\:\/\/)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/g;
+
     return (
         <div
             id={`message${message.id}`}
@@ -20,7 +22,22 @@ const Message = ({ message, user }) => {
                 }}
                 className={`chatRoomMessage sent`}
             >
-                <div className="chatRoomMessageBody">{message.body}</div>
+                {linkRegEx.test(message.body) ? (
+                    <a
+                        className="chatRoomMessageBody"
+                        target="_blank"
+                        href={
+                            !message.body.includes('https') ||
+                            !message.body.includes('http')
+                                ? 'https://' + message.body
+                                : message.body
+                        }
+                    >
+                        {message.body}
+                    </a>
+                ) : (
+                    <div className="chatRoomMessageBody">{message.body}</div>
+                )}
                 <span className="chatRoomMessageTime">
                     {dayjs(message.createdAt).format('HH:mm')}
                 </span>

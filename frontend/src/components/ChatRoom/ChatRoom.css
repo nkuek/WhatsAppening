@@ -141,7 +141,7 @@
     padding: 10px 20px;
     border-radius: 10px;
     display: flex;
-    max-width: 30%;
+    max-width: 60ch;
 }
 
 .chatRoomMessageContainer.sent {
