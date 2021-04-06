@@ -30,6 +30,17 @@
     font-size: 5rem;
 }
 
+.demoUserButton {
+    padding: .7em 4em;
+    margin-top: 1em;
+    background-color: var(--button-color);
+    color: white;
+    border-radius: 5px;
+}
+
+.demoUserButton:hover {
+    background-color: var(--button-hover);
+}
 @media only screen and (max-width: 600px) {
     .callToAction1 {
         font-size: 2rem;

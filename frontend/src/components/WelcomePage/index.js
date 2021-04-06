@@ -1,9 +1,21 @@
+import { useDispatch } from 'react-redux';
 import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
+import * as sessionActions from '../../store/session';
 
 import './WelcomePage.css';
 
 const WelcomePage = () => {
+    const dispatch = useDispatch();
+    const handleDemoUser = () => {
+        return dispatch(
+            sessionActions.login({
+                credential: 'demo@user.io',
+                password: 'password',
+            })
+        );
+    };
+
     return (
         <div className="chatRoomMessageList noMessagesContainer">
             <div className="welcomeMessageContainer">
@@ -19,6 +31,9 @@ const WelcomePage = () => {
                 <div className="loginSignup">
                     <LoginFormModal />
                     <SignupFormModal />
+                    <button className="demoUserButton" onClick={handleDemoUser}>
+                        Demo User
+                    </button>
                 </div>
             </div>
         </div>

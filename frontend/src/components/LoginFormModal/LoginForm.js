@@ -19,15 +19,6 @@ function LoginForm() {
         );
     };
 
-    const handleDemoUser = () => {
-        return dispatch(
-            sessionActions.login({
-                credential: 'demo@user.io',
-                password: 'password',
-            })
-        );
-    };
-
     return (
         <div className="loginFormContainer">
             <div className="loginFormHeader">
@@ -71,14 +62,6 @@ function LoginForm() {
                     <div className="loginFormButtonContainer">
                         <button className="loginFormButton" type="submit">
                             Login
-                        </button>
-                    </div>
-                    <div className="loginFormButtonContainer">
-                        <button
-                            className="loginFormButton"
-                            onClick={handleDemoUser}
-                        >
-                            Demo User
                         </button>
                     </div>
                 </div>
