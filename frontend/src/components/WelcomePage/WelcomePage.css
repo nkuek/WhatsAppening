@@ -42,12 +42,16 @@
     background-color: var(--button-hover);
 }
 @media only screen and (max-width: 600px) {
+    .welcomeMessage {
+        margin: 0em 2em;
+    }
     .callToAction1 {
-        font-size: 2rem;
+        font-size: 3rem;
     }
 
     .callToAction2 {
         font-size: 1rem;
+        line-height: 1.6
     }
 
     .logoContainer i {
