@@ -1,6 +1,6 @@
 # WhatsAppening
 
-**WhatsAppening** is a clone of the popular chat app, WhatsApp. Add users to your contacts, create a group with them, and live chat away! WhastAppening is integrated with AWS so that you can upload your own custom profile and chat room images.
+**WhatsAppening** is a clone of the popular chat app, WhatsApp. Add users to your contacts, create a group with them, and live chat away! WhatsAppening is integrated with AWS so that you can upload your own custom profile and chat room images.
 
 # About the Project
 
