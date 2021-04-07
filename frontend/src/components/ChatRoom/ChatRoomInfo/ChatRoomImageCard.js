@@ -116,7 +116,7 @@ const ChatRoomImageCard = ({
                                 type="submit"
                                 className="chatRoomEditNameSubmit"
                             >
-                                Edit
+                                Update
                             </button>
                         </div>
                     )}

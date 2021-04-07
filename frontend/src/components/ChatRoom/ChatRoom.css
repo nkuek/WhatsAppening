@@ -128,11 +128,14 @@
 
 .chatRoomMessage {
     margin: 5px;
-    width: fit-content;
+    /* width: fit-content; */
     padding: 10px 20px;
     border-radius: 10px;
     display: flex;
     max-width: 40ch;
+    overflow-wrap: anywhere;
+    flex-wrap:wrap;
+
 }
 
 .chatRoomMessageContainer.sent {
@@ -187,6 +190,8 @@
     align-items: flex-end;
     margin-left: 20px;
     position: relative;
+    width: 100%;
+    justify-content: flex-end;
 }
 
 .messageDropdown {

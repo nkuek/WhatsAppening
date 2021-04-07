@@ -111,7 +111,7 @@ const ChatRoomInfo = ({ chatRoom }) => {
                             type="submit"
                             className="chatRoomEditNameSubmit"
                         >
-                            Edit
+                            Update
                         </button>
                     </div>
                 )}
