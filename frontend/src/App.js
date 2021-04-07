@@ -24,7 +24,7 @@ function App() {
             dispatch(getUserRooms(session.user.id));
             dispatch(findContacts(session.user.id));
         }
-    }, [session, dispatch]);
+    });
 
     useEffect(() => {
         socket.on('new user', () => {
@@ -35,7 +35,7 @@ function App() {
         });
 
         socket.emit('connection');
-    }, [dispatch]);
+    });
 
     return (
         <>

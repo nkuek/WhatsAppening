@@ -74,9 +74,7 @@ const NewRoomForm = ({ socket }) => {
 
     const handleNewRoomSubmit = (e) => {
         e.preventDefault();
-        return dispatch(
-            createNewRoom(roomName, user.id, image, selectedContacts)
-        )
+        return dispatch(createNewRoom(roomName, image, selectedContacts))
             .then(() => {
                 socket.emit('new room', { adminId: user.id });
                 resetForm();

@@ -25,19 +25,52 @@ router.post(
     requireAuth,
     validateChatRoom,
     asyncHandler(async (req, res) => {
-        const { roomName, adminId, imageUrl, selectedContacts } = req.body;
+        const { roomName, imageUrl, selectedContacts } = req.body;
 
-        const chatroom = await ChatRoom.create({
+        const chatRoom = await ChatRoom.create({
             name: roomName,
-            adminId,
+            adminId: req.user.id,
             imageUrl,
         });
 
         const contactIds = selectedContacts.map((contact) => contact.id);
 
-        contactIds.forEach(async (id) => await chatroom.addParticipant(id));
+        console.log('================');
+        console.log(contactIds);
+        console.log('================');
 
-        return res.json({ chatroom });
+        // await contactIds.forEach(
+        //     async (id) => await chatRoom.addParticipant(id)
+        // );
+
+        await chatRoom.addParticipants(contactIds);
+
+        const participants = await chatRoom.getParticipants();
+
+        console.log(participants);
+
+        let participantsInfo = participants.map((participant) => {
+            return {
+                id: participant.id,
+                name: participant.name,
+                profileUrl: participant.profileUrl,
+                phoneNumber: participant.phoneNumber,
+            };
+        });
+
+        const adminInfo = {
+            id: req.user.id,
+            name: req.user.name,
+            profileUrl: req.user.profileUrl,
+            phoneNumber: req.user.phoneNumber,
+        };
+
+        const allParticipants = participantsInfo.concat(adminInfo);
+
+        return res.json({
+            chatRoom,
+            participants: allParticipants,
+        });
     })
 );
 

@@ -126,9 +126,15 @@ const ChatRoom = ({ socket, user }) => {
                             .reverse()
                             .map((message) =>
                                 user.id === message.authorId ? (
-                                    <SentMessage message={message} />
+                                    <SentMessage
+                                        key={message.id}
+                                        message={message}
+                                    />
                                 ) : (
-                                    <ReceivedMessage message={message} />
+                                    <ReceivedMessage
+                                        key={message.id}
+                                        message={message}
+                                    />
                                 )
                             )
                     )}

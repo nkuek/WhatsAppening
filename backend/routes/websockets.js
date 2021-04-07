@@ -18,7 +18,7 @@ io.on('connection', (socket) => {
         chatRoom.update({ isRead: false });
 
         io.to(chatRoomId).emit('load messages', { chatRoomId });
-        io.emit('reload chatlist');
+        // io.emit('reload chatlist');
     });
 
     socket.on('delete message', async (data) => {
