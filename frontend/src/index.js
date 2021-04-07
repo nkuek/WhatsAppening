@@ -15,35 +15,28 @@ import * as sessionActions from './store/session';
 const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
-  restoreCSRF();
+    restoreCSRF();
 
-  window.csrfFetch = fetch;
-  window.store = store;
-  window.sessionActions = sessionActions;
+    window.csrfFetch = fetch;
+    window.store = store;
+    window.sessionActions = sessionActions;
 }
 
-// const Carrot = () => (
-//   <div style={{ color: "orange", fontSize: "100px" }}>
-//     <i className="fas fa-carrot"></i>
-//   </div>
-// );
-
 function Root() {
-  return (
-    <ModalProvider>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-          {/* <Carrot /> */}
-        </BrowserRouter>
-      </Provider>
-    </ModalProvider>
-  );
+    return (
+        <ModalProvider>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </Provider>
+        </ModalProvider>
+    );
 }
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Root />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Root />
+    </React.StrictMode>,
+    document.getElementById('root')
 );

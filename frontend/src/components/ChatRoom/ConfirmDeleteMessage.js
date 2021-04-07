@@ -1,10 +1,12 @@
+import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
-import { socket } from '../../App';
 
 const ConfirmDeleteMessage = ({ setShowModal, messageId, chatRoomId }) => {
+    const socket = useSelector((state) => state.chatRoom.socket);
+
     const handleDeleteMessage = () => {
         const chatMessageList = document.querySelector('.chatRoomMessageList');
-        socket.emit('delete message', { messageId, chatRoomId });
+        socket && socket.emit('delete message', { messageId, chatRoomId });
         sessionStorage.setItem('chatScrollPosition', chatMessageList.scrollTop);
     };
 

@@ -7,42 +7,52 @@ import SideBar from './components/SideBar';
 import ChatRoom from './components/ChatRoom';
 import WelcomePage from './components/WelcomePage';
 import { findContacts } from './store/userContacts';
-
-export const socket = io(
-    process.env.NODE_ENV === 'development'
-        ? 'localhost:5000'
-        : 'https://whatsapp-ening.herokuapp.com/'
-);
+import { setSocket, closeSocket } from './store/chatroom';
 
 function App() {
     const dispatch = useDispatch();
 
     const session = useSelector((state) => state.session);
+    const socket = useSelector((state) => state.chatRoom.socket);
+
+    useEffect(() => {
+        dispatch(sessionActions.restoreUser());
+    }, [dispatch]);
 
     useEffect(() => {
         if (session.user && session.isLoaded) {
             dispatch(getUserRooms(session.user.id));
             dispatch(findContacts(session.user.id));
+            const socket = io(
+                process.env.NODE_ENV === 'development'
+                    ? 'localhost:5000'
+                    : 'https://whatsapp-ening.herokuapp.com/'
+            );
+            dispatch(setSocket(socket));
         }
-    });
+        return () => {
+            !session.user && dispatch(closeSocket());
+        };
+    }, [session.user, session.isLoaded, dispatch]);
 
     useEffect(() => {
-        socket.on('new user', () => {
-            dispatch(sessionActions.restoreUser());
-        });
-        socket.on('created room', (data) => {
-            dispatch(getUserRooms(data.adminId));
-        });
-
-        socket.emit('connection');
-    });
+        socket &&
+            socket.on('new user', () => {
+                // dispatch(sessionActions.restoreUser());
+                console.log('new user');
+            });
+        socket &&
+            socket.on('created room', (data) => {
+                dispatch(getUserRooms(data.adminId));
+            });
+    }, [dispatch, socket]);
 
     return (
         <>
             {session.user && session.isLoaded ? (
                 <>
-                    <SideBar socket={socket} />
-                    <ChatRoom socket={socket} user={session.user} />
+                    <SideBar />
+                    <ChatRoom user={session.user} />
                 </>
             ) : (
                 <WelcomePage />

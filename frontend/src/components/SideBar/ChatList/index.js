@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { findUserRoom } from '../../../store/chatroom';
 import { getUserRooms } from '../../../store/chatlist';
-import { socket } from '../../../App';
 
 import './ChatList.css';
 import ChatListItem from './ChatListItem';
@@ -15,6 +14,7 @@ const ChatList = () => {
     const chatList = useSelector((state) => state.chatList);
     const user = useSelector((state) => state.session.user);
     const chatRoom = useSelector((state) => state.chatRoom);
+    const socket = useSelector((state) => state.chatRoom.socket);
 
     const handleChatListClick = (chatId, chatRoom) => {
         const selectedElement = document.getElementById(selectedItem);
@@ -32,7 +32,7 @@ const ChatList = () => {
                 selectedElement.classList.remove('selected');
         }
         if (!chatRoom.isRead) {
-            socket.emit('read message', { chatRoomId: chatId });
+            socket && socket.emit('read message', { chatRoomId: chatId });
         }
 
         setSelectedItem(chatId);
@@ -41,25 +41,28 @@ const ChatList = () => {
 
     useEffect(() => {
         if (chatRoom.isLoaded && user) dispatch(getUserRooms(user.id));
-    }, [user, chatRoom, dispatch]);
+    }, [user, chatRoom.isLoaded, dispatch]);
 
     useEffect(() => {
         if (user) {
-            socket.on('load messages', () => {
-                dispatch(getUserRooms(user.id));
-            });
-            socket.on('reload chatlist', () => {
-                dispatch(getUserRooms(user.id));
-            });
+            socket &&
+                socket.on('load messages', () => {
+                    dispatch(getUserRooms(user.id));
+                });
+            socket &&
+                socket.on('reload chatlist', () => {
+                    dispatch(getUserRooms(user.id));
+                });
 
             const timer = setInterval(() => {
                 dispatch(getUserRooms(user.id));
             }, 60000);
 
-            return () => clearTimeout(timer);
+            return () => {
+                clearTimeout(timer);
+            };
         }
-        return;
-    }, [user, dispatch]);
+    }, [user, dispatch, socket]);
 
     return (
         <div className="chatListContainer">

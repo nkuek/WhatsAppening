@@ -47,7 +47,7 @@ const initialState = { contacts: null, isLoaded: false };
 const contactReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_CONTACTS:
-            return { contacts: [...action.contacts], isLoaded: true };
+            return { ...state, contacts: [...action.contacts], isLoaded: true };
         case REMOVE_CONTACTS:
             return initialState;
         default:

@@ -17,7 +17,7 @@ io.on('connection', (socket) => {
 
         chatRoom.update({ isRead: false });
 
-        io.to(chatRoomId).emit('load messages', { chatRoomId });
+        io.in(chatRoomId).emit('load messages', { chatRoomId });
     });
 
     socket.on('delete message', async (data) => {
@@ -42,6 +42,12 @@ io.on('connection', (socket) => {
 
     socket.on('new room', async (data) => {
         socket.emit('created room', { adminId: data.adminId });
+    });
+
+    socket.on('disconnect', () => {
+        console.log('================');
+        console.log('user disconnected');
+        console.log('================');
     });
 });
 

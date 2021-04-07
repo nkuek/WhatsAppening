@@ -4,6 +4,8 @@ import imageUploader from './images';
 const CREATE_ROOM = 'chatroom/createRoom';
 const FIND_ROOM = 'chatroom/findRoom';
 const RESET_STATE = 'chatroom/resetChatRoomState';
+const SET_SOCKET = 'chatroom/setSocket';
+const CLOSE_SOCKET = 'chatroom/closeSocket';
 
 const createRoom = (room) => ({
     type: CREATE_ROOM,
@@ -17,6 +19,15 @@ const findRoom = (room) => ({
 
 const resetRoom = () => ({
     type: RESET_STATE,
+});
+
+export const setSocket = (socket) => ({
+    type: SET_SOCKET,
+    socket,
+});
+
+export const closeSocket = () => ({
+    type: CLOSE_SOCKET,
 });
 
 export const createNewRoom = (roomName, image, selectedContacts) => async (
@@ -77,15 +88,20 @@ export const editUserRoom = (
     dispatch(findRoom(chatRoom));
 };
 
-const initialState = { room: null, isLoaded: false };
+const initialState = { room: null, isLoaded: false, socket: null };
 const chatroomReducer = (state = initialState, action) => {
     switch (action.type) {
         case CREATE_ROOM:
-            return { room: action.room, isLoaded: true };
+            return { ...state, room: action.room, isLoaded: true };
         case FIND_ROOM:
-            return { room: action.room, isLoaded: true };
+            return { ...state, room: action.room, isLoaded: true };
         case RESET_STATE:
             return initialState;
+        case SET_SOCKET:
+            return { ...state, socket: action.socket };
+        case CLOSE_SOCKET:
+            state.socket && state.socket.disconnect();
+            return { ...state, socket: null };
         default:
             return state;
     }

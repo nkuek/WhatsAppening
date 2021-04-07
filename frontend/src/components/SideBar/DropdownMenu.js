@@ -13,7 +13,7 @@ import { removeUserRooms } from '../../store/chatlist';
 import { resetUserRoomState } from '../../store/chatroom';
 import { removeUserContactsState } from '../../store/userContacts';
 import { clearSearchUsers } from '../../store/usersearch';
-import { socket } from '../../App';
+import { closeSocket } from '../../store/chatroom';
 
 const CustomIconButton = withStyles({
     root: {
@@ -36,6 +36,7 @@ const DropdownMenu = () => {
         dispatch(resetUserRoomState());
         dispatch(removeUserContactsState());
         dispatch(clearSearchUsers());
+        dispatch(closeSocket());
         dispatch(sessionActions.logout());
     };
 

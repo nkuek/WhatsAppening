@@ -29,7 +29,7 @@ const initialState = { users: null, isLoaded: false };
 const userSearchReducer = (state = initialState, action) => {
     switch (action.type) {
         case FIND_USERS:
-            return { users: action.users, isLoaded: true };
+            return { ...state, users: action.users, isLoaded: true };
         case CLEAR_STATE:
             return initialState;
         default:

@@ -10,9 +10,11 @@ import SentMessage from './SentMessage';
 import ReceivedMessage from './ReceivedMessage';
 import ChatRoomInfo from './ChatRoomInfo';
 
-const ChatRoom = ({ socket, user }) => {
+const ChatRoom = () => {
     const dispatch = useDispatch();
     const chatRoom = useSelector((state) => state.chatRoom);
+    const socket = useSelector((state) => state.chatRoom.socket);
+    const user = useSelector((state) => state.session.user);
 
     const [messageInput, setMessageInput] = useState('');
 
@@ -31,12 +33,13 @@ const ChatRoom = ({ socket, user }) => {
     useEffect(() => {
         const chatMessageList = document.querySelector('.chatRoomMessageList');
         const chatScrollPosition = sessionStorage.getItem('chatScrollPosition');
-        socket.on('load messages', (data) => {
-            if (chatScrollPosition)
-                chatMessageList.scrollTop = chatScrollPosition;
-            else chatMessageList.scrollTop = chatMessageList.scrollHeight;
-            dispatch(findUserRoom(data.chatRoomId));
-        });
+        socket &&
+            socket.on('load messages', (data) => {
+                if (chatScrollPosition)
+                    chatMessageList.scrollTop = chatScrollPosition;
+                else chatMessageList.scrollTop = chatMessageList.scrollHeight;
+                dispatch(findUserRoom(data.chatRoomId));
+            });
     }, [socket, dispatch]);
 
     useEffect(() => {

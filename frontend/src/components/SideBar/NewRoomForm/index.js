@@ -74,6 +74,9 @@ const NewRoomForm = ({ socket }) => {
 
     const handleNewRoomSubmit = (e) => {
         e.preventDefault();
+        document
+            .querySelector('.newRoomFormContainer')
+            .classList.remove('show');
         return dispatch(createNewRoom(roomName, image, selectedContacts))
             .then(() => {
                 socket.emit('new room', { adminId: user.id });
