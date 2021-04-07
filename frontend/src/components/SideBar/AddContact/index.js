@@ -18,7 +18,7 @@ const UserSearch = () => {
     const userSearch = useSelector((state) => state.userSearch);
 
     useEffect(() => {
-        if (!userSearchInput) dispatch(clearSearchUsers());
+        if (!userSearchInput && showModal) dispatch(clearSearchUsers());
         else {
             const timer = setTimeout(() => {
                 dispatch(searchUsers(userSearchInput));

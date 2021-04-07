@@ -15,7 +15,8 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
     const session = useSelector((state) => state.session);
 
     useEffect(() => {
-        if (session.user) dispatch(findContacts(session.user.id));
+        if (session.user && session.user.isLoaded)
+            dispatch(findContacts(session.user.id));
     }, [session.user]);
 
     const contactFilter = (contactsList) => {

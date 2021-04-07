@@ -11,7 +11,7 @@ function SignupFormModal() {
     const session = useSelector((state) => state.sesion);
 
     const handleClose = () => {
-        dispatch(sessionActions.loadUserState());
+        dispatch(sessionActions.restoreUser());
         setShowModal(false);
     };
 

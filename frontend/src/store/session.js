@@ -29,13 +29,17 @@ export const login = ({ credential, password }) => async (dispatch) => {
         method: 'POST',
         body: JSON.stringify({ credential, password }),
     });
+    dispatch(loadUser());
     dispatch(setUser(res.data.user));
     return res;
 };
 
 export const restoreUser = () => async (dispatch) => {
     const res = await fetch('/api/session');
-    dispatch(setUser(res.data.user));
+    if (res.data.user) {
+        dispatch(loadUser());
+        dispatch(setUser(res.data.user));
+    } else dispatch(setUser(null));
     return res;
 };
 
@@ -108,7 +112,7 @@ function reducer(state = initialState, action) {
         case SET_USER:
             return { ...state, user: action.payload };
         case REMOVE_USER:
-            return { ...state, user: null };
+            return { ...state, user: null, isLoaded: false };
         case LOAD_USER:
             return { ...state, isLoaded: true };
         case UNLOAD_USER:

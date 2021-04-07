@@ -26,7 +26,6 @@ function App() {
 
     useEffect(() => {
         socket.on('new user', () => {
-            dispatch(sessionActions.loadUserState());
             dispatch(sessionActions.restoreUser());
         });
         socket.on('created room', (data) => {
@@ -38,7 +37,7 @@ function App() {
 
     return (
         <>
-            {session.user ? (
+            {session.user && session.isLoaded ? (
                 <>
                     <SideBar socket={socket} />
                     <ChatRoom socket={socket} user={session.user} />

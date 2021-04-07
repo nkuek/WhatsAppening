@@ -25,7 +25,7 @@ const WelcomePage = () => {
                         Login or signup to find out WhatsAppening
                     </div>
                     <div className="logoContainer">
-                        <i class="far fa-comment-dots"></i>
+                        <i className="far fa-comment-dots"></i>
                     </div>
                 </div>
                 <div className="loginSignup">
