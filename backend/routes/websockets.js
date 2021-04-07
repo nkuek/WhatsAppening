@@ -43,12 +43,6 @@ io.on('connection', (socket) => {
     socket.on('new room', async (data) => {
         socket.emit('created room', { adminId: data.adminId });
     });
-
-    socket.on('disconnect', () => {
-        console.log('================');
-        console.log('user disconnected');
-        console.log('================');
-    });
 });
 
 module.exports = io;

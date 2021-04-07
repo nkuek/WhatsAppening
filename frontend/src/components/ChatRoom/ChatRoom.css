@@ -138,6 +138,15 @@
 
 }
 
+.chatRoomMessageInfo {
+    display: flex;
+    align-items: flex-start;
+}
+
+.chatRoomAuthorPic {
+    margin-right: .5em;
+}
+
 .chatRoomMessageContainer.sent {
     display: flex;
     justify-content: flex-end;
@@ -170,6 +179,7 @@
 
 .chatRoomMessageSender {
     font-size: .8em;
+    font-weight: bold;
 }
 
 .chatMessageArrow {

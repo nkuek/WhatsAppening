@@ -107,7 +107,11 @@ router.put(
         let messagesAndUsers = await Promise.all(
             messages.map(async (message) => {
                 let user = await message.getUser();
-                return { ...message.dataValues, author: user.name };
+                return {
+                    ...message.dataValues,
+                    author: user.name,
+                    authorProfileUrl: user.profileUrl,
+                };
             })
         );
 
