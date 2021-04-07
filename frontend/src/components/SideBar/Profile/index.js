@@ -170,7 +170,7 @@ const Profile = ({ user }) => {
                                 type="submit"
                                 className="editProfileSubmit"
                             >
-                                Edit
+                                Update
                             </button>
                         </div>
                     )}
