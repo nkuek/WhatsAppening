@@ -1,7 +1,7 @@
 import { fetch } from './csrf.js';
 
 const GET_ROOMS = 'chat/getRooms';
-const REMOVE_ROOMS = 'chat/removeRooms';
+const REMOVE_ROOMS = 'chat/clearChatList';
 
 const getRooms = (rooms) => ({
     type: GET_ROOMS,

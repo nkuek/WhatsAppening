@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 const ReceivedMessage = ({ message }) => {
-    const linkRegEx = /((http|ftp|https)\:\/\/)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/g;
+    const linkRegEx = /((http|ftp|https):\/\/)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/g;
     return (
         <div
             id={`message${message.id}`}
@@ -17,6 +17,7 @@ const ReceivedMessage = ({ message }) => {
                         <a
                             className="chatRoomMessageBody"
                             target="_blank"
+                            rel="noreferrer"
                             href={
                                 !message.body.includes('https') ||
                                 !message.body.includes('http')

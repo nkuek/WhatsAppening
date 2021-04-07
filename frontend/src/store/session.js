@@ -1,6 +1,5 @@
 import { fetch } from './csrf.js';
 import imageUploader from './images';
-import { socket } from '../App';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
@@ -112,7 +111,7 @@ function reducer(state = initialState, action) {
         case SET_USER:
             return { ...state, user: action.payload };
         case REMOVE_USER:
-            return { ...state, user: null, isLoaded: false };
+            return initialState;
         case LOAD_USER:
             return { ...state, isLoaded: true };
         case UNLOAD_USER:

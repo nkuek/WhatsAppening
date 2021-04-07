@@ -12,6 +12,7 @@ import { withStyles } from '@material-ui/styles';
 import { removeUserRooms } from '../../store/chatlist';
 import { resetUserRoomState } from '../../store/chatroom';
 import { removeUserContactsState } from '../../store/userContacts';
+import { clearSearchUsers } from '../../store/usersearch';
 
 const CustomIconButton = withStyles({
     root: {
@@ -33,6 +34,7 @@ const DropdownMenu = () => {
         dispatch(removeUserRooms());
         dispatch(resetUserRoomState());
         dispatch(removeUserContactsState());
+        dispatch(clearSearchUsers());
         dispatch(sessionActions.logout());
     };
 

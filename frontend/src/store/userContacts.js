@@ -1,7 +1,7 @@
 import { fetch } from './csrf';
 
 const GET_CONTACTS = 'contacts/getContacts';
-const REMOVE_CONTACTS = 'contact/removeContacts';
+const REMOVE_CONTACTS = 'contact/clearContacts';
 
 const getContacts = (contacts) => ({
     type: GET_CONTACTS,

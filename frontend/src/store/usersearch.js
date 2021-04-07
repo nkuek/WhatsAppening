@@ -1,7 +1,7 @@
 import { fetch } from './csrf';
 
 const FIND_USERS = 'users/findUsers';
-const CLEAR_STATE = 'users/clearState';
+const CLEAR_STATE = 'users/resetSearch';
 
 const findUsers = (users) => ({
     type: FIND_USERS,

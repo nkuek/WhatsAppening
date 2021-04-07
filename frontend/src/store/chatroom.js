@@ -3,7 +3,7 @@ import imageUploader from './images';
 
 const CREATE_ROOM = 'chatroom/createRoom';
 const FIND_ROOM = 'chatroom/findRoom';
-const RESET_STATE = 'chatroom/resetState';
+const RESET_STATE = 'chatroom/resetChatRoomState';
 
 const createRoom = (room) => ({
     type: CREATE_ROOM,

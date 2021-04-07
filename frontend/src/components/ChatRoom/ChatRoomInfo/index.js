@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useState, useRef, useEffect } from 'react';
-import { withStyles } from '@material-ui/styles';
+import { useState, useEffect } from 'react';
 import { Avatar, IconButton } from '@material-ui/core';
 import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
@@ -125,6 +124,7 @@ const ChatRoomInfo = ({ chatRoom }) => {
                 {chatRoom.participants &&
                     chatRoom.participants.map((participant) => (
                         <div
+                            key={participant.id}
                             style={{ margin: '10px 0px', color: 'white' }}
                             className="selectedContactsItem"
                         >

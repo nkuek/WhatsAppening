@@ -128,7 +128,7 @@ const NewRoomForm = ({ socket }) => {
                 )}
                 <div className="newRoomFormInputContainer">
                     <input
-                        // required
+                        required
                         value={roomName}
                         onChange={(e) => setRoomName(e.target.value)}
                         type="text"
@@ -150,7 +150,10 @@ const NewRoomForm = ({ socket }) => {
                 <div className="selectedContactsContainer">
                     {selectedContacts &&
                         selectedContacts.map((contact) => (
-                            <div className="selectedContactsItem">
+                            <div
+                                key={contact.id}
+                                className="selectedContactsItem"
+                            >
                                 <div className="selectedContactInfo">
                                     <div className="selectedContactProfileImage">
                                         <Avatar src={contact.profileUrl} />

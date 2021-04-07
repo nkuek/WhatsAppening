@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 const Message = ({ message }) => {
     const [messageHover, setMessageHover] = useState(false);
     const [showDropdownMenu, setShowDropdownMenu] = useState(false);
-    const linkRegEx = /((http|ftp|https)\:\/\/)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/g;
+    const linkRegEx = /((http|ftp|https):\/\/)?([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/g;
 
     return (
         <div
@@ -26,6 +26,7 @@ const Message = ({ message }) => {
                     <a
                         className="chatRoomMessageBody"
                         target="_blank"
+                        rel="noreferrer"
                         href={
                             !message.body.includes('https') ||
                             !message.body.includes('http')

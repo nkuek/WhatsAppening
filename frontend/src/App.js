@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 import SideBar from './components/SideBar';
 import ChatRoom from './components/ChatRoom';
 import WelcomePage from './components/WelcomePage';
+import { findContacts } from './store/userContacts';
 
 export const socket = io(
     process.env.NODE_ENV === 'development'
@@ -21,6 +22,7 @@ function App() {
     useEffect(() => {
         if (session.user && session.isLoaded) {
             dispatch(getUserRooms(session.user.id));
+            dispatch(findContacts(session.user.id));
         }
     }, [session, dispatch]);
 

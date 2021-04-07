@@ -41,7 +41,7 @@ const ChatList = () => {
 
     useEffect(() => {
         if (chatRoom.isLoaded && user) dispatch(getUserRooms(user.id));
-    }, [user, chatRoom]);
+    }, [user, chatRoom, dispatch]);
 
     useEffect(() => {
         if (user) {
@@ -59,7 +59,7 @@ const ChatList = () => {
             return () => clearTimeout(timer);
         }
         return;
-    }, [user]);
+    }, [user, dispatch]);
 
     return (
         <div className="chatListContainer">

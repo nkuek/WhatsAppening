@@ -11,6 +11,7 @@ import { resetUserRoomState } from '../../../store/chatroom';
 import { removeUserContactsState } from '../../../store/userContacts';
 
 import './Profile.css';
+import { clearSearchUsers } from '../../../store/usersearch';
 
 const CustomAvatar = withStyles({
     root: {
@@ -66,6 +67,7 @@ const Profile = ({ user }) => {
         dispatch(removeUserRooms());
         dispatch(resetUserRoomState());
         dispatch(removeUserContactsState());
+        dispatch(clearSearchUsers());
         dispatch(sessionActions.logout());
     };
 
@@ -97,7 +99,7 @@ const Profile = ({ user }) => {
             document.addEventListener('click', closeEditName);
             return () => document.removeEventListener('click', closeEditName);
         }
-    }, [showEditName]);
+    });
 
     return (
         <>

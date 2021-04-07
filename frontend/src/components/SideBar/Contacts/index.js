@@ -17,7 +17,7 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
     useEffect(() => {
         if (session.user && session.user.isLoaded)
             dispatch(findContacts(session.user.id));
-    }, [session.user]);
+    }, [session.user, dispatch]);
 
     const contactFilter = (contactsList) => {
         return contactsList.filter((contact) => {
@@ -53,7 +53,7 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
     };
 
     const handleContactClick = (contact) => {
-        setSelectedContacts([...selectedContacts, contact]);
+        setSelectedContacts((prev) => [...prev, contact]);
     };
 
     return (
@@ -99,10 +99,9 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
                             (contact) =>
                                 !selectedContacts
                                     .map(
-                                        (selectedContact) =>
-                                            selectedContact.name
+                                        (selectedContact) => selectedContact.id
                                     )
-                                    .includes(contact.name) && (
+                                    .includes(contact.id) && (
                                     <div
                                         key={contact.id}
                                         onClick={() =>

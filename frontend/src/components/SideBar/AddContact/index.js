@@ -18,14 +18,14 @@ const UserSearch = () => {
     const userSearch = useSelector((state) => state.userSearch);
 
     useEffect(() => {
-        if (!userSearchInput && showModal) dispatch(clearSearchUsers());
+        if (!userSearchInput) dispatch(clearSearchUsers());
         else {
             const timer = setTimeout(() => {
                 dispatch(searchUsers(userSearchInput));
             }, 500);
             return () => clearTimeout(timer);
         }
-    }, [userSearchInput]);
+    }, [userSearchInput, dispatch]);
 
     const resetForm = () => {
         document

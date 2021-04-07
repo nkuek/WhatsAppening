@@ -115,7 +115,7 @@ const ChatRoom = ({ socket, user }) => {
                     {chatRoom.room.messages &&
                     chatRoom.room.messages.length === 0 ? (
                         <div className="noMessagesContainer">
-                            <div className="callToAction1">
+                            <div className="callToAction2">
                                 This room has no messages yet!
                             </div>
                         </div>
