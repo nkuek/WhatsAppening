@@ -13,6 +13,7 @@ import { removeUserRooms } from '../../store/chatlist';
 import { resetUserRoomState } from '../../store/chatroom';
 import { removeUserContactsState } from '../../store/userContacts';
 import { clearSearchUsers } from '../../store/usersearch';
+import { socket } from '../../App';
 
 const CustomIconButton = withStyles({
     root: {

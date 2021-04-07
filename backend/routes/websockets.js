@@ -18,7 +18,6 @@ io.on('connection', (socket) => {
         chatRoom.update({ isRead: false });
 
         io.to(chatRoomId).emit('load messages', { chatRoomId });
-        // io.emit('reload chatlist');
     });
 
     socket.on('delete message', async (data) => {
@@ -27,8 +26,7 @@ io.on('connection', (socket) => {
         const chatRoom = await db.ChatRoom.findByPk(chatRoomId);
         await chatRoom.removeMessage(messageId);
         message.destroy();
-        // io.to(chatRoomId).emit('load messages', { chatRoomId });
-        io.emit('load messages', { chatRoomId });
+        io.to(chatRoomId).emit('load messages', { chatRoomId });
     });
 
     socket.on('read message', async (data) => {
