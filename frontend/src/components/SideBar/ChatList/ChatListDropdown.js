@@ -29,7 +29,7 @@ const ChatListDropdown = ({
     const [showModal, setShowModal] = useState(false);
     const anchorRef = useRef(null);
 
-    const toggleDropdownMenu = () => {
+    const toggleDropdownMenu = (e) => {
         setShowDropdownMenu((prev) => !prev);
     };
 

@@ -9,7 +9,6 @@ import ChatListItem from './ChatListItem';
 const ChatList = () => {
     const dispatch = useDispatch();
     const [selectedItem, setSelectedItem] = useState('');
-    const [showDropdownMenu, setShowDropdownMenu] = useState(false);
 
     const chatList = useSelector((state) => state.chatList);
     const user = useSelector((state) => state.session.user);
@@ -71,8 +70,6 @@ const ChatList = () => {
                     <ChatListItem
                         key={chatRoom.id}
                         chatRoom={chatRoom}
-                        showDropdownMenu={showDropdownMenu}
-                        setShowDropdownMenu={setShowDropdownMenu}
                         handleChatListClick={handleChatListClick}
                         selectedItem={selectedItem}
                         setSelectedItem={setSelectedItem}

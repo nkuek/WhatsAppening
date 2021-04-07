@@ -9,14 +9,13 @@ dayjs.extend(relativeTime);
 
 const ChatListItem = ({
     chatRoom,
-    showDropdownMenu,
-    setShowDropdownMenu,
     handleChatListClick,
     selectedItem,
     setSelectedItem,
     user,
 }) => {
     const [chatListHover, setChatListHover] = useState(false);
+    const [showDropdownMenu, setShowDropdownMenu] = useState(false);
 
     return (
         <div
@@ -48,7 +47,10 @@ const ChatListItem = ({
             <div className="chatListImage">
                 <Avatar src={chatRoom.imageUrl} />
             </div>
-            <div className="chatListInfo">
+            <div
+                className="chatListInfo"
+                onMouseEnter={() => setChatListHover(true)}
+            >
                 <div className="chatListNameAndMessage">
                     <div className="chatListName">{chatRoom.name}</div>
                     <div className="chatListRecentMessage">
@@ -70,9 +72,6 @@ const ChatListItem = ({
             <span
                 className="chatListDropdown"
                 onMouseEnter={() => setChatListHover(true)}
-                onMouseLeave={() => {
-                    if (!showDropdownMenu) setChatListHover(false);
-                }}
             >
                 {chatListHover && (
                     <ChatListDropdown
