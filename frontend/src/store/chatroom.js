@@ -35,9 +35,9 @@ export const createNewRoom = (
         body: JSON.stringify({ roomName, adminId, imageUrl, selectedContacts }),
     });
 
-    const room = response.data;
+    console.log(response.data);
+    const room = response.data.chatroom;
     dispatch(createRoom(room));
-    return room;
 };
 
 export const findUserRoom = (chatRoomId) => async (dispatch) => {
