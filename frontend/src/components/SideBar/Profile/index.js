@@ -37,6 +37,11 @@ const Profile = ({ user }) => {
         }
     }, [user]);
 
+    useEffect(() => {
+        const editInput = document.querySelector('.userNameEdit');
+        if (showEditName) editInput.focus();
+    }, [showEditName]);
+
     const resetForm = () => {
         openProfile();
         document.getElementById('profilePictureInput').value = '';
@@ -94,6 +99,10 @@ const Profile = ({ user }) => {
         dispatch(sessionActions.editUserPrivacy(e.target.value));
     };
 
+    const handleShowEditName = () => {
+        setShowEditName(true);
+    };
+
     useEffect(() => {
         if (showEditName) {
             document.addEventListener('click', closeEditName);
@@ -142,7 +151,7 @@ const Profile = ({ user }) => {
                                         color: 'white',
                                         cursor: 'pointer',
                                     }}
-                                    onClick={() => setShowEditName(true)}
+                                    onClick={handleShowEditName}
                                 />
                             </>
                         )}

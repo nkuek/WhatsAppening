@@ -33,6 +33,7 @@ const UserSearch = () => {
             .classList.toggle('show');
 
         document.querySelector('.newRoomFormContainer').classList.add('show');
+        document.querySelector('.newRoomFormInput').focus();
         setTimeout(() => {
             setUserSearchInput('');
             dispatch(clearSearchUsers());

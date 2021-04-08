@@ -77,7 +77,7 @@ const NewRoomForm = () => {
     const handleNewRoomSubmit = (e) => {
         e.preventDefault();
         return dispatch(createNewRoom(roomName, image, selectedContacts))
-            .then((chatRoom) => {
+            .then(() => {
                 socket.emit('new room', {
                     adminId: user.id,
                 });
@@ -130,6 +130,7 @@ const NewRoomForm = () => {
                 )}
                 <div className="newRoomFormInputContainer">
                     <input
+                        className="newRoomFormInput"
                         required
                         value={roomName}
                         onChange={(e) => setRoomName(e.target.value)}

@@ -22,6 +22,16 @@ const ChatRoomInfo = ({ chatRoom }) => {
         setDescription(chatRoom.description);
     }, [chatRoom]);
 
+    useEffect(() => {
+        if (showEditName)
+            document.querySelector('.chatRoomCardNameEdit').focus();
+    }, [showEditName]);
+
+    useEffect(() => {
+        if (showEditDescription)
+            document.querySelector('.chatRoomCardDescriptionEdit').focus();
+    }, [showEditDescription]);
+
     const resetForm = () => {
         document.getElementById('chatRoomImageInput').value = '';
         setTimeout(() => {

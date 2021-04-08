@@ -32,6 +32,7 @@ const SideBar = ({ socket }) => {
         document
             .querySelector('.newRoomFormContainer')
             .classList.toggle('show');
+        document.querySelector('.newRoomFormInput').focus();
     };
 
     const openProfile = () => {

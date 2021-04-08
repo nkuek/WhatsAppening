@@ -15,6 +15,13 @@ const ChatList = () => {
     const chatRoom = useSelector((state) => state.chatRoom);
     const socket = useSelector((state) => state.chatRoom.socket);
 
+    useEffect(() => {
+        const chatRoomMessageInput = document.querySelector(
+            '.chatRoomMessageInput'
+        );
+        chatRoom.room && chatRoomMessageInput.focus();
+    }, [chatRoom.room]);
+
     const handleChatListClick = (chatId, chatRoom) => {
         const selectedElement = document.getElementById(selectedItem);
         const clickedChat = document.getElementById(chatId);
