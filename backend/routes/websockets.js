@@ -9,10 +9,13 @@ io.on('connection', (socket) => {
     socket.on('update socket', async (data) => {
         const user = await db.User.findByPk(data.userId);
         const chatRooms = await user.getParticipants();
+        const admin = await user.getAdmin();
         const roomIds = chatRooms.map((room) => room.id);
-        console.log('joining', roomIds);
+        const adminIds = admin.map((room) => room.id);
+        const allRoomIds = [...roomIds, ...adminIds];
+        console.log('joining', allRoomIds);
 
-        socket.join(roomIds);
+        socket.join(allRoomIds);
     });
 
     socket.on('new message', async (data) => {
