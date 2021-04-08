@@ -33,7 +33,8 @@ const ChatListDropdown = ({
         setShowDropdownMenu((prev) => !prev);
     };
 
-    const handleDeleteChatRoom = () => {
+    const handleDeleteChatRoom = (e) => {
+        e.stopPropagation();
         setShowModal(true);
     };
 

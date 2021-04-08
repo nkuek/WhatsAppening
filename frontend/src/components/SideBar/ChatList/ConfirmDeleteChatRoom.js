@@ -9,7 +9,8 @@ const ConfirmDeleteMessage = ({
     setSelectedItem,
 }) => {
     const dispatch = useDispatch();
-    const handleDeleteChatRoom = () => {
+    const handleDeleteChatRoom = (e) => {
+        e.stopPropagation();
         setSelectedItem('');
         dispatch(deleteUserRoom(chatRoomId));
         dispatch(resetUserRoomState());
