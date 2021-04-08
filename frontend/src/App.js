@@ -29,7 +29,6 @@ function App() {
                     : 'https://whatsapp-ening.herokuapp.com/'
             );
             dispatch(setSocket(socket));
-            console.log('updating');
             socket.emit('update socket', { userId: session.user.id });
         }
         return () => {
