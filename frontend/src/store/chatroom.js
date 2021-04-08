@@ -47,6 +47,7 @@ export const createNewRoom = (roomName, image, selectedContacts) => async (
     chatRoom.messages = [];
     chatRoom.participants = participants;
     dispatch(createRoom(chatRoom));
+    return chatRoom;
 };
 
 export const findUserRoom = (chatRoomId) => async (dispatch) => {

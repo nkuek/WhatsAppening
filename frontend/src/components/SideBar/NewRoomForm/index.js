@@ -77,8 +77,10 @@ const NewRoomForm = () => {
     const handleNewRoomSubmit = (e) => {
         e.preventDefault();
         return dispatch(createNewRoom(roomName, image, selectedContacts))
-            .then(() => {
-                socket.emit('new room', { adminId: user.id });
+            .then((chatRoom) => {
+                socket.emit('new room', {
+                    adminId: user.id,
+                });
                 resetForm();
                 openNewRoomForm();
             })

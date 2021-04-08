@@ -44,10 +44,10 @@ const ChatList = () => {
 
     useEffect(() => {
         if (user) {
-            socket &&
-                socket.on('load messages', () => {
-                    dispatch(getUserRooms(user.id));
-                });
+            // socket &&
+            //     socket.on('load messages', () => {
+            //         dispatch(getUserRooms(user.id));
+            //     });
             socket &&
                 socket.on('reload chatlist', () => {
                     dispatch(getUserRooms(user.id));

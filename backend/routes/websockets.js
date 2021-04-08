@@ -6,12 +6,19 @@ const io = require('socket.io')({
 });
 
 io.on('connection', (socket) => {
-    socket.emit('new user');
+    socket.on('update socket', async (data) => {
+        const user = await db.User.findByPk(data.userId);
+        const chatRooms = await user.getParticipants();
+        const roomIds = chatRooms.map((room) => room.id);
+        console.log('joining', roomIds);
+
+        socket.join(roomIds);
+    });
 
     socket.on('new message', async (data) => {
         const { authorId, body, chatRoomId } = data;
         socket.join(chatRoomId);
-        db.Message.create({ body, authorId, chatRoomId });
+        await db.Message.create({ body, authorId, chatRoomId });
 
         const chatRoom = await db.ChatRoom.findByPk(chatRoomId);
 
@@ -41,7 +48,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('new room', async (data) => {
-        socket.emit('created room', { adminId: data.adminId });
+        io.emit('created room', { adminId: data.adminId });
     });
 });
 

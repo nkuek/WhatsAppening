@@ -37,15 +37,11 @@ function App() {
 
     useEffect(() => {
         socket &&
-            socket.on('new user', () => {
-                // dispatch(sessionActions.restoreUser());
-                console.log('new user');
-            });
-        socket &&
             socket.on('created room', (data) => {
                 dispatch(getUserRooms(data.adminId));
+                socket.emit('update socket', { userId: session.user.id });
             });
-    }, [dispatch, socket]);
+    }, [dispatch, socket, session.user]);
 
     return (
         <>
