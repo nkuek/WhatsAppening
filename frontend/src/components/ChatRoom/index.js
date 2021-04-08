@@ -65,12 +65,13 @@ const ChatRoom = () => {
     const handleNewMessage = (e) => {
         e.preventDefault();
         if (!messageInput) return;
-        socket.emit('new message', {
-            name: user.name,
-            authorId: user.id,
-            body: messageInput,
-            chatRoomId: chatRoom.room.id,
-        });
+        socket &&
+            socket.emit('new message', {
+                name: user.name,
+                authorId: user.id,
+                body: messageInput,
+                chatRoomId: chatRoom.room.id,
+            });
         setMessageInput('');
     };
 
