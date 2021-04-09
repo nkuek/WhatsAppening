@@ -23,10 +23,6 @@ const ChatList = () => {
     }, [chatRoom.room]);
 
     const handleChatListClick = (chatId, chatRoom) => {
-        console.log('===================');
-        console.log('handling click');
-        console.log('===================');
-
         dispatch(setRoomId(chatId));
 
         const selectedElement = document.getElementById(selectedItem);

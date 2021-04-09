@@ -44,8 +44,6 @@ const ChatRoom = () => {
     useEffect(() => {
         socket &&
             socket.on('load messages', (data) => {
-                console.log('chatRoomId', chatRoomId);
-                console.log('data', data.chatRoomId);
                 if (chatRoomId === data.chatRoomId)
                     dispatch(findUserRoom(data.chatRoomId));
             });

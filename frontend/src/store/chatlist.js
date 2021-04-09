@@ -13,7 +13,6 @@ const removeRooms = () => ({
 });
 
 export const getUserRooms = (userId) => async (dispatch) => {
-    console.log('dispatching');
     const res = await fetch('/api/users/chatrooms', {
         method: 'PUT',
         body: JSON.stringify({ userId }),
