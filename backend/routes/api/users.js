@@ -87,7 +87,7 @@ router.put(
         const userParticipant = await user.getParticipants();
         const allRooms = rooms.concat(userParticipant);
 
-        roomsAndMessages = await Promise.all(
+        const roomsAndMessages = await Promise.all(
             allRooms.map(async (room) => {
                 const messages = await room.getMessages();
                 let lastMessage = [];
@@ -102,13 +102,15 @@ router.put(
                 };
             })
         );
+
+        console.log('=======================================================');
+        console.log(roomsAndMessages.map((room) => room.lastMessage.body));
+        console.log('=======================================================');
         roomsAndMessages.sort((a, b) => {
             if (a.lastMessage && b.lastMessage)
                 return b.lastMessage.createdAt - a.lastMessage.createdAt;
-            else if (a.lastMessage && !b.lastMessage)
-                return b.createdAt - a.lastMessage.createdAt;
-            else if (!a.lastMessage && b.lastMessage)
-                return b.lastMessage.createdAt - a.createdAt;
+            else if (a.lastMessage && !b.lastMessage) return -1;
+            else if (!a.lastMessage && b.lastMessage) return 1;
             else return b.createdAt - a.createdAt;
         });
 

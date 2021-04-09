@@ -5,19 +5,30 @@ const io = require('socket.io')({
     },
 });
 
+const connectedUsers = {};
+
 io.on('connection', (socket) => {
     socket.on('update socket', async (data) => {
         const user = await db.User.findByPk(data.userId);
+        socket.user = user;
         const chatRooms = await user.getParticipants();
         const admin = await user.getAdmin();
         const roomIds = chatRooms.map((room) => room.id);
         const adminIds = admin.map((room) => room.id);
         const allRoomIds = [...roomIds, ...adminIds];
+        socket.roomIds = allRoomIds;
+
+        allRoomIds.forEach((roomId) => {
+            if (!connectedUsers[roomId]) connectedUsers[roomId] = new Set();
+        });
 
         socket.join(allRoomIds);
     });
 
     socket.on('new message', async (data) => {
+        console.log('===============');
+        console.log('receiving message');
+        console.log('===============');
         const { authorId, body, chatRoomId } = data;
         socket.join(chatRoomId);
         await db.Message.create({ body, authorId, chatRoomId });
@@ -26,6 +37,7 @@ io.on('connection', (socket) => {
 
         chatRoom.update({ isRead: false });
 
+        io.in(chatRoomId).emit('reload chatlist');
         io.in(chatRoomId).emit('load messages', { chatRoomId });
     });
 
@@ -42,6 +54,11 @@ io.on('connection', (socket) => {
         const { chatRoomId } = data;
         const chatRoom = await db.ChatRoom.findByPk(chatRoomId);
         chatRoom.update({ isRead: true });
+        socket.roomIds.forEach((roomId) => {
+            connectedUsers[roomId].delete(socket.user.id);
+        });
+        connectedUsers[chatRoomId].add(socket.user.id);
+
         socket.emit('reload chatlist');
     });
 
