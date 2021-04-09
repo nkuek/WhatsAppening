@@ -6,6 +6,12 @@ const FIND_ROOM = 'chatroom/findRoom';
 const RESET_STATE = 'chatroom/resetChatRoomState';
 const SET_SOCKET = 'chatroom/setSocket';
 const CLOSE_SOCKET = 'chatroom/closeSocket';
+const SET_ROOM_ID = 'chatroom/setRoomId';
+
+export const setRoomId = (roomId) => ({
+    type: SET_ROOM_ID,
+    roomId,
+});
 
 const createRoom = (room) => ({
     type: CREATE_ROOM,
@@ -89,7 +95,12 @@ export const editUserRoom = (
     dispatch(findRoom(chatRoom));
 };
 
-const initialState = { room: null, isLoaded: false, socket: null };
+const initialState = {
+    room: null,
+    isLoaded: false,
+    socket: null,
+    currentRoomId: null,
+};
 const chatroomReducer = (state = initialState, action) => {
     switch (action.type) {
         case CREATE_ROOM:
@@ -103,6 +114,8 @@ const chatroomReducer = (state = initialState, action) => {
         case CLOSE_SOCKET:
             state.socket && state.socket.disconnect();
             return { ...state, socket: null };
+        case SET_ROOM_ID:
+            return { ...state, currentRoomId: action.roomId };
         default:
             return state;
     }

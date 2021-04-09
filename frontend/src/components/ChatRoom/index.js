@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Avatar, IconButton } from '@material-ui/core';
-import { closeSocket, findUserRoom, setSocket } from '../../store/chatroom';
+import { findUserRoom } from '../../store/chatroom';
 import InfoIcon from '@material-ui/icons/Info';
 import SendIcon from '@material-ui/icons/Send';
 
@@ -15,6 +15,7 @@ const ChatRoom = () => {
     const chatRoom = useSelector((state) => state.chatRoom);
     const socket = useSelector((state) => state.chatRoom.socket);
     const user = useSelector((state) => state.session.user);
+    const chatRoomId = useSelector((state) => state.chatRoom.currentRoomId);
 
     const [messageInput, setMessageInput] = useState('');
 
@@ -43,9 +44,13 @@ const ChatRoom = () => {
     useEffect(() => {
         socket &&
             socket.on('load messages', (data) => {
-                dispatch(findUserRoom(data.chatRoomId));
+                console.log('chatRoomId', chatRoomId);
+                console.log('data', data.chatRoomId);
+                if (chatRoomId === data.chatRoomId)
+                    dispatch(findUserRoom(data.chatRoomId));
             });
-    }, [socket, dispatch]);
+        return () => socket && socket.off('load messages');
+    }, [socket, dispatch, chatRoomId]);
 
     // useEffect(() => {
     //     const chatMessageList = document.querySelector('.chatRoomMessageList');

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { findUserRoom } from '../../../store/chatroom';
+import { findUserRoom, setRoomId } from '../../../store/chatroom';
 import { getUserRooms } from '../../../store/chatlist';
 
 import './ChatList.css';
@@ -23,6 +23,12 @@ const ChatList = () => {
     }, [chatRoom.room]);
 
     const handleChatListClick = (chatId, chatRoom) => {
+        console.log('===================');
+        console.log('handling click');
+        console.log('===================');
+
+        dispatch(setRoomId(chatId));
+
         const selectedElement = document.getElementById(selectedItem);
         const clickedChat = document.getElementById(chatId);
 
@@ -51,10 +57,6 @@ const ChatList = () => {
 
     useEffect(() => {
         if (user) {
-            socket &&
-                socket.on('load messages', () => {
-                    dispatch(getUserRooms(user.id));
-                });
             socket &&
                 socket.on('reload chatlist', () => {
                     dispatch(getUserRooms(user.id));
