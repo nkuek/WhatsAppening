@@ -103,9 +103,6 @@ router.put(
             })
         );
 
-        console.log('=======================================================');
-        console.log(roomsAndMessages.map((room) => room.lastMessage.body));
-        console.log('=======================================================');
         roomsAndMessages.sort((a, b) => {
             if (a.lastMessage && b.lastMessage)
                 return b.lastMessage.createdAt - a.lastMessage.createdAt;
