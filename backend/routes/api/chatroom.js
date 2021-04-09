@@ -35,19 +35,9 @@ router.post(
 
         const contactIds = selectedContacts.map((contact) => contact.id);
 
-        console.log('================');
-        console.log(contactIds);
-        console.log('================');
-
-        // await contactIds.forEach(
-        //     async (id) => await chatRoom.addParticipant(id)
-        // );
-
         await chatRoom.addParticipants(contactIds);
 
         const participants = await chatRoom.getParticipants();
-
-        console.log(participants);
 
         let participantsInfo = participants.map((participant) => {
             return {

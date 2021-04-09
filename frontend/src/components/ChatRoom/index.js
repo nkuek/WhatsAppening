@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Avatar, IconButton } from '@material-ui/core';
-import { findUserRoom } from '../../store/chatroom';
+import { closeSocket, findUserRoom, setSocket } from '../../store/chatroom';
 import InfoIcon from '@material-ui/icons/Info';
 import SendIcon from '@material-ui/icons/Send';
 
@@ -24,7 +24,10 @@ const ChatRoom = () => {
                 participantList &&
                 participantList.map((participant) => {
                     if (participant.id === user.id) return 'You';
-                    else return participant.name.split(' ')[0];
+                    const fullName = participant.name
+                        .split(' ')
+                        .filter((name) => name.length > 3);
+                    return fullName[0];
                 });
             return firstNames.sort().join(', ');
         }
@@ -33,21 +36,16 @@ const ChatRoom = () => {
     useEffect(() => {
         const chatMessageList = document.querySelector('.chatRoomMessageList');
         const chatScrollPosition = sessionStorage.getItem('chatScrollPosition');
-        socket &&
-            socket.on('load messages', (data) => {
-                if (chatScrollPosition)
-                    chatMessageList.scrollTop = chatScrollPosition;
-                else chatMessageList.scrollTop = chatMessageList.scrollHeight;
-                dispatch(findUserRoom(data.chatRoomId));
-            });
-    }, [socket, dispatch]);
-
-    useEffect(() => {
-        const chatMessageList = document.querySelector('.chatRoomMessageList');
-        const chatScrollPosition = sessionStorage.getItem('chatScrollPosition');
         if (chatScrollPosition) chatMessageList.scrollTop = chatScrollPosition;
         else chatMessageList.scrollTop = chatMessageList.scrollHeight;
     }, [chatRoom.room]);
+
+    useEffect(() => {
+        socket &&
+            socket.on('load messages', (data) => {
+                dispatch(findUserRoom(data.chatRoomId));
+            });
+    }, [socket, dispatch]);
 
     // useEffect(() => {
     //     const chatMessageList = document.querySelector('.chatRoomMessageList');

@@ -25,9 +25,13 @@ const ChatListItem = ({
                 if (!showDropdownMenu) setChatListHover(false);
             }}
             onClick={() => handleChatListClick(chatRoom.id, chatRoom)}
-            className={`chatListItem ${!chatRoom.isRead ? 'unread' : ''} ${
-                chatRoom.id === selectedItem ? 'selected' : ''
-            }`}
+            className={`chatListItem ${
+                !chatRoom.isRead &&
+                chatRoom.lastMessage &&
+                chatRoom.lastMessage.id !== user.id
+                    ? 'unread'
+                    : ''
+            } ${chatRoom.id === selectedItem ? 'selected' : ''}`}
         >
             <div className="readStatus">
                 {!chatRoom.isRead &&

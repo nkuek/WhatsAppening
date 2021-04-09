@@ -78,9 +78,10 @@ const NewRoomForm = () => {
         e.preventDefault();
         return dispatch(createNewRoom(roomName, image, selectedContacts))
             .then(() => {
-                socket.emit('new room', {
-                    adminId: user.id,
-                });
+                socket &&
+                    socket.emit('new room', {
+                        adminId: user.id,
+                    });
                 resetForm();
                 openNewRoomForm();
             })

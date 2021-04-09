@@ -13,7 +13,6 @@ io.on('connection', (socket) => {
         const roomIds = chatRooms.map((room) => room.id);
         const adminIds = admin.map((room) => room.id);
         const allRoomIds = [...roomIds, ...adminIds];
-        console.log('joining', allRoomIds);
 
         socket.join(allRoomIds);
     });
