@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, IconButton } from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import * as sessionActions from '../../../store/session';
@@ -7,7 +7,7 @@ import { removeUserRooms } from '../../../store/chatlist';
 import EditIcon from '@material-ui/icons/Edit';
 import ClearIcon from '@material-ui/icons/Clear';
 import { withStyles } from '@material-ui/styles';
-import { resetUserRoomState } from '../../../store/chatroom';
+import { closeSocket, resetUserRoomState } from '../../../store/chatroom';
 import { removeUserContactsState } from '../../../store/userContacts';
 
 import './Profile.css';
@@ -28,6 +28,8 @@ const Profile = ({ user }) => {
     const [showEditName, setShowEditName] = useState(false);
     const [isPublic, setIsPublic] = useState('');
     const dispatch = useDispatch();
+
+    const socket = useSelector((state) => state.chatRoom.socket);
 
     useEffect(() => {
         if (user) {
@@ -73,6 +75,8 @@ const Profile = ({ user }) => {
         dispatch(resetUserRoomState());
         dispatch(removeUserContactsState());
         dispatch(clearSearchUsers());
+        socket.emit('disconnect user');
+        dispatch(closeSocket());
         dispatch(sessionActions.logout());
     };
 

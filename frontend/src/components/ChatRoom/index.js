@@ -27,7 +27,7 @@ const ChatRoom = () => {
                     if (participant.id === user.id) return 'You';
                     const fullName = participant.name
                         .split(' ')
-                        .filter((name) => name.length > 3);
+                        .filter((name) => !name.includes('.'));
                     return fullName[0];
                 });
             return firstNames.sort().join(', ');
