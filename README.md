@@ -4,6 +4,8 @@
 
 **WhatsAppening** is live on Heroku [here](https://whatsapp-ening.herokuapp.com/)!
 
+Visit the wiki [here](https://github.com/nkuek/WhatsAppening/wiki)!
+
 # About the Project
 
 ![chatroom-example](readme-images/chatroom-example.png)
