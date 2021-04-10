@@ -76,33 +76,37 @@ To fork this project simply follow these steps!
 
 # Features
 
-## Convenient, preconfigured Demo User Login
+
+## 1. Convenient, preconfigured Demo User Login
 ![demo-user](./readme-images/demo-user.png)
 
-## Chatlist with all your chatrooms sorted by most recent message
+## 2. Chatlist with all your chatrooms sorted by most recent message
 ![chat-list-sort](./readme-images/chatlist-sort.png)
 
-## New message indicator when someone else sends you a message
+## 3. New message indicator when someone else sends you a message
 ![new-message-indicator](./readme-images/new-message-indicator.png)
 
-## Convenient dropdown menu for navigation
+## 4. Search your Chats and Contacts to quickly start a new Chat or find an existing Chat Room
+![chatlist-search](./readme-images/chatlist-search.png)
+![chatlist-search-results](./readme-images/chatlist-search-results.png)
+## 5. Convenient dropdown menu for navigation
 ![dropdown-menu](./readme-images/dropdown-menu.png)
 
-## Create a new group
+## 6. Create a new group
 ![click-new-room](./readme-images/click-new-room.png)
 ![new-room-form](./readme-images/new-room-form.png)
 
-## Add contacts
+## 7. Add contacts
 ![add-contact](./readme-images/add-contact.png)
 
-## Search public users by phone number or name
+## 8. Search public users by phone number or name
 ![contact-search](./readme-images/contact-search.png)
 
-## View and edit your profile name, image, and privacy setting
+## 9. View and edit your profile name, image, and privacy setting
 ![click-profile](./readme-images/click-profile.png)
 ![profile](./readme-images/profile.png)
 
-## View and edit chatroom information
+## 10. View and edit chatroom information
 ![click-group-info](./readme-images/click-group-info.png)
 ![group-info](./readme-images/group-info.png)
 # Obstacles
