@@ -88,10 +88,6 @@ router.put(
         const userParticipant = await user.getParticipants();
         const allRooms = rooms.concat(userParticipant);
 
-        const firstRoom = await allRooms[0].getMessages({
-            order: [['createdAt', 'DESC']],
-        });
-
         const roomsAndMessages = await Promise.all(
             allRooms.map(async (room) => {
                 const messages = await room.getMessages();
@@ -111,8 +107,8 @@ router.put(
         roomsAndMessages.sort((a, b) => {
             if (a.lastMessage && b.lastMessage)
                 return b.lastMessage.createdAt - a.lastMessage.createdAt;
-            else if (a.lastMessage && !b.lastMessage) return -1;
-            else if (!a.lastMessage && b.lastMessage) return 1;
+            else if (a.lastMessage && !b.lastMessage) return 1;
+            else if (!a.lastMessage && b.lastMessage) return -1;
             else return b.createdAt - a.createdAt;
         });
 

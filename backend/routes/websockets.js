@@ -74,7 +74,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('new room', async (data) => {
-        io.emit('created room', { adminId: data.adminId });
+        io.emit('created room', { adminId: socket.user.id });
     });
 
     socket.on('disconnect user', () => {
