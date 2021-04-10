@@ -32,7 +32,6 @@ io.on('connection', (socket) => {
 
     // Create new messages in database
     socket.on('new message', async (data) => {
-        console.log(connectedUsers);
         const { authorId, body, chatRoomId } = data;
         socket.join(chatRoomId);
         await db.Message.create({ body, authorId, chatRoomId });

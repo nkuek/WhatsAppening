@@ -19,7 +19,6 @@ export const searchAll = (searchQuery) => async (dispatch) => {
     });
 
     const searchResults = response.data;
-    console.log(searchResults);
     dispatch(setSearch(searchResults));
 };
 
