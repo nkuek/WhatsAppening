@@ -74,26 +74,29 @@ const ChatListItem = ({
                         </div>
 
                         <div className="chatListRecentMessageTimeContainer">
-                            <div className="chatListRecentMessageTime">
-                                {chatRoom.lastMessage &&
-                                dayjs().diff(
-                                    dayjs(chatRoom.lastMessage.createdAt),
-                                    'day'
-                                ) < 1
-                                    ? `${dayjs(
-                                          chatRoom.lastMessage.createdAt
-                                      ).format('HH:mm')}`
-                                    : dayjs().diff(
-                                          dayjs(chatRoom.lastMessage.createdAt),
-                                          'day'
-                                      ) < 6
-                                    ? `${dayjs(
-                                          chatRoom.lastMessage.createdAt
-                                      ).format('dddd')}`
-                                    : `${dayjs(
-                                          chatRoom.lastMessage.createdAt
-                                      ).format('MM/DD')}`}
-                            </div>
+                            {chatRoom.lastMessage && (
+                                <div className="chatListRecentMessageTime">
+                                    {dayjs().diff(
+                                        dayjs(chatRoom.lastMessage.createdAt),
+                                        'day'
+                                    ) < 1
+                                        ? `${dayjs(
+                                              chatRoom.lastMessage.createdAt
+                                          ).format('HH:mm')}`
+                                        : dayjs().diff(
+                                              dayjs(
+                                                  chatRoom.lastMessage.createdAt
+                                              ),
+                                              'day'
+                                          ) < 6
+                                        ? `${dayjs(
+                                              chatRoom.lastMessage.createdAt
+                                          ).format('dddd')}`
+                                        : `${dayjs(
+                                              chatRoom.lastMessage.createdAt
+                                          ).format('MM/DD')}`}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -40,7 +40,7 @@ const NewRoomForm = () => {
 
     const [roomName, setRoomName] = useState('');
     const [image, setImage] = useState('');
-    const [preview, setPreview] = useState(user && user.profileUrl);
+    const [preview, setPreview] = useState(null);
     const [errors, setErrors] = useState([]);
     const [selectedContacts, setSelectedContacts] = useState([]);
 

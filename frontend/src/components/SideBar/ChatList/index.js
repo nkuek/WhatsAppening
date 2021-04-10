@@ -21,6 +21,7 @@ const ChatList = () => {
     const searchResults = useSelector((state) => state.searchResults);
 
     useEffect(() => {
+        if (chatRoom.room) setSelectedItem(chatRoom.room.id);
         const chatRoomMessageInput = document.querySelector(
             '.chatRoomMessageInput'
         );
@@ -47,9 +48,9 @@ const ChatList = () => {
 
         selectedItem &&
             selectedElement &&
-            selectedElement.classList.toggle('selected');
+            selectedElement.classList.add('selected');
         if (!clickedChat.classList.contains('selected')) {
-            clickedChat.classList.toggle('selected');
+            clickedChat.classList.remove('selected');
             selectedItem &&
                 selectedElement &&
                 selectedElement.classList.remove('selected');
@@ -109,8 +110,12 @@ const ChatList = () => {
                   ))
                 : searchResults && (
                       <>
-                          <ChatListSearchContacts />
-                          <ChatListSearchRooms />
+                          <ChatListSearchContacts
+                              setChatListSearchInput={setChatListSearchInput}
+                          />
+                          <ChatListSearchRooms
+                              setChatListSearchInput={setChatListSearchInput}
+                          />
                       </>
                   )}
         </div>

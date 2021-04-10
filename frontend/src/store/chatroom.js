@@ -39,8 +39,8 @@ export const closeSocket = () => ({
 export const createNewRoom = (roomName, image, selectedContacts) => async (
     dispatch
 ) => {
-    let imageUrl;
-    if (image) {
+    let imageUrl = image;
+    if (typeof image === 'object') {
         imageUrl = await imageUploader(image);
     }
 
@@ -104,11 +104,21 @@ const initialState = {
 const chatroomReducer = (state = initialState, action) => {
     switch (action.type) {
         case CREATE_ROOM:
-            return { ...state, room: action.room, isLoaded: true };
+            return {
+                ...state,
+                room: action.room,
+                isLoaded: true,
+                currentRoomId: action.room.id,
+            };
         case FIND_ROOM:
             return { ...state, room: action.room, isLoaded: true };
         case RESET_STATE:
-            return initialState;
+            return {
+                ...state,
+                room: null,
+                isLoaded: false,
+                currentRoomId: null,
+            };
         case SET_SOCKET:
             return { ...state, socket: action.socket };
         case CLOSE_SOCKET:
