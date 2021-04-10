@@ -9,7 +9,6 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { withStyles } from '@material-ui/styles';
 import { closeSocket, resetUserRoomState } from '../../../store/chatroom';
 import { removeUserContactsState } from '../../../store/userContacts';
-import { useMediaQuery } from 'react-responsive';
 
 import './Profile.css';
 import { clearSearchUsers } from '../../../store/usersearch';
@@ -22,7 +21,6 @@ const CustomAvatar = withStyles({
 })(Avatar);
 
 const Profile = ({ user }) => {
-    const isMobile = useMediaQuery({ query: '(max-width: 700px)' });
     const editNameRef = useRef(null);
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -118,7 +116,7 @@ const Profile = ({ user }) => {
 
     return (
         <>
-            <div className={`profileHeader`}>
+            <div className={`profileHeader `}>
                 <IconButton style={{ color: 'white' }} onClick={resetForm}>
                     <KeyboardBackspaceIcon />
                 </IconButton>

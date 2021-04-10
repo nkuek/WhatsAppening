@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { Avatar } from '@material-ui/core';
@@ -35,7 +35,10 @@ const ChatListItem = ({
                         : ''
                 } ${chatRoom.id === selectedItem ? 'selected' : ''}`}
             >
-                <div className="chatListItemContainer">
+                <div
+                    className="chatListItemContainer"
+                    onMouseEnter={() => setChatListHover(true)}
+                >
                     <div className="readStatus">
                         {!chatRoom.isRead &&
                             chatRoom.lastMessage &&
@@ -51,7 +54,10 @@ const ChatListItem = ({
                                 />
                             )}
                     </div>
-                    <div className="chatListImage">
+                    <div
+                        className="chatListImage"
+                        onMouseEnter={() => setChatListHover(true)}
+                    >
                         <Avatar src={chatRoom.imageUrl} />
                     </div>
                     <div
