@@ -5,6 +5,7 @@ import session from './session';
 import chatroomReducer from './chatroom';
 import userSearchReducer from './usersearch';
 import contactReducer from './userContacts';
+import searchReducer from './chatlistsearch';
 
 const rootReducer = combineReducers({
     session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     chatRoom: chatroomReducer,
     userSearch: userSearchReducer,
     userContacts: contactReducer,
+    searchResults: searchReducer,
 });
 
 let enhancer;

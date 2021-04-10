@@ -5,6 +5,23 @@
     border-bottom: thin solid rgb(77, 77, 77);
 }
 
+.chatListSearchContainer > div {
+    padding: 15px 0px
+}
+
+.chatListSearch {
+    padding: 10px 0px;
+    padding-left: 50px;
+    background-color: #2a2f32;
+    color: white;
+    font: inherit;
+    border-radius: 20px;
+    border: 1px solid gray;
+    font-size: .8em;
+    width: 80%;
+    margin: 0 auto
+}
+
 .chatListItemContainer {
     display: flex;
     width: 100%;

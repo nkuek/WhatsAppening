@@ -2,18 +2,23 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { findUserRoom, setRoomId } from '../../../store/chatroom';
 import { getUserRooms } from '../../../store/chatlist';
+import ChatListSearchContacts from './ChatListSearchContacts';
+import ChatListSearchRooms from './ChatListSearchRooms';
+import ChatListItem from './ChatListItem';
+import { resetSearch, searchAll } from '../../../store/chatlistsearch';
 
 import './ChatList.css';
-import ChatListItem from './ChatListItem';
 
 const ChatList = () => {
     const dispatch = useDispatch();
     const [selectedItem, setSelectedItem] = useState('');
+    const [chatListSearchInput, setChatListSearchInput] = useState('');
 
     const chatList = useSelector((state) => state.chatList);
     const user = useSelector((state) => state.session.user);
     const chatRoom = useSelector((state) => state.chatRoom);
     const socket = useSelector((state) => state.chatRoom.socket);
+    const searchResults = useSelector((state) => state.searchResults);
 
     useEffect(() => {
         const chatRoomMessageInput = document.querySelector(
@@ -21,6 +26,16 @@ const ChatList = () => {
         );
         chatRoom.room && chatRoomMessageInput.focus();
     }, [chatRoom.room]);
+
+    useEffect(() => {
+        if (!chatListSearchInput) dispatch(resetSearch());
+        else {
+            const timer = setTimeout(() => {
+                dispatch(searchAll(chatListSearchInput));
+            }, 500);
+            return () => clearTimeout(timer);
+        }
+    }, [chatListSearchInput, dispatch]);
 
     const handleChatListClick = (chatId, chatRoom) => {
         dispatch(setRoomId(chatId));
@@ -70,17 +85,34 @@ const ChatList = () => {
 
     return (
         <div className="chatListContainer">
-            {chatList.length > 0 &&
-                chatList.map((chatRoom) => (
-                    <ChatListItem
-                        key={chatRoom.id}
-                        chatRoom={chatRoom}
-                        handleChatListClick={handleChatListClick}
-                        selectedItem={selectedItem}
-                        setSelectedItem={setSelectedItem}
-                        user={user}
-                    />
-                ))}
+            <div className="chatListSearchContainer">
+                <div>
+                    <input
+                        placeholder="Search or start a new chat"
+                        className="chatListSearch"
+                        value={chatListSearchInput}
+                        onChange={(e) => setChatListSearchInput(e.target.value)}
+                    ></input>
+                </div>
+            </div>
+            {!searchResults
+                ? chatList.length > 0 &&
+                  chatList.map((chatRoom) => (
+                      <ChatListItem
+                          key={chatRoom.id}
+                          chatRoom={chatRoom}
+                          handleChatListClick={handleChatListClick}
+                          selectedItem={selectedItem}
+                          setSelectedItem={setSelectedItem}
+                          user={user}
+                      />
+                  ))
+                : searchResults && (
+                      <>
+                          <ChatListSearchContacts />
+                          <ChatListSearchRooms />
+                      </>
+                  )}
         </div>
     );
 };
