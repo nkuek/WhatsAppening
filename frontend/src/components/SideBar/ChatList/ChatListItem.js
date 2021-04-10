@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import { Avatar } from '@material-ui/core';
@@ -70,9 +70,23 @@ const ChatListItem = ({
                         <div className="chatListRecentMessageTimeContainer">
                             <div className="chatListRecentMessageTime">
                                 {chatRoom.lastMessage &&
-                                    `${dayjs(
-                                        chatRoom.lastMessage.createdAt
-                                    ).fromNow(true)} ago`}
+                                dayjs().diff(
+                                    dayjs(chatRoom.lastMessage.createdAt),
+                                    'day'
+                                ) < 1
+                                    ? `${dayjs(
+                                          chatRoom.lastMessage.createdAt
+                                      ).format('HH:mm')}`
+                                    : dayjs().diff(
+                                          dayjs(chatRoom.lastMessage.createdAt),
+                                          'day'
+                                      ) < 6
+                                    ? `${dayjs(
+                                          chatRoom.lastMessage.createdAt
+                                      ).format('dddd')}`
+                                    : `${dayjs(
+                                          chatRoom.lastMessage.createdAt
+                                      ).format('MM/DD')}`}
                             </div>
                         </div>
                     </div>
