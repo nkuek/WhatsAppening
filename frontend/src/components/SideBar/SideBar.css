@@ -4,17 +4,6 @@
     }
 } */
 
-@media only screen and (min-width: 600px) {
-
-    .sidebarContainer,
-    .newRoomFormContainer,
-    .profileContainer {
-        min-width: 280px;
-        max-width:420px;
-        width: 35%;
-    }
-
-}
 .sidebarContainer {
     display: flex;
     flex-direction: column;
@@ -39,6 +28,7 @@
 .sidebarContentBody {
     overflow-y: auto;
     overflow-x: hidden;
+    width: 100%;
 }
 
 
@@ -124,4 +114,35 @@
 
 .dropdownItem:hover {
     background-color: #212527;
+}
+
+/* =============================== */
+/* React Responsive Mobile Styling */
+/* =============================== */
+
+.sidebarContainer.mobile,
+.profileContainer.mobile,
+.newRoomFormContainer.mobile,
+.addContactFormContainer.mobile {
+    min-width: 100vw;
+}
+
+.sidebarContainer.mobile {
+    transition: left 300ms;
+}
+
+.sidebarContainer.mobile.hide {
+    left: -100%;
+}
+
+.profileContainer.mobile,
+.newRoomFormContainer.mobile,
+.addContactFormContainer.mobile {
+    left: -100%;
+}
+
+.profileContainer.mobile.show,
+.newRoomFormContainer.mobile.show,
+.addContactFormContainer.mobile.show {
+    left: 0%;
 }

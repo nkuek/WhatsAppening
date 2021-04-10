@@ -82,7 +82,6 @@ const NewRoomForm = () => {
                     socket.emit('new room', {
                         adminId: user.id,
                     });
-                console.log('emitting');
                 resetForm();
                 openNewRoomForm();
             })
