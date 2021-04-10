@@ -19,76 +19,83 @@ const ChatListItem = ({
     const [showDropdownMenu, setShowDropdownMenu] = useState(false);
 
     return (
-        <div
-            id={chatRoom.id}
-            onMouseEnter={() => setChatListHover(true)}
-            onMouseLeave={() => {
-                if (!showDropdownMenu) setChatListHover(false);
-            }}
-            onClick={() => handleChatListClick(chatRoom.id, chatRoom)}
-            className={`chatListItem ${
-                !chatRoom.isRead &&
-                chatRoom.lastMessage &&
-                chatRoom.lastMessage.id !== user.id
-                    ? 'unread'
-                    : ''
-            } ${chatRoom.id === selectedItem ? 'selected' : ''}`}
-        >
-            <div className="readStatus">
-                {!chatRoom.isRead &&
+        <>
+            <div
+                id={chatRoom.id}
+                onMouseEnter={() => setChatListHover(true)}
+                onMouseLeave={() => {
+                    if (!showDropdownMenu) setChatListHover(false);
+                }}
+                onClick={() => handleChatListClick(chatRoom.id, chatRoom)}
+                className={`chatListItem ${
+                    !chatRoom.isRead &&
                     chatRoom.lastMessage &&
-                    chatRoom.lastMessage.authorId !== user.id && (
-                        <FiberManualRecordIcon
-                            style={{
-                                position: 'relative',
-                                color: '#2878FF',
-                                marginLeft: '5px',
-                                display: 'inline-block',
-                                margin: '0px',
-                            }}
+                    chatRoom.lastMessage.id !== user.id
+                        ? 'unread'
+                        : ''
+                } ${chatRoom.id === selectedItem ? 'selected' : ''}`}
+            >
+                <div className="chatListItemContainer">
+                    <div className="readStatus">
+                        {!chatRoom.isRead &&
+                            chatRoom.lastMessage &&
+                            chatRoom.lastMessage.authorId !== user.id && (
+                                <FiberManualRecordIcon
+                                    style={{
+                                        position: 'relative',
+                                        color: '#2878FF',
+                                        marginLeft: '5px',
+                                        display: 'inline-block',
+                                        margin: '0px',
+                                    }}
+                                />
+                            )}
+                    </div>
+                    <div className="chatListImage">
+                        <Avatar src={chatRoom.imageUrl} />
+                    </div>
+                    <div
+                        className="chatListInfo"
+                        onMouseEnter={() => setChatListHover(true)}
+                    >
+                        <div className="chatListNameAndMessage">
+                            <div className="chatListName">{chatRoom.name}</div>
+                            <div className="chatListRecentMessage">
+                                {chatRoom.lastMessage
+                                    ? `${chatRoom.lastMessage.author}: ${chatRoom.lastMessage.body}`
+                                    : 'This room has no messages yet!'}
+                            </div>
+                        </div>
+
+                        <div className="chatListRecentMessageTimeContainer">
+                            <div className="chatListRecentMessageTime">
+                                {chatRoom.lastMessage &&
+                                    `${dayjs(
+                                        chatRoom.lastMessage.createdAt
+                                    ).fromNow(true)} ago`}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span
+                    className="chatListDropdown"
+                    onMouseEnter={() => setChatListHover(true)}
+                    onMouseLeave={() => {
+                        if (!showDropdownMenu) setChatListHover(false);
+                    }}
+                >
+                    {chatListHover && (
+                        <ChatListDropdown
+                            chatRoomId={chatRoom.id}
+                            showDropdownMenu={showDropdownMenu}
+                            setShowDropdownMenu={setShowDropdownMenu}
+                            setChatListHover={setChatListHover}
+                            setSelectedItem={setSelectedItem}
                         />
                     )}
+                </span>
             </div>
-            <div className="chatListImage">
-                <Avatar src={chatRoom.imageUrl} />
-            </div>
-            <div
-                className="chatListInfo"
-                onMouseEnter={() => setChatListHover(true)}
-            >
-                <div className="chatListNameAndMessage">
-                    <div className="chatListName">{chatRoom.name}</div>
-                    <div className="chatListRecentMessage">
-                        {chatRoom.lastMessage
-                            ? `${chatRoom.lastMessage.author}: ${chatRoom.lastMessage.body}`
-                            : 'This room has no messages yet!'}
-                    </div>
-                </div>
-
-                <div className="chatListRecentMessageTimeContainer">
-                    <div className="chatListRecentMessageTime">
-                        {chatRoom.lastMessage &&
-                            `${dayjs(chatRoom.lastMessage.createdAt).fromNow(
-                                true
-                            )} ago`}
-                    </div>
-                </div>
-            </div>
-            <span
-                className="chatListDropdown"
-                onMouseEnter={() => setChatListHover(true)}
-            >
-                {chatListHover && (
-                    <ChatListDropdown
-                        chatRoomId={chatRoom.id}
-                        showDropdownMenu={showDropdownMenu}
-                        setShowDropdownMenu={setShowDropdownMenu}
-                        setChatListHover={setChatListHover}
-                        setSelectedItem={setSelectedItem}
-                    />
-                )}
-            </span>
-        </div>
+        </>
     );
 };
 

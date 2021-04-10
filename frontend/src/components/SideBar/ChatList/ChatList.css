@@ -5,14 +5,20 @@
     min-width: 252px;
 }
 
+.chatListItemContainer {
+    display: flex;
+}
+
 .chatListDropdown {
-    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
     z-index: 799;
+    height: 15px;
 }
 
 .chatListDropdownMenu {
-    left: 350px;
-    top: 25px;
+    top: -15px;
 }
 
 .chatListItem,
@@ -37,7 +43,9 @@
 .chatListItem {
     padding-left: 0px;
     padding-right: 15px;
+    padding-bottom: 0px;
     display: flex;
+    flex-direction: column;
     box-sizing: border-box;
 }
 
