@@ -6,7 +6,7 @@
 
 # About the Project
 
-![chatroom-example](readme-images/chatroom-example.png)
+![chatroom-example](readme-images/chatroom-example-new.png)
 
 ## Overall Structure
 ### Built With
@@ -81,20 +81,20 @@ To fork this project simply follow these steps!
 ![demo-user](./readme-images/demo-user.png)
 
 ## 2. Chatlist with all your chatrooms sorted by most recent message
-![chat-list-sort](./readme-images/chatlist-sort.png)
+![chat-list-sort](./readme-images/chatlist-sort-new.png)
 
 ## 3. New message indicator when someone else sends you a message
-![new-message-indicator](./readme-images/new-message-indicator.png)
+![new-message-indicator](./readme-images/new-message-indicator-new.png)
 
 ## 4. Search your Chats and Contacts to quickly start a new Chat or find an existing Chat Room
 ![chatlist-search](./readme-images/chatlist-search.png)
 ![chatlist-search-results](./readme-images/chatlist-search-results.png)
 ## 5. Convenient dropdown menu for navigation
-![dropdown-menu](./readme-images/dropdown-menu.png)
+![dropdown-menu](./readme-images/dropdown-menu-new.png)
 
 ## 6. Create a new group
-![click-new-room](./readme-images/click-new-room.png)
-![new-room-form](./readme-images/new-room-form.png)
+![click-new-room](./readme-images/click-new-room-new.png)
+![new-room-form](./readme-images/new-room-form-new.png)
 
 ## 7. Add contacts
 ![add-contact](./readme-images/add-contact.png)
@@ -103,12 +103,12 @@ To fork this project simply follow these steps!
 ![contact-search](./readme-images/contact-search.png)
 
 ## 9. View and edit your profile name, image, and privacy setting
-![click-profile](./readme-images/click-profile.png)
+![click-profile](./readme-images/click-profile-new.png)
 ![profile](./readme-images/profile.png)
 
 ## 10. View and edit chatroom information
-![click-group-info](./readme-images/click-group-info.png)
-![group-info](./readme-images/group-info.png)
+![click-group-info](./readme-images/click-group-info-new.png)
+![group-info](./readme-images/group-info-new.png)
 # Obstacles
 - State management
     - Because this is a single-page application, managing the React/Redux state was especially important.
