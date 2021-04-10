@@ -5,9 +5,11 @@ const io = require('socket.io')({
     },
 });
 
+// Keep updated list of users connected to each room
 const connectedUsers = {};
 
 io.on('connection', (socket) => {
+    // Ensure user is connected to all socket.io rooms
     socket.on('update socket', async (data) => {
         const user = await db.User.findByPk(data.userId);
         socket.user = user;
@@ -25,6 +27,7 @@ io.on('connection', (socket) => {
         socket.join(allRoomIds);
     });
 
+    // Create new messages in database
     socket.on('new message', async (data) => {
         const { authorId, body, chatRoomId } = data;
         socket.join(chatRoomId);
@@ -34,7 +37,10 @@ io.on('connection', (socket) => {
 
         chatRoom.update({ isRead: false });
 
+        // dispatches action to reload chat list
         io.in(chatRoomId).emit('reload chatlist');
+
+        // dispatches action to update chat room messages
         io.in(chatRoomId).emit('load messages', { chatRoomId });
     });
 

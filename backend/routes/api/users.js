@@ -115,6 +115,7 @@ router.put(
     })
 );
 
+// Delete chat room
 router.delete(
     '/chatrooms',
     requireAuth,
@@ -155,6 +156,7 @@ router.delete(
     })
 );
 
+// Edit user information
 router.put(
     '/edit',
     requireAuth,
@@ -168,6 +170,7 @@ router.put(
     })
 );
 
+// Search user contacts
 router.put(
     '/search',
     requireAuth,
@@ -199,6 +202,7 @@ router.put(
     })
 );
 
+// Add user to contacts
 router.post(
     '/contacts',
     requireAuth,
@@ -215,6 +219,7 @@ router.post(
     })
 );
 
+// Find user contacts
 router.put(
     '/contacts',
     requireAuth,

@@ -20,6 +20,7 @@ const validateChatRoom = [
     handleValidationErrors,
 ];
 
+// Create new room
 router.post(
     '/',
     requireAuth,
@@ -64,6 +65,7 @@ router.post(
     })
 );
 
+// Find user rooms
 router.put(
     '/',
     requireAuth,
@@ -113,6 +115,7 @@ router.put(
     })
 );
 
+// Edit room info
 router.put(
     '/edit',
     requireAuth,

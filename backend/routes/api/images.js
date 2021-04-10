@@ -4,6 +4,7 @@ const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
 
 const router = express.Router();
 
+// Dedicated api route to upload to AWS and generate image URL
 router.post(
     '/',
     singleMulterUpload('image'),
