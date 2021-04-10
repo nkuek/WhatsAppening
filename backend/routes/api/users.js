@@ -150,6 +150,8 @@ router.delete(
         roomsAndMessages.sort((a, b) => {
             if (a.lastMessage && b.lastMessage)
                 return b.lastMessage.createdAt - a.lastMessage.createdAt;
+            else if (a.lastMessage && !b.lastMessage) return 1;
+            else if (!a.lastMessage && b.lastMessage) return -1;
             else return b.createdAt - a.createdAt;
         });
 
