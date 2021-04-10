@@ -26,7 +26,7 @@ router.put(
             },
         });
 
-        const matchedRooms = await user.getParticipants({
+        const adminRooms = await user.getAdmin({
             where: {
                 name: {
                     [Op.iLike]: `%${searchQuery}%`,
@@ -34,9 +34,41 @@ router.put(
             },
         });
 
+        const participantRooms = await user.getParticipants({
+            where: {
+                name: {
+                    [Op.iLike]: `%${searchQuery}%`,
+                },
+            },
+        });
+
+        const matchedRooms = [...adminRooms, ...participantRooms];
+
+        const matchedRoomsAndMessages = await Promise.all(
+            matchedRooms.map(async (room) => {
+                const messages = await room.getMessages();
+                let lastMessage = [];
+                if (messages.length > 0) {
+                    lastMessage = messages[messages.length - 1];
+                    const lastMessageAuthor = await lastMessage.getUser();
+                    lastMessage.dataValues.author = lastMessageAuthor.name;
+                }
+                return {
+                    ...room.dataValues,
+                    lastMessage: messages[messages.length - 1] || null,
+                };
+            })
+        );
+
+        matchedRoomsAndMessages.sort((a, b) => {
+            if (a.lastMessage && b.lastMessage)
+                return b.lastMessage.createdAt - a.lastMessage.createdAt;
+            else return b.createdAt - a.createdAt;
+        });
+
         const searchResults = {
             contacts: matchedContacts,
-            chatRooms: matchedRooms,
+            chatRooms: matchedRoomsAndMessages,
         };
 
         return res.json(searchResults);

@@ -141,4 +141,10 @@
 .chatListSearchNoResults {
     padding: 1.5em;
     padding-top: 0em;
+    border-bottom: thin solid rgb(77, 77, 77);
+}
+
+.chatListItem.searchResult {
+    border-top: none;
+    padding-bottom: 15px;
 }

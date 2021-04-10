@@ -7,7 +7,6 @@ const ChatListSearchContacts = ({ setChatListSearchInput }) => {
     const dispatch = useDispatch();
     const searchResults = useSelector((state) => state.searchResults);
     const socket = useSelector((state) => state.chatRoom.socket);
-    const user = useSelector((state) => state.session.user);
 
     const [isLoaded, setIsLoaded] = useState(false);
 
