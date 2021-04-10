@@ -78,6 +78,7 @@ router.put(
     })
 );
 
+// Find all user rooms
 router.put(
     '/chatrooms',
     asyncHandler(async (req, res) => {
@@ -86,6 +87,10 @@ router.put(
         const rooms = await user.getAdmin();
         const userParticipant = await user.getParticipants();
         const allRooms = rooms.concat(userParticipant);
+
+        const firstRoom = await allRooms[0].getMessages({
+            order: [['createdAt', 'DESC']],
+        });
 
         const roomsAndMessages = await Promise.all(
             allRooms.map(async (room) => {

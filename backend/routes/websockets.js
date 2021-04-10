@@ -11,6 +11,9 @@ const connectedUsers = {};
 io.on('connection', (socket) => {
     // Ensure user is connected to all socket.io rooms
     socket.on('update socket', async (data) => {
+        console.log('==============');
+        console.log('updating');
+        console.log('==============');
         const user = await db.User.findByPk(data.userId);
         socket.user = user;
         const chatRooms = await user.getParticipants();
@@ -29,6 +32,7 @@ io.on('connection', (socket) => {
 
     // Create new messages in database
     socket.on('new message', async (data) => {
+        console.log(connectedUsers);
         const { authorId, body, chatRoomId } = data;
         socket.join(chatRoomId);
         await db.Message.create({ body, authorId, chatRoomId });
@@ -71,6 +75,10 @@ io.on('connection', (socket) => {
 
     socket.on('new room', async (data) => {
         io.emit('created room', { adminId: data.adminId });
+    });
+
+    socket.on('disconnect user', () => {
+        socket.disconnect();
     });
 });
 

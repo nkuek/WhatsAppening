@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import * as sessionActions from '../../store/session';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {
     Popper,
@@ -28,6 +28,7 @@ const DropdownMenu = () => {
     const dispatch = useDispatch();
     const anchorRef = useRef(null);
     const [showDropdownMenu, setShowDropdownMenu] = useState(false);
+    const socket = useSelector((state) => state.chatRoom.socket);
 
     const logout = (e) => {
         e.preventDefault();
@@ -36,6 +37,7 @@ const DropdownMenu = () => {
         dispatch(resetUserRoomState());
         dispatch(removeUserContactsState());
         dispatch(clearSearchUsers());
+        socket.emit('disconnect user');
         dispatch(closeSocket());
         dispatch(sessionActions.logout());
     };
