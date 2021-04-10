@@ -20,7 +20,7 @@
 * [CSS](http://www.css3.info/)
 
 ### Backend
-WhatsAppening's backend was built using a combination of express, sequelize, and socket.io.
+WhatsAppening's backend was built using a combination of express, sequelize, and Socket.IO.
 
 ### Frontend
 The frontend was built with React/Redux and Socket.IO-Client. By utilizing React and Redux state, WhatsAppening is a seamless, single-page aplication. All page interactions are controlled by the React/Redux state and web sockets.
