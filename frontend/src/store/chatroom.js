@@ -40,7 +40,7 @@ export const createNewRoom = (roomName, image, selectedContacts) => async (
     dispatch
 ) => {
     let imageUrl = image;
-    if (typeof image === 'object') {
+    if (image && typeof image === 'object') {
         imageUrl = await imageUploader(image);
     }
 
