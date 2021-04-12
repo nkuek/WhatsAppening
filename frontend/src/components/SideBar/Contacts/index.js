@@ -5,7 +5,7 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { findContacts } from '../../../store/userContacts';
 
 import './Contacts.css';
-import { Avatar } from '@material-ui/core';
+import ContactsItem from './ContactsItem';
 
 const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
     const dispatch = useDispatch();
@@ -50,10 +50,6 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
         document
             .querySelector('.newRoomFormContainer')
             .classList.remove('show');
-    };
-
-    const handleContactClick = (contact) => {
-        setSelectedContacts((prev) => [...prev, contact]);
     };
 
     return (
@@ -102,25 +98,13 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
                                         (selectedContact) => selectedContact.id
                                     )
                                     .includes(contact.id) && (
-                                    <div
+                                    <ContactsItem
                                         key={contact.id}
-                                        onClick={() =>
-                                            handleContactClick(contact)
+                                        contact={contact}
+                                        setSelectedContacts={
+                                            setSelectedContacts
                                         }
-                                        className="userResult"
-                                    >
-                                        <div className="userResultProfileImage">
-                                            <Avatar src={contact.profileUrl} />
-                                        </div>
-                                        <div className="userResultInfoContainer">
-                                            <div className="userResultInfo">
-                                                {contact.name}
-                                            </div>
-                                            <div className="userResultInfo">
-                                                {contact.phoneNumber}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    />
                                 )
                         )}
                 </div>

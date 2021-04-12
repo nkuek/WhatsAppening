@@ -57,3 +57,41 @@
     width: 100%;
     color: white;
 }
+
+.userResult.contact {
+    justify-content: space-between;
+    position: relative;
+    flex-wrap: wrap
+}
+
+.userProfileAndName {
+    display: flex;
+}
+
+.contactDeleteButtonContainer {
+    position: absolute;
+    left: 280px;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.contactDeleteButtonContainer.showContainer {
+}
+
+
+.contactDeleteButton {
+    width: 5em;
+    position: relative;
+    right: -100%;
+    background-color: red;
+    transition: right 300ms;
+    overflow: hidden;
+    padding: .5em 1em;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.contactDeleteButton.showButton {
+    right: 0%;
+    z-index: 2;
+}

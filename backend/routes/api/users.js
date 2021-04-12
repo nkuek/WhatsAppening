@@ -216,9 +216,9 @@ router.post(
         const userToAdd = await User.findByPk(userId);
 
         await loggedInUser.addUserContacts(userToAdd);
-        const contacts = await loggedInUser.getUserContacts();
+        const userContacts = await loggedInUser.getUserContacts();
 
-        return res.json({ contacts });
+        return res.json({ userContacts });
     })
 );
 
@@ -230,6 +230,19 @@ router.put(
         const loggedInUser = await User.getCurrentUserById(req.user.id);
         const userContacts = await loggedInUser.getUserContacts();
 
+        return res.json({ userContacts });
+    })
+);
+
+// Delete contact
+router.delete(
+    '/contacts',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const { contactId } = req.body;
+        const user = await User.findByPk(req.user.id);
+        await user.removeUserContact(contactId);
+        const userContacts = await user.getUserContacts();
         return res.json({ userContacts });
     })
 );
