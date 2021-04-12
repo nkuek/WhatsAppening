@@ -75,10 +75,6 @@
     z-index: 0;
 }
 
-.contactDeleteButtonContainer.showContainer {
-}
-
-
 .contactDeleteButton {
     width: 5em;
     position: relative;

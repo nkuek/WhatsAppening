@@ -99,7 +99,7 @@ To fork this project simply follow these steps!
 ![new-room-form](./readme-images/new-room-form-new.png)
 
 ## 7. Add contacts
-![add-contact](./readme-images/add-contact.png)
+![add-contact](./readme-images/add-contact-new.png)
 
 ## 8. Search public users by phone number or name
 ![contact-search](./readme-images/contact-search.png)
