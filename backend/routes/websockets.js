@@ -72,8 +72,9 @@ io.on('connection', (socket) => {
         socket.emit('load rooms', { userId: data.userId });
     });
 
-    socket.on('new room', async (data) => {
-        io.emit('created room', { adminId: socket.user.id });
+    socket.on('new room', () => {
+        console.log('emitting');
+        io.emit('created room');
     });
 
     socket.on('disconnect user', () => {

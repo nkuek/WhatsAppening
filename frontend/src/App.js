@@ -38,8 +38,9 @@ function App() {
 
     useEffect(() => {
         socket &&
-            socket.on('created room', (data) => {
-                dispatch(getUserRooms(data.adminId));
+            socket.on('created room', () => {
+                console.log('dispatching');
+                dispatch(getUserRooms(session.user.id));
                 socket.emit('update socket', { userId: session.user.id });
             });
     }, [dispatch, socket, session.user]);

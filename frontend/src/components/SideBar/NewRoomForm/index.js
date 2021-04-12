@@ -35,7 +35,6 @@ const CustomCloseIcon = withStyles({
 const NewRoomForm = () => {
     const dispatch = useDispatch();
 
-    const user = useSelector((state) => state.session.user);
     const socket = useSelector((state) => state.chatRoom.socket);
 
     const [roomName, setRoomName] = useState('');
@@ -78,10 +77,7 @@ const NewRoomForm = () => {
         e.preventDefault();
         return dispatch(createNewRoom(roomName, image, selectedContacts))
             .then(() => {
-                socket &&
-                    socket.emit('new room', {
-                        adminId: user.id,
-                    });
+                socket && socket.emit('new room');
                 resetForm();
                 openNewRoomForm();
             })
