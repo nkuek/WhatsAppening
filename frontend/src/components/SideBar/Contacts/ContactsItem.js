@@ -62,7 +62,6 @@ const ContactsItem = ({ contact, setSelectedContacts }) => {
                         padding: '8px',
                         position: 'relative',
                         zIndex: 1,
-                        // margin: '0 -50px 0 0',
                     }}
                     onClick={handleShowDelete}
                 >
