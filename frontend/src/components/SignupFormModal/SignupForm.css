@@ -177,6 +177,7 @@
     position:absolute;
     top: 110px;
     left: 25px;
+
 }
 
 .fileInput:hover {
@@ -184,7 +185,8 @@
 }
 
 .form2Input::after {
-    left: 18px;
+    left: 25px;
+    font-size: .8em;
 }
 
 .signupFormFooter {
