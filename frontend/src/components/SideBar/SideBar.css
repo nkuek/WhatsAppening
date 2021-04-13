@@ -132,7 +132,7 @@
     .newRoomFormContainer,
     .addContactFormContainer {
 
-    min-width: 100%;
+    min-width: 100vw;
     z-index: 2;
     overflow-x: hidden;
     border-right: none;

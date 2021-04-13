@@ -68,7 +68,7 @@
     display: flex;
     order: 2;
     position: relative;
-    height: calc(100% - 62px - 58px);
+    height: calc(100vh - 120px);
     flex-direction: column;
     overflow-y: auto;
 }
@@ -239,8 +239,4 @@
 
 .chatRoomNameContainer.mobile {
     font-size: .8em;
-}
-
-.chatRoomContainer.hide {
-    display: none;
 }
