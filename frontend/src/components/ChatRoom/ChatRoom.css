@@ -231,6 +231,10 @@
     .chatRoomHeader {
         padding: 0px;
     }
+
+    .chatRoomContainer {
+        height: -webkit-fill-available;
+    }
 }
 
 /*===============================*/
