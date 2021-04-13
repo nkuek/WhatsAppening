@@ -44,7 +44,11 @@ const ChatList = () => {
         if (isMobile) {
             document.querySelector('.sidebarContainer').classList.add('hide');
         }
-
+        if (isMobile && document.querySelector('.chatRoomContainer')) {
+            document
+                .querySelector('.chatRoomContainer')
+                .classList.remove('hide');
+        }
         dispatch(setRoomId(chatId));
 
         const selectedElement = document.getElementById(selectedItem);

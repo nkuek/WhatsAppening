@@ -68,7 +68,7 @@
     display: flex;
     order: 2;
     position: relative;
-    height: calc(100vh - 120px);
+    height: calc(100% - 120px);
     flex-direction: column;
     overflow-y: auto;
 }
@@ -232,9 +232,6 @@
         padding: 0px;
     }
 
-    .chatRoomContainer {
-        height: -webkit-fill-available;
-    }
 }
 
 /*===============================*/
@@ -243,4 +240,8 @@
 
 .chatRoomNameContainer.mobile {
     font-size: .8em;
+}
+
+.chatRoomContainer.hide {
+    display: none;
 }
