@@ -90,3 +90,7 @@
     right: 0%;
     z-index: 2;
 }
+
+.contactSearchInput::before {
+    content: '\f002'
+}

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { findContacts } from '../../../store/userContacts';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 import './Contacts.css';
 import ContactsItem from './ContactsItem';
@@ -57,17 +58,6 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
             <div className="contactBody">
                 <h1 className="newRoomFormDescription">Add participants</h1>
                 <div className="newRoomFormInputContainer">
-                    <SearchIcon
-                        style={{
-                            color: 'white',
-                            right: '590px',
-                            position: 'relative',
-                            left: '40px',
-                            top: '5px',
-                            cursor: 'pointer',
-                            zIndex: '3',
-                        }}
-                    />
                     <input
                         className="contactSearchInput"
                         value={contactSearch}

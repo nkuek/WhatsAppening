@@ -40,11 +40,6 @@
         position: relative;
         justify-content: center;
     }
-
-    .contactSearchInput {
-        position: relative;
-        right: 10px;
-    }
 }
 
 .selectedContactsContainer {
