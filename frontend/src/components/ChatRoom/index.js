@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import { Avatar, IconButton } from '@material-ui/core';
 import { findUserRoom } from '../../store/chatroom';
 import InfoIcon from '@material-ui/icons/Info';
 import SendIcon from '@material-ui/icons/Send';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 import './ChatRoom.css';
 import SentMessage from './SentMessage';
@@ -11,6 +13,7 @@ import ReceivedMessage from './ReceivedMessage';
 import ChatRoomInfo from './ChatRoomInfo';
 
 const ChatRoom = () => {
+    const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
     const dispatch = useDispatch();
     const chatRoom = useSelector((state) => state.chatRoom);
     const socket = useSelector((state) => state.chatRoom.socket);
@@ -50,19 +53,6 @@ const ChatRoom = () => {
         return () => socket && socket.off('load messages');
     }, [socket, dispatch, chatRoomId]);
 
-    // useEffect(() => {
-    //     const chatMessageList = document.querySelector('.chatRoomMessageList');
-    //     const loadMore = () => {
-    //         if (chatRoom.room && chatMessageList.scrollTop === 0) {
-    //             setTimeout(() => {
-    //                 dispatch(findUserRoom(chatRoom.room.id));
-    //             }, 500);
-    //         }
-    //     };
-    //     chatMessageList.addEventListener('scroll', loadMore);
-    //     return () => chatMessageList.removeEventListener('scroll', loadMore);
-    // }, [chatRoom]);
-
     const handleNewMessage = (e) => {
         e.preventDefault();
         if (!messageInput) return;
@@ -77,20 +67,38 @@ const ChatRoom = () => {
     };
 
     const handleShowChatRoomInfo = () => {
+        if (isMobile)
+            document.querySelector('.chatRoomContainer').classList.add('hide');
         document
             .querySelector('.chatRoomInfoContainer')
             .classList.add('display');
     };
 
+    // Mobile Only
+    const handleBackToChatList = (e) => {
+        e.stopPropagation();
+        document.querySelector('.sidebarContainer').classList.remove('hide');
+    };
+
     return chatRoom.isLoaded ? (
         <>
-            <div className="chatRoomContainer">
+            <div className={`chatRoomContainer ${isMobile ? 'mobile' : ''}`}>
                 <header
                     onClick={handleShowChatRoomInfo}
                     style={{ cursor: 'pointer' }}
                     className="chatRoomHeader"
                 >
                     <div className="chatRoomImageAndName">
+                        {isMobile && (
+                            <IconButton
+                                style={{ padding: '8px' }}
+                                onClick={handleBackToChatList}
+                            >
+                                <KeyboardBackspaceIcon
+                                    style={{ color: 'white' }}
+                                />
+                            </IconButton>
+                        )}
                         <div className="chatRoomImage">
                             <Avatar
                                 src={
@@ -99,7 +107,11 @@ const ChatRoom = () => {
                                 }
                             />
                         </div>
-                        <div className="chatRoomNameContainer">
+                        <div
+                            className={`chatRoomNameContainer ${
+                                isMobile ? 'mobile' : ''
+                            }`}
+                        >
                             <div className="chatRoomName">
                                 {chatRoom.room.name}
                             </div>
@@ -172,12 +184,18 @@ const ChatRoom = () => {
                     </form>
                 </footer>
             </div>
-            <div className="chatRoomInfoContainer">
+            <div
+                className={`chatRoomInfoContainer ${isMobile ? 'mobile' : ''}`}
+            >
                 <ChatRoomInfo chatRoom={chatRoom.room} />
             </div>
         </>
     ) : (
-        <div className="chatRoomMessageList noMessagesContainer">
+        <div
+            className={`chatRoomMessageList noMessagesContainer ${
+                isMobile ? 'mobile' : ''
+            }`}
+        >
             <h1>Select or create a chatroom to view messages!</h1>
         </div>
     );

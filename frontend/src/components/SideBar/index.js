@@ -4,6 +4,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import { IconButton } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 import { withStyles } from '@material-ui/styles';
+import { useMediaQuery } from 'react-responsive';
 
 import ProfileButton from './Profile/ProfileButton';
 import NewRoomForm from './NewRoomForm';
@@ -24,6 +25,8 @@ const CustomIconButton = withStyles({
 })(IconButton);
 
 const SideBar = ({ socket }) => {
+    const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
+
     const session = useSelector((state) => state.session);
 
     const [showProfile, setShowProfile] = useState(false);
@@ -41,7 +44,7 @@ const SideBar = ({ socket }) => {
 
     return (
         <>
-            <div className="sidebarContainer">
+            <div className={`sidebarContainer ${isMobile ? 'mobile' : ''}`}>
                 <div
                     style={{
                         justifyContent: !session.user && 'center',
@@ -77,15 +80,19 @@ const SideBar = ({ socket }) => {
                 </div>
             </div>
 
-            <div className="newRoomFormContainer">
+            <div className={`newRoomFormContainer ${isMobile ? 'mobile' : ''}`}>
                 <NewRoomForm socket={socket} />
             </div>
 
-            <div className="profileContainer">
+            <div className={`profileContainer ${isMobile ? 'mobile' : ''}`}>
                 <Profile openProfile={openProfile} user={session.user} />
             </div>
 
-            <div className="addContactFormContainer">
+            <div
+                className={`addContactFormContainer ${
+                    isMobile ? 'mobile' : ''
+                }`}
+            >
                 <AddContact />
             </div>
         </>

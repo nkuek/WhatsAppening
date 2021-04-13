@@ -116,6 +116,12 @@
     background-color: #212527;
 }
 
+@media only screen and (max-width: 800px) {
+    .dropdownContainer {
+        position: relative;
+        right: 30px;
+    }
+}
 /* =============================== */
 /* React Responsive Mobile Styling */
 /* =============================== */
@@ -124,16 +130,22 @@
 .profileContainer.mobile,
 .newRoomFormContainer.mobile,
 .addContactFormContainer.mobile {
-    min-width: 100vw;
+    min-width: 100%;
+    z-index: 2;
+    overflow-x: hidden;
+    border-right: none;
+    height: 100vh;
+}
+
+.sidebarContainer.mobile.hide {
+    display: none;
 }
 
 .sidebarContainer.mobile {
     transition: left 300ms;
+    overflow-y: scroll;
 }
 
-.sidebarContainer.mobile.hide {
-    left: -100%;
-}
 
 .profileContainer.mobile,
 .newRoomFormContainer.mobile,

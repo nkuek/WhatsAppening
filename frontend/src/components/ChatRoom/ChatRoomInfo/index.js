@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Avatar, IconButton } from '@material-ui/core';
+import { useMediaQuery } from 'react-responsive';
 import ClearIcon from '@material-ui/icons/Clear';
 import EditIcon from '@material-ui/icons/Edit';
 import ChatRoomImageCard from './ChatRoomImageCard';
@@ -8,6 +9,7 @@ import { editUserRoom } from '../../../store/chatroom';
 import './ChatRoomInfo.css';
 
 const ChatRoomInfo = ({ chatRoom }) => {
+    const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
     const dispatch = useDispatch();
     const [description, setDescription] = useState('');
     const [preview, setPreview] = useState(chatRoom && chatRoom.imageUrl);
@@ -44,6 +46,11 @@ const ChatRoomInfo = ({ chatRoom }) => {
     };
 
     const handleCloseChatRoomInfo = () => {
+        if (isMobile) {
+            document
+                .querySelector('.chatRoomContainer')
+                .classList.remove('hide');
+        }
         document
             .querySelector('.chatRoomInfoContainer')
             .classList.remove('display');

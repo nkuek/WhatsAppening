@@ -117,3 +117,17 @@
 .chatRoomParticipantsLabel {
     color: #009184;
 }
+
+/*===============================*/
+/*React Responsive Mobile Styling*/
+/*===============================*/
+
+.chatRoomInfoContainer.mobile {
+    display: none;
+}
+
+.chatRoomInfoContainer.mobile.display {
+    width: 100%;
+    display: initial;
+    height: 100vh;
+}

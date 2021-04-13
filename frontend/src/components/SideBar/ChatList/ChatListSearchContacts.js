@@ -1,9 +1,11 @@
+import { useMediaQuery } from 'react-responsive';
 import { Avatar } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createNewRoom } from '../../../store/chatroom';
 
 const ChatListSearchContacts = ({ setChatListSearchInput }) => {
+    const isMobile = useMediaQuery({ query: '(max-width: 800px' });
     const dispatch = useDispatch();
     const searchResults = useSelector((state) => state.searchResults);
     const socket = useSelector((state) => state.chatRoom.socket);
@@ -15,6 +17,8 @@ const ChatListSearchContacts = ({ setChatListSearchInput }) => {
     }, [searchResults, isLoaded]);
 
     const handleClick = (contactName, contactImage, contact) => {
+        if (isMobile)
+            document.querySelector('.sidebarContainer').classList.add('hide');
         const firstName = contactName
             .split(' ')
             .filter((name) => !name.includes('.'))[0];

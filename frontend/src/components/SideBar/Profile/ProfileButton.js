@@ -1,3 +1,4 @@
+import { useMediaQuery } from 'react-responsive';
 import { Avatar } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';

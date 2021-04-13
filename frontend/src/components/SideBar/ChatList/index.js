@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import { findUserRoom, setRoomId } from '../../../store/chatroom';
 import { getUserRooms } from '../../../store/chatlist';
 import ChatListSearchContacts from './ChatListSearchContacts';
@@ -10,6 +11,7 @@ import { resetSearch, searchAll } from '../../../store/chatlistsearch';
 import './ChatList.css';
 
 const ChatList = () => {
+    const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
     const dispatch = useDispatch();
     const [selectedItem, setSelectedItem] = useState('');
     const [chatListSearchInput, setChatListSearchInput] = useState('');
@@ -39,6 +41,10 @@ const ChatList = () => {
     }, [chatListSearchInput, dispatch]);
 
     const handleChatListClick = (chatId, chatRoom) => {
+        if (isMobile) {
+            document.querySelector('.sidebarContainer').classList.add('hide');
+        }
+
         dispatch(setRoomId(chatId));
 
         const selectedElement = document.getElementById(selectedItem);
