@@ -57,20 +57,23 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
             <div className="contactBody">
                 <h1 className="newRoomFormDescription">Add participants</h1>
                 <div className="newRoomFormInputContainer">
+                    <SearchIcon
+                        style={{
+                            color: 'white',
+                            right: '590px',
+                            position: 'relative',
+                            left: '40px',
+                            top: '5px',
+                            cursor: 'pointer',
+                            zIndex: '3',
+                        }}
+                    />
                     <input
+                        className="contactSearchInput"
                         value={contactSearch}
                         onChange={handleContactSearch}
                         placeholder="Search your contacts"
                     ></input>
-                    <SearchIcon
-                        style={{
-                            color: 'white',
-                            position: 'absolute',
-                            left: '30px',
-                            top: '70px',
-                            cursor: 'pointer',
-                        }}
-                    />
                 </div>
                 <div
                     onClick={showUserSearch}

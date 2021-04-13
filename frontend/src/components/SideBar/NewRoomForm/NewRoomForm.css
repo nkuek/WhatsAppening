@@ -34,6 +34,19 @@
     border-color: var(--button-color)
 }
 
+@media screen and (max-width: 800px) {
+    .newRoomFormInputContainer {
+        display: flex;
+        position: relative;
+        justify-content: center;
+    }
+
+    .contactSearchInput {
+        position: relative;
+        right: 10px;
+    }
+}
+
 .selectedContactsContainer {
     display: flex;
     flex-direction: column;

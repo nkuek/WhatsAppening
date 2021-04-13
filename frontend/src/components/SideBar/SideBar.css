@@ -126,6 +126,20 @@
 /* React Responsive Mobile Styling */
 /* =============================== */
 
+@media only screen and (max-width: 800px) {
+    .sidebarContainer,
+    .profileContainer,
+    .newRoomFormContainer,
+    .addContactFormContainer {
+
+    min-width: 100%;
+    z-index: 2;
+    overflow-x: hidden;
+    border-right: none;
+    height: 100vh;
+    }
+}
+
 .sidebarContainer.mobile,
 .profileContainer.mobile,
 .newRoomFormContainer.mobile,
@@ -143,7 +157,6 @@
 
 .sidebarContainer.mobile {
     transition: left 300ms;
-    overflow-y: scroll;
 }
 
 
