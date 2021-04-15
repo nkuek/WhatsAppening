@@ -89,7 +89,7 @@ const ChatList = () => {
             }, 60000);
 
             return () => {
-                clearTimeout(timer);
+                clearInterval(timer);
             };
         }
     }, [user, dispatch, socket]);
