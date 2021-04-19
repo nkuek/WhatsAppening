@@ -59,13 +59,18 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
+    position: relative;
 }
 
 .userNameEdit {
-    padding: 5px;
+    padding-bottom: 10px;
     padding-right: 40px;
     border-radius: 5px;
     width: 100%;
+    background-color: #131c21;
+    color: white;
+    border-radius: 0px;
+    border-bottom: 1px solid #00af9c
 }
 
 .editButtonContainer {

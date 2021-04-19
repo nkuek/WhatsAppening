@@ -21,6 +21,10 @@
     margin: 0 auto
 }
 
+.chatListSearch:focus {
+    border-color: var(--button-color);
+}
+
 .chatListItemContainer {
     display: flex;
     width: 100%;

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Avatar, IconButton } from '@material-ui/core';
 import { useMediaQuery } from 'react-responsive';
 import ClearIcon from '@material-ui/icons/Clear';
+import CheckIcon from '@material-ui/icons/Check';
 import EditIcon from '@material-ui/icons/Edit';
 import ChatRoomImageCard from './ChatRoomImageCard';
 import { editUserRoom } from '../../../store/chatroom';
@@ -59,6 +60,10 @@ const ChatRoomInfo = ({ chatRoom }) => {
 
     const handleEditDescription = (e) => {
         e.preventDefault();
+        if (description === chatRoom.description) {
+            setShowEditDescription(false);
+            return;
+        }
         dispatch(editUserRoom(chatRoom.id, roomName, description));
         setShowEditDescription(false);
     };
@@ -81,7 +86,10 @@ const ChatRoomInfo = ({ chatRoom }) => {
                 showEditName={showEditName}
                 setShowEditName={setShowEditName}
             />
-            <form className="chatRoomDescriptionContainer">
+            <form
+                onSubmit={handleEditDescription}
+                className="chatRoomDescriptionContainer"
+            >
                 <div className="chatRoomDescriptionLabel">Description</div>
                 <div className="chatRoomDescriptionAndEdit">
                     {!showEditDescription ? (
@@ -103,34 +111,22 @@ const ChatRoomInfo = ({ chatRoom }) => {
                         <>
                             <input
                                 className="chatRoomCardDescriptionEdit"
-                                value={description}
+                                value={description || ''}
                                 onChange={(e) => setDescription(e.target.value)}
                             ></input>
-                            <ClearIcon
+                            <CheckIcon
                                 style={{
+                                    color: 'white',
                                     position: 'absolute',
                                     right: '5px',
                                     top: '0px',
-                                    color: 'black',
                                     cursor: 'pointer',
                                 }}
-                                onClick={() => setShowEditDescription(false)}
+                                onClick={handleEditDescription}
                             />
                         </>
                     )}
                 </div>
-                {showEditDescription && (
-                    <div className="chatRoomEditButtonContainer">
-                        <button
-                            onClick={handleEditDescription}
-                            style={{ fontSize: '16px' }}
-                            type="submit"
-                            className="chatRoomEditNameSubmit"
-                        >
-                            Update
-                        </button>
-                    </div>
-                )}
             </form>
             <div className="chatRoomParticipantsCard">
                 <div className="chatRoomParticipantsLabelContainer">

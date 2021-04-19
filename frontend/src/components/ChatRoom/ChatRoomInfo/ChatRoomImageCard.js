@@ -97,10 +97,10 @@ const ChatRoomImageCard = ({
                                 ></input>
                                 <ClearIcon
                                     style={{
+                                        color: 'white',
                                         position: 'absolute',
                                         right: '10px',
                                         top: '7px',
-                                        color: 'black',
                                         cursor: 'pointer',
                                     }}
                                     onClick={() => setShowEditName(false)}

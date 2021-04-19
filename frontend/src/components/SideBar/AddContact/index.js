@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchIcon from '@material-ui/icons/Search';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { Avatar, IconButton } from '@material-ui/core';
 import { searchUsers, clearSearchUsers } from '../../../store/usersearch';

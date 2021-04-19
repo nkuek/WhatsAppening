@@ -228,13 +228,6 @@
     display: flex;
 }
 
-@media only screen and (max-width: 800px) {
-    .chatRoomHeader {
-        padding: 0px;
-    }
-
-}
-
 /*===============================*/
 /*React Responsive Mobile Styling*/
 /*===============================*/

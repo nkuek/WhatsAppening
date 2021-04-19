@@ -124,7 +124,7 @@ router.put(
         const chatRoom = await ChatRoom.findByPk(chatRoomId);
 
         if (roomName) await chatRoom.update({ name: roomName });
-        if (description) await chatRoom.update({ description });
+        await chatRoom.update({ description });
         if (imageUrl) await chatRoom.update({ imageUrl });
 
         const messages = await chatRoom.getMessages({

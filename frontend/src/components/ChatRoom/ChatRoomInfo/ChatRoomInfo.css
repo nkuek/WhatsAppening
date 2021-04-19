@@ -4,8 +4,6 @@
     max-width: 420px;
     width: 0%;
     transition: width 200ms ease-in;
-
-    /* display: none; */
 }
 
 .chatRoomInfoContainer.display {
@@ -19,8 +17,9 @@
     align-items: center;
     color: white;
     background-color: #2a2f32;
-    height: 59px;
+    height: 68px;
 }
+
 
 .fileWrapper.chatRoom {
     margin-bottom: 0px;
@@ -41,7 +40,8 @@
     box-sizing: border-box;
 }
 
-.chatRoomCardNameEdit {
+.chatRoomCardNameEdit,
+.chatRoomCardDescriptionEdit {
     margin-bottom: .5em;
     box-sizing: border-box;
     display: flex;
@@ -49,6 +49,10 @@
     padding: 5px;
     border-radius: 5px;
     padding-right: 40px;
+    background-color: #131c21;
+    color: white;
+    border-radius: 0px;
+    border-bottom: 1px solid #00af9c
 }
 
 
@@ -75,6 +79,7 @@
 }
 
 .chatRoomEditButtonContainer {
+    padding-top: 10px;
     display: flex;
     justify-content: center;
 }
@@ -97,13 +102,13 @@
     position: relative;
 }
 
-.chatRoomCardDescriptionEdit {
+/* .chatRoomCardDescriptionEdit {
     width: 100%;
     padding: 5px;
     padding-right: 40px;
     font-size: .8rem;
     margin-bottom: .5em;
-}
+} */
 
 .chatRoomParticipantsCard {
     background-color: #131c21;
@@ -127,7 +132,8 @@
 }
 
 .chatRoomInfoContainer.mobile.display {
-    width: 100%;
+    width: 100vw;
+    max-width: 100vw;
     display: initial;
     height: 100vh;
 }

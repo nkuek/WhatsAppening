@@ -5,7 +5,7 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import * as sessionActions from '../../../store/session';
 import { removeUserRooms } from '../../../store/chatlist';
 import EditIcon from '@material-ui/icons/Edit';
-import ClearIcon from '@material-ui/icons/Clear';
+import CheckIcon from '@material-ui/icons/Check';
 import { withStyles } from '@material-ui/styles';
 import { closeSocket, resetUserRoomState } from '../../../store/chatroom';
 import { removeUserContactsState } from '../../../store/userContacts';
@@ -93,6 +93,10 @@ const Profile = ({ user }) => {
 
     const handleEditProfile = (e) => {
         e.preventDefault();
+        if (name === user.name) {
+            setShowEditName(false);
+            return;
+        }
         dispatch(sessionActions.editUserProfile(name, image));
         setImage('');
         setShowEditName(false);
@@ -161,34 +165,24 @@ const Profile = ({ user }) => {
                         )}
                         {showEditName && (
                             <>
+                                <CheckIcon
+                                    style={{
+                                        color: 'white',
+                                        position: 'absolute',
+                                        right: '0px',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={handleEditProfile}
+                                />
                                 <input
                                     className="userNameEdit"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 ></input>
-                                <ClearIcon
-                                    style={{
-                                        position: 'relative',
-                                        left: '-30px',
-                                        top: '2px',
-                                        cursor: 'pointer',
-                                    }}
-                                    onClick={() => setShowEditName(false)}
-                                />
                             </>
                         )}
                     </div>
-                    {(showEditName || image) && (
-                        <div className="editButtonContainer">
-                            <button
-                                onClick={handleEditProfile}
-                                type="submit"
-                                className="editProfileSubmit"
-                            >
-                                Update
-                            </button>
-                        </div>
-                    )}
+
                     <div className="editPrivacyContainer">
                         <div className="userPrivacy">Privacy Setting</div>
                         <select value={isPublic} onChange={handlePrivacyEdit}>
