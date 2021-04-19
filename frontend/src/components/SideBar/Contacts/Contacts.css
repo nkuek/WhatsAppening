@@ -8,7 +8,6 @@
     box-sizing: border-box;
     top: 0;
     transition: top 400ms;
-    padding-top: 20px;
     height: 100%;
     overflow-y: scroll;
 }

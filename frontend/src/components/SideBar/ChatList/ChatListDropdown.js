@@ -30,6 +30,7 @@ const ChatListDropdown = ({
     const anchorRef = useRef(null);
 
     const toggleDropdownMenu = (e) => {
+        e.stopPropagation();
         setShowDropdownMenu((prev) => !prev);
     };
 

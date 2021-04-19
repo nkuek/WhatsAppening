@@ -62,6 +62,7 @@
 
 .chatRoomParticipants {
     display: flex;
+    color: rgba(241, 241, 242, 0.63)
 }
 
 .chatRoomMessageList {
