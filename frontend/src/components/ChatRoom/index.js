@@ -13,7 +13,7 @@ import ReceivedMessage from './ReceivedMessage';
 import ChatRoomInfo from './ChatRoomInfo';
 
 const ChatRoom = () => {
-    const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 900px)' });
     const dispatch = useDispatch();
     const chatRoom = useSelector((state) => state.chatRoom);
     const socket = useSelector((state) => state.chatRoom.socket);

@@ -3,7 +3,10 @@ import { useDispatch } from 'react-redux';
 import { Avatar, ClickAwayListener, IconButton } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { deleteContact } from '../../../store/userContacts';
+import { useMediaQuery } from 'react-responsive';
+
 const ContactsItem = ({ contact, setSelectedContacts }) => {
+    const isMobile = useMediaQuery({ query: '(max-width: 900px)' });
     const dispatch = useDispatch();
     const [contactHover, setContactHover] = useState(false);
     const [showDeleteButton, setShowDeleteButton] = useState(false);
@@ -63,25 +66,27 @@ const ContactsItem = ({ contact, setSelectedContacts }) => {
                         position: 'relative',
                         zIndex: 1,
                     }}
-                    onClick={handleShowDelete}
+                    onClick={isMobile ? handleDeleteContact : handleShowDelete}
                 >
                     <RemoveIcon style={{ color: 'red' }} />
                 </IconButton>
             )}
-            <ClickAwayListener onClickAway={handleHideDeleteButton}>
-                <div
-                    id={`contactContainer${contact.id}`}
-                    className={`contactDeleteButtonContainer`}
-                >
+            {!isMobile && (
+                <ClickAwayListener onClickAway={handleHideDeleteButton}>
                     <div
-                        id={`contact${contact.id}`}
-                        className="contactDeleteButton"
-                        onClick={handleDeleteContact}
+                        id={`contactContainer${contact.id}`}
+                        className={`contactDeleteButtonContainer`}
                     >
-                        Delete
+                        <div
+                            id={`contact${contact.id}`}
+                            className="contactDeleteButton"
+                            onClick={handleDeleteContact}
+                        >
+                            Delete
+                        </div>
                     </div>
-                </div>
-            </ClickAwayListener>
+                </ClickAwayListener>
+            )}
         </div>
     );
 };

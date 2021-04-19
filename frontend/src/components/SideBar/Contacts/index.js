@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import SearchIcon from '@material-ui/icons/Search';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { findContacts } from '../../../store/userContacts';
-import InputAdornment from '@material-ui/core/InputAdornment';
 
 import './Contacts.css';
 import ContactsItem from './ContactsItem';
@@ -55,7 +53,7 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
 
     return (
         <>
-            <div className="contactBody">
+            <div className="contactHeader">
                 <h1 className="newRoomFormDescription">Add participants</h1>
                 <div className="newRoomFormInputContainer">
                     <input
@@ -65,6 +63,8 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
                         placeholder="Search your contacts"
                     ></input>
                 </div>
+            </div>
+            <div className="contactBody">
                 <div
                     onClick={showUserSearch}
                     className="addContactButtonContainer"

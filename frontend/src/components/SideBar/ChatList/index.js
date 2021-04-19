@@ -11,7 +11,7 @@ import { resetSearch, searchAll } from '../../../store/chatlistsearch';
 import './ChatList.css';
 
 const ChatList = () => {
-    const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 900px)' });
     const dispatch = useDispatch();
     const [selectedItem, setSelectedItem] = useState('');
     const [chatListSearchInput, setChatListSearchInput] = useState('');

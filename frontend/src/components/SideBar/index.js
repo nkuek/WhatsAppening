@@ -25,7 +25,7 @@ const CustomIconButton = withStyles({
 })(IconButton);
 
 const SideBar = ({ socket }) => {
-    const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 900px)' });
 
     const session = useSelector((state) => state.session);
 

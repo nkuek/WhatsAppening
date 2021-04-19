@@ -10,6 +10,7 @@
     transition: top 400ms;
     padding-top: 20px;
     height: 100%;
+    overflow-y: scroll;
 }
 
 .addContactForm {
@@ -90,4 +91,8 @@
 .contactDeleteButton.showButton {
     right: 0%;
     z-index: 2;
+}
+
+.contactHeader {
+    background-color: #131c21;
 }

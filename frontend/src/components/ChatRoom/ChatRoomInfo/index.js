@@ -9,7 +9,7 @@ import { editUserRoom } from '../../../store/chatroom';
 import './ChatRoomInfo.css';
 
 const ChatRoomInfo = ({ chatRoom }) => {
-    const isMobile = useMediaQuery({ query: '(max-width: 800px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 900px)' });
     const dispatch = useDispatch();
     const [description, setDescription] = useState('');
     const [preview, setPreview] = useState(chatRoom && chatRoom.imageUrl);
