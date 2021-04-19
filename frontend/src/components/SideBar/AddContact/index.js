@@ -65,15 +65,6 @@ const UserSearch = () => {
                         onChange={handleUserSearch}
                         placeholder="Search users by name or phone number"
                     ></input>
-                    <SearchIcon
-                        style={{
-                            color: 'white',
-                            position: 'relative',
-                            top: '-30px',
-                            left: '30px',
-                            cursor: 'pointer',
-                        }}
-                    />
                 </div>
                 <div className="searchResults">
                     {userSearch.isLoaded &&
