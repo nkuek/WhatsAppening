@@ -6,9 +6,13 @@ import { findContacts } from '../../../store/userContacts';
 import './Contacts.css';
 import ContactsItem from './ContactsItem';
 
-const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
+const ContactsSearch = ({
+    selectedContacts,
+    setSelectedContacts,
+    contactSearch,
+    setContactSearch,
+}) => {
     const dispatch = useDispatch();
-    const [contactSearch, setContactSearch] = useState('');
 
     const userContacts = useSelector((state) => state.userContacts);
     const session = useSelector((state) => state.session);
@@ -53,53 +57,56 @@ const ContactsSearch = ({ selectedContacts, setSelectedContacts }) => {
 
     return (
         <>
-            <div className="contactHeader">
-                <h1 className="newRoomFormDescription">Add participants</h1>
-                <div className="newRoomFormInputContainer">
-                    <input
-                        className="contactSearchInput"
-                        value={contactSearch}
-                        onChange={handleContactSearch}
-                        placeholder="Search your contacts"
-                    ></input>
-                </div>
-            </div>
             <div className="contactBody">
-                <div
-                    onClick={showUserSearch}
-                    className="addContactButtonContainer"
-                >
-                    <div className="addContactButton">
-                        <GroupAddIcon
-                            style={{
-                                color: 'white',
-                                margin: '0px 10px',
-                                backgroundColor: '#009688',
-                                borderRadius: '100%',
-                                padding: '10px',
-                            }}
-                        />
-                        Add a contact
+                <div className="contactHeader">
+                    <h1 className="newRoomFormDescription">Add participants</h1>
+                    <div className="newRoomFormInputContainer">
+                        <input
+                            className="contactSearchInput"
+                            value={contactSearch}
+                            onChange={handleContactSearch}
+                            placeholder="Search your contacts"
+                        ></input>
                     </div>
                 </div>
-                <div className="userContacts">
-                    {userContacts.isLoaded &&
-                        contactFilter(userContacts.contacts).map(
-                            (contact) =>
-                                !selectedContacts
-                                    .map(
-                                        (selectedContact) => selectedContact.id
+                <div className="contactListBody">
+                    <div
+                        onClick={showUserSearch}
+                        className="addContactButtonContainer"
+                    >
+                        <div className="addContactButton">
+                            <GroupAddIcon
+                                style={{
+                                    color: 'white',
+                                    margin: '0px 10px',
+                                    backgroundColor: '#009688',
+                                    borderRadius: '100%',
+                                    padding: '10px',
+                                }}
+                            />
+                            Add a contact
+                        </div>
+                    </div>
+                    <div className="userContacts">
+                        {userContacts.isLoaded &&
+                            contactFilter(userContacts.contacts).map(
+                                (contact) =>
+                                    !selectedContacts
+                                        .map(
+                                            (selectedContact) =>
+                                                selectedContact.id
+                                        )
+                                        .includes(contact.id) && (
+                                        <ContactsItem
+                                            key={contact.id}
+                                            contact={contact}
+                                            setSelectedContacts={
+                                                setSelectedContacts
+                                            }
+                                        />
                                     )
-                                    .includes(contact.id) && (
-                                    <ContactsItem
-                                        key={contact.id}
-                                        contact={contact}
-                                        setSelectedContacts={
-                                            setSelectedContacts
-                                        }
-                                    />
-                                )
-                        )}
+                            )}
+                    </div>
                 </div>
             </div>
         </>

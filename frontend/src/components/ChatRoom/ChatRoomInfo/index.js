@@ -10,7 +10,7 @@ import { editUserRoom } from '../../../store/chatroom';
 import './ChatRoomInfo.css';
 
 const ChatRoomInfo = ({ chatRoom }) => {
-    const isMobile = useMediaQuery({ query: '(max-width: 900px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 950px)' });
     const dispatch = useDispatch();
     const [description, setDescription] = useState('');
     const [preview, setPreview] = useState(chatRoom && chatRoom.imageUrl);
@@ -135,22 +135,28 @@ const ChatRoomInfo = ({ chatRoom }) => {
                     </div>
                 </div>
                 {chatRoom.participants &&
-                    chatRoom.participants.map((participant) => (
-                        <div
-                            key={participant.id}
-                            style={{ margin: '10px 0px', color: 'white' }}
-                            className="selectedContactsItem"
-                        >
-                            <div className="selectedContactInfo">
-                                <div className="selectedContactProfileImage">
-                                    <Avatar src={participant.profileUrl} />
-                                </div>
-                                <div className="selectedContactName">
-                                    {participant.name}
+                    chatRoom.participants
+                        .sort((a, b) => {
+                            return a.name.toLowerCase() < b.name.toLowerCase()
+                                ? -1
+                                : 1;
+                        })
+                        .map((participant) => (
+                            <div
+                                key={participant.id}
+                                style={{ margin: '10px 0px', color: 'white' }}
+                                className="selectedContactsItem"
+                            >
+                                <div className="selectedContactInfo">
+                                    <div className="selectedContactProfileImage">
+                                        <Avatar src={participant.profileUrl} />
+                                    </div>
+                                    <div className="selectedContactName">
+                                        {participant.name}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
             </div>
         </>
     );

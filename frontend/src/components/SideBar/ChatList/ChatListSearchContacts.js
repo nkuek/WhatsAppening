@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { createNewRoom } from '../../../store/chatroom';
 
 const ChatListSearchContacts = ({ setChatListSearchInput }) => {
-    const isMobile = useMediaQuery({ query: '(max-width: 900px' });
+    const isMobile = useMediaQuery({ query: '(max-width: 950px' });
     const dispatch = useDispatch();
     const searchResults = useSelector((state) => state.searchResults);
     const socket = useSelector((state) => state.chatRoom.socket);

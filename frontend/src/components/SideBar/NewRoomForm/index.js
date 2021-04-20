@@ -4,7 +4,6 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { Avatar, IconButton } from '@material-ui/core';
 import { createNewRoom } from '../../../store/chatroom';
 import { withStyles } from '@material-ui/styles';
-import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 
 import ContactsSearch from '../Contacts';
@@ -42,6 +41,7 @@ const NewRoomForm = () => {
     const [preview, setPreview] = useState(null);
     const [errors, setErrors] = useState([]);
     const [selectedContacts, setSelectedContacts] = useState([]);
+    const [contactSearch, setContactSearch] = useState('');
 
     const updateFile = (e) => {
         const file = e.target.files[0];
@@ -63,6 +63,10 @@ const NewRoomForm = () => {
             setPreview(null);
             setSelectedContacts([]);
             setErrors([]);
+            setContactSearch('');
+            document
+                .querySelector('.contactBody')
+                .classList.remove('searching');
             document.querySelector('.fileInput').value = '';
         }, 500);
     };
@@ -134,18 +138,6 @@ const NewRoomForm = () => {
                         type="text"
                         placeholder="Room Name"
                     ></input>
-                    {roomName && (
-                        <CheckIcon
-                            style={{
-                                color: 'white',
-                                position: 'relative',
-                                top: '-30px',
-                                left: '30px',
-                                cursor: 'pointer',
-                            }}
-                            onClick={handleNewRoomSubmit}
-                        />
-                    )}
                 </div>
                 <div className="selectedContactsContainer">
                     {selectedContacts &&
@@ -179,6 +171,8 @@ const NewRoomForm = () => {
                 )}
             </form>
             <ContactsSearch
+                contactSearch={contactSearch}
+                setContactSearch={setContactSearch}
                 selectedContacts={selectedContacts}
                 setSelectedContacts={setSelectedContacts}
             />

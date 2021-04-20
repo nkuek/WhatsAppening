@@ -1,7 +1,6 @@
 .contactBody {
     display: flex;
     flex-direction: column;
-    align-items: center;
     position: relative;
     z-index: 3;
     background-color: #131C21;
@@ -48,7 +47,7 @@
 
 
 .searching {
-    top: -413px;
+    top: -286px;
     min-height: 100%;
     /* height: auto; */
 }

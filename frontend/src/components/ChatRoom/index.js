@@ -13,7 +13,7 @@ import ReceivedMessage from './ReceivedMessage';
 import ChatRoomInfo from './ChatRoomInfo';
 
 const ChatRoom = () => {
-    const isMobile = useMediaQuery({ query: '(max-width: 900px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 950px)' });
     const dispatch = useDispatch();
     const chatRoom = useSelector((state) => state.chatRoom);
     const socket = useSelector((state) => state.chatRoom.socket);
@@ -33,6 +33,17 @@ const ChatRoom = () => {
                         .filter((name) => !name.includes('.'));
                     return fullName[0];
                 });
+            if (firstNames.length > 3) {
+                const shortenedFirstNames = firstNames
+                    .sort((a, b) =>
+                        a.toLowerCase() < b.toLowerCase() ? -1 : 1
+                    )
+                    .slice(0, 4)
+                    .join(', ');
+                return (
+                    shortenedFirstNames + ` + ${firstNames.length - 4} others`
+                );
+            }
             return firstNames.sort().join(', ');
         }
     };
@@ -174,9 +185,9 @@ const ChatRoom = () => {
                                 onClick={handleNewMessage}
                                 style={{
                                     color: '#2878FF',
-                                    position: 'relative',
-                                    right: '40px',
-                                    top: '8px',
+                                    position: 'absolute',
+                                    right: '12%',
+                                    top: '17px',
                                     cursor: 'pointer',
                                 }}
                             />

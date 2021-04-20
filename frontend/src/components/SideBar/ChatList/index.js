@@ -11,7 +11,7 @@ import { resetSearch, searchAll } from '../../../store/chatlistsearch';
 import './ChatList.css';
 
 const ChatList = () => {
-    const isMobile = useMediaQuery({ query: '(max-width: 900px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 950px)' });
     const dispatch = useDispatch();
     const [selectedItem, setSelectedItem] = useState('');
     const [chatListSearchInput, setChatListSearchInput] = useState('');
@@ -41,14 +41,6 @@ const ChatList = () => {
     }, [chatListSearchInput, dispatch]);
 
     const handleChatListClick = (chatId, chatRoom) => {
-        if (isMobile) {
-            document.querySelector('.sidebarContainer').classList.add('hide');
-        }
-        if (isMobile && document.querySelector('.chatRoomContainer')) {
-            document
-                .querySelector('.chatRoomContainer')
-                .classList.remove('hide');
-        }
         dispatch(setRoomId(chatId));
 
         const selectedElement = document.getElementById(selectedItem);
@@ -72,6 +64,12 @@ const ChatList = () => {
         setSelectedItem(chatId);
         sessionStorage.removeItem('chatScrollPosition');
     };
+
+    useEffect(() => {
+        if (isMobile && chatRoom.room) {
+            document.querySelector('.sidebarContainer').classList.add('hide');
+        }
+    }, [isMobile, chatRoom.room]);
 
     useEffect(() => {
         if (chatRoom.isLoaded && user) dispatch(getUserRooms(user.id));

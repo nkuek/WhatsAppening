@@ -6,7 +6,7 @@ import { deleteContact } from '../../../store/userContacts';
 import { useMediaQuery } from 'react-responsive';
 
 const ContactsItem = ({ contact, setSelectedContacts }) => {
-    const isMobile = useMediaQuery({ query: '(max-width: 900px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 950px)' });
     const dispatch = useDispatch();
     const [contactHover, setContactHover] = useState(false);
     const [showDeleteButton, setShowDeleteButton] = useState(false);

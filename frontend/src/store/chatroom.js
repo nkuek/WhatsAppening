@@ -23,7 +23,7 @@ const findRoom = (room) => ({
     room,
 });
 
-const resetRoom = () => ({
+export const resetRoom = () => ({
     type: RESET_STATE,
 });
 
