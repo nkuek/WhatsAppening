@@ -38,10 +38,10 @@ const ChatRoom = () => {
                     .sort((a, b) =>
                         a.toLowerCase() < b.toLowerCase() ? -1 : 1
                     )
-                    .slice(0, 4)
+                    .slice(0, 3)
                     .join(', ');
                 return (
-                    shortenedFirstNames + ` + ${firstNames.length - 4} others`
+                    shortenedFirstNames + ` + ${firstNames.length - 3} others`
                 );
             }
             return firstNames.sort().join(', ');
