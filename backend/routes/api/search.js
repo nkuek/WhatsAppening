@@ -17,10 +17,10 @@ router.put(
             where: {
                 [Op.or]: {
                     name: {
-                        [Op.iLike]: `%${searchQuery}%`,
+                        [Op.iLike]: `${searchQuery}%`,
                     },
                     phoneNumber: {
-                        [Op.iLike]: `%${searchQuery}%`,
+                        [Op.iLike]: `${searchQuery}%`,
                     },
                 },
             },
@@ -29,7 +29,7 @@ router.put(
         const adminRooms = await user.getAdmin({
             where: {
                 name: {
-                    [Op.iLike]: `%${searchQuery}%`,
+                    [Op.iLike]: `${searchQuery}%`,
                 },
             },
         });
@@ -37,7 +37,7 @@ router.put(
         const participantRooms = await user.getParticipants({
             where: {
                 name: {
-                    [Op.iLike]: `%${searchQuery}%`,
+                    [Op.iLike]: `${searchQuery}%`,
                 },
             },
         });
