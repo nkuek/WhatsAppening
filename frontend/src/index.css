@@ -61,7 +61,7 @@ li {
 
 #root {
     display: flex;
-    overflow-x: hidden;
+    overflow: hidden
 }
 
 
