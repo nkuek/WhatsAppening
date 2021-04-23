@@ -192,10 +192,10 @@ router.put(
                 },
                 [Op.or]: {
                     name: {
-                        [Op.iLike]: `%${searchInput}%`,
+                        [Op.iLike]: `${searchInput}%`,
                     },
                     phoneNumber: {
-                        [Op.iLike]: `%${searchInput}%`,
+                        [Op.iLike]: `${searchInput}%`,
                         [Op.not]: user.phoneNumber,
                     },
                 },
