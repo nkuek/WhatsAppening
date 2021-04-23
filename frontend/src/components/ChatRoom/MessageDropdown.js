@@ -62,15 +62,12 @@ const MessageDropdown = ({
                 style={{
                     positon: 'relative',
                     zIndex: 10,
-                    borderRadius: '5px',
                 }}
             >
                 <Paper
                     style={{
-                        marginBottom: '3px',
                         position: 'relative',
                         zIndex: 1,
-                        borderRadius: '5px',
                         display: 'flex',
                     }}
                 >

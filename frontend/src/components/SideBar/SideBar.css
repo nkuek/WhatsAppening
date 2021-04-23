@@ -90,17 +90,12 @@
     display: flex;
 }
 
-.dropdownContainer {
-    border-radius: 5px;
-}
-
 .dropdownList {
     text-align: center;
     background-color: #2a2f32;
     color: #fff;
     font-size: .8em;
     padding: 10px 0px;
-    border-radius: 5px;
 }
 
 .dropdownItem {
