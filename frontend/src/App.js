@@ -20,7 +20,7 @@ function App() {
     }, [dispatch]);
 
     useEffect(() => {
-        if (session.user && session.isLoaded) {
+        if (session.user?.id && session.isLoaded) {
             dispatch(getUserRooms(session.user.id));
             dispatch(findContacts(session.user.id));
             const socket = io(
@@ -32,9 +32,9 @@ function App() {
             socket.emit('update socket', { userId: session.user.id });
         }
         return () => {
-            !session.user && dispatch(closeSocket());
+            !session.user?.id && dispatch(closeSocket());
         };
-    }, [session.user, session.isLoaded, dispatch]);
+    }, [session.user?.id, session.isLoaded, dispatch]);
 
     useEffect(() => {
         socket &&

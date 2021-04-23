@@ -70,6 +70,7 @@ const Profile = ({ user }) => {
 
     const logout = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         openProfile();
         dispatch(removeUserRooms());
         dispatch(resetUserRoomState());
@@ -191,13 +192,12 @@ const Profile = ({ user }) => {
                         </select>
                     </div>
                 </div>
-
-                <div className="profileLogoutButtonContainer">
-                    <button onClick={logout} className="profileLogoutButton">
-                        Logout
-                    </button>
-                </div>
             </form>
+            <div className="profileLogoutButtonContainer">
+                <button onClick={logout} className="profileLogoutButton">
+                    Logout
+                </button>
+            </div>
         </>
     );
 };

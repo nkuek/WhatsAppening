@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { findContacts } from '../../../store/userContacts';
