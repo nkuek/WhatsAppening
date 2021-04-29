@@ -1,20 +1,14 @@
 #modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 #modal-background {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   margin: auto;
   z-index: 20;
@@ -22,17 +16,15 @@
 
 #modal-content {
     position: absolute;
-    inset: 50% auto auto 50%;
     color: white;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     background-color: #2a2f32;
-    transform: translate(-50%, -50%);
     z-index: 20;
-    margin-right: -50%;
     width: 500px;
     overflow: hidden;
+    margin: 0 auto;
 }
 
 #modal-content > form {
@@ -43,5 +35,10 @@
 @media only screen and (max-width: 900px) {
    #modal-content {
        width: 100vw;
+   }
+
+   #modal-background {
+       width: 100vw;
+       height: 100vh;
    }
 }

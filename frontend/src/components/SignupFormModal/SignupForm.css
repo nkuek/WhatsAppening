@@ -121,18 +121,10 @@
     background-color: #5895ff;
 }
 
-.signupButton {
-    border-radius: 5px;
-    padding: .7em 4em;
-}
-
-.signupButton:hover {
-    background-color: rgb(226, 226, 226)
-}
 
 .fileWrapper {
-    height: 150px;
-    width: 150px;
+    height: 10rem;
+    width: 10rem;
     position: relative;
     border: 3px solid #fff;
     border-radius: 100%;
@@ -194,14 +186,6 @@
     flex-direction: column;
     margin: 0px 50px;
     text-align: center;
-}
-
-.hasAnAccount {
-    cursor: pointer;
-}
-
-.hasAnAccount:hover {
-    color: teal;
 }
 
 @media only screen and (max-width: 900px) {

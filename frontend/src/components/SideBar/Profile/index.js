@@ -15,8 +15,8 @@ import { clearSearchUsers } from '../../../store/usersearch';
 
 const CustomAvatar = withStyles({
     root: {
-        width: '150px',
-        height: '150px',
+        width: '10rem',
+        height: '10rem',
     },
 })(Avatar);
 

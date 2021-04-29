@@ -2,7 +2,7 @@
     display: flex;
     background-color: #131C21;
     flex-direction: column;
-    /* height: 100%; */
+    height: fit-content;
 }
 
 .newRoomFormDescription {
@@ -14,7 +14,6 @@
     margin-top: 10px;
     width: 100%;
     margin-bottom: 10px;
-    height: 37px;
 }
 
 .newRoomFormInputContainer input {
@@ -33,11 +32,14 @@
     border-color: var(--button-color)
 }
 
-@media screen and (max-width: 800px) {
-    .newRoomFormInputContainer {
-        display: flex;
-        position: relative;
-        justify-content: center;
+.fileContainer {
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 900px) {
+    .newRoomForm {
+        height: fit-content;
     }
 }
 

@@ -26,6 +26,17 @@
     flex-direction: column;
 }
 
+
+.signupButton {
+    border-radius: 5px;
+    padding: .7em 4em;
+    background-color: #EFEFEF;
+}
+
+.signupButton:hover {
+    background-color: rgb(226, 226, 226)
+}
+
 .logoContainer i {
     font-size: 5rem;
 }

@@ -12,8 +12,8 @@ import './NewRoomForm.css';
 
 const CustomAvatar = withStyles({
     root: {
-        width: '150px',
-        height: '150px',
+        width: '10rem',
+        height: '10rem',
     },
 })(Avatar);
 
@@ -110,7 +110,7 @@ const NewRoomForm = () => {
             </div>
             <form onSubmit={handleNewRoomSubmit} className="newRoomForm">
                 <h1 className="newRoomFormDescription">Create a new group</h1>
-                <div className="fileWrapper">
+                <div className="fileWrapper newForm">
                     <CustomAvatar
                         className="imgPreview"
                         src={preview && preview}
