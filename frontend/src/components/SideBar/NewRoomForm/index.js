@@ -12,8 +12,8 @@ import './NewRoomForm.css';
 
 const CustomAvatar = withStyles({
     root: {
-        width: '10rem',
-        height: '10rem',
+        width: '8rem',
+        height: '8rem',
     },
 })(Avatar);
 

@@ -29,6 +29,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     width: 100%;
+    height: -webkit-fill-available;
 }
 
 
@@ -120,7 +121,7 @@
 
     min-width: 100vw;
     z-index: 2;
-    overflow-x: hidden;
+    overflow: hidden;
     border-right: none;
     height: 100vh;
     }
@@ -132,9 +133,9 @@
 .addContactFormContainer.mobile {
     min-width: 100%;
     z-index: 2;
-    overflow-x: hidden;
+    overflow:hidden;
     border-right: none;
-    height: 100vh;
+    height: -webkit-fill-available;
     background-color: #131C21;
 }
 

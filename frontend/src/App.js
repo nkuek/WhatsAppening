@@ -10,6 +10,9 @@ import { findContacts } from './store/userContacts';
 import { setSocket, closeSocket } from './store/chatroom';
 
 function App() {
+    window.addEventListener('resize', () => {
+        document.body.style.height = `${window.innerHeight}px`;
+    });
     const dispatch = useDispatch();
 
     const session = useSelector((state) => state.session);

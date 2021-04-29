@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     border-bottom: thin solid rgb(77, 77, 77);
+    overflow-y: auto;
 }
 
 .chatListSearchContainer > div {

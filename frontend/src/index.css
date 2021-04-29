@@ -26,13 +26,11 @@ a:visited {
 }
 
 html {
-    height: -webkit-fill-available;
+    /* height: -webkit-fill-available; */
 }
 
 body {
     overflow: hidden;
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
 }
 
 button {
@@ -64,7 +62,7 @@ li {
 #root {
     display: flex;
     overflow: hidden;
-    min-height: -webkit-fill-available;
+    height: -webkit-fill-available;
 }
 
 
