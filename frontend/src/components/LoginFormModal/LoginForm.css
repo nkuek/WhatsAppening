@@ -87,3 +87,19 @@
 .loginButton:hover {
     background-color: var(--button-hover);
 }
+
+@media only screen and (max-width: 900px) {
+    .loginLabelContainer {
+        margin-left: initial;
+        justify-content: center;
+    }
+
+    .loginFormButtonContainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .loginFormButton {
+        margin-left: initial;
+    }
+}

@@ -203,3 +203,13 @@
 .hasAnAccount:hover {
     color: teal;
 }
+
+@media only screen and (max-width: 900px) {
+    .signupPage1 {
+        margin-left: -5px;
+    }
+
+    .signupPage2 {
+        margin-left: 105px;
+    }
+}
