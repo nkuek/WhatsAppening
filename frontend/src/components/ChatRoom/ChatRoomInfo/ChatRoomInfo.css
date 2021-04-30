@@ -135,5 +135,6 @@
     width: 100vw;
     max-width: 100vw;
     display: initial;
-    height: 100vh;
+    min-height: 100vh;
+    overflow-y: auto;
 }
