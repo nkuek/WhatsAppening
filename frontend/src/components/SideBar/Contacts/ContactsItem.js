@@ -5,7 +5,12 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import { deleteContact } from '../../../store/userContacts';
 import { useMediaQuery } from 'react-responsive';
 
-const ContactsItem = ({ contact, setSelectedContacts }) => {
+const ContactsItem = ({
+    contact,
+    setSelectedContacts,
+    contactSearch,
+    setContactSearch,
+}) => {
     const isMobile = useMediaQuery({ query: '(max-width: 950px)' });
     const dispatch = useDispatch();
     const [contactHover, setContactHover] = useState(false);
@@ -24,6 +29,12 @@ const ContactsItem = ({ contact, setSelectedContacts }) => {
 
     const handleContactClick = (contact) => {
         setSelectedContacts((prev) => [...prev, contact]);
+        if (contactSearch) {
+            setContactSearch('');
+            document
+                .querySelector('.contactBody')
+                .classList.remove('searching');
+        }
     };
 
     const handleDeleteContact = (e) => {

@@ -7,7 +7,7 @@
     box-sizing: border-box;
     top: 0;
     transition: top 400ms;
-    height: 100%;
+    height: -webkit-fill-available;
     overflow-y: auto;
 }
 
@@ -45,9 +45,8 @@
     align-items: center;
 }
 
-
 .searching {
-    top: -286px;
+    top: -280px;
     min-height: 100%;
     /* height: auto; */
 }

@@ -4,9 +4,28 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import { findContacts } from '../../../store/userContacts';
 
 import './Contacts.css';
+import CloseIcon from '@material-ui/icons/Close';
 import ContactsItem from './ContactsItem';
+import { Avatar } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
+
+const CustomCloseIcon = withStyles({
+    root: {
+        '&:hover': {
+            backgroundColor: 'gray',
+        },
+        borderRadius: '100%',
+        marginLeft: '10px',
+        cursor: 'pointer',
+        height: '12px',
+        width: '12px',
+        padding: '2px',
+    },
+})(CloseIcon);
 
 const ContactsSearch = ({
+    roomName,
+    handleNewRoomSubmit,
     selectedContacts,
     setSelectedContacts,
     contactSearch,
@@ -33,6 +52,13 @@ const ContactsSearch = ({
                 );
             } else return contact;
         });
+    };
+
+    const handleRemoveContactFromState = (contactId) => {
+        const newSelectedContacts = selectedContacts.filter(
+            (contact) => contact.id !== contactId
+        );
+        setSelectedContacts(newSelectedContacts);
     };
 
     const handleContactSearch = (e) => {
@@ -70,6 +96,41 @@ const ContactsSearch = ({
                     </div>
                 </div>
                 <div className="contactListBody">
+                    <div className="selectedContactsContainer">
+                        {selectedContacts &&
+                            selectedContacts.map((contact) => (
+                                <div
+                                    key={contact.id}
+                                    className="selectedContactsItem"
+                                >
+                                    <div className="selectedContactInfo">
+                                        <div className="selectedContactProfileImage">
+                                            <Avatar src={contact.profileUrl} />
+                                        </div>
+                                        <div className="selectedContactName">
+                                            {contact.name}
+                                        </div>
+                                        <CustomCloseIcon
+                                            onClick={() =>
+                                                handleRemoveContactFromState(
+                                                    contact.id
+                                                )
+                                            }
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                    </div>
+                    {(roomName || selectedContacts.length > 0) && (
+                        <div className="newRoomFormSubmitContainer">
+                            <button
+                                onClick={handleNewRoomSubmit}
+                                className="newRoomFormSubmit"
+                            >
+                                Create
+                            </button>
+                        </div>
+                    )}
                     <div
                         onClick={showUserSearch}
                         className="addContactButtonContainer"
@@ -103,6 +164,8 @@ const ContactsSearch = ({
                                             setSelectedContacts={
                                                 setSelectedContacts
                                             }
+                                            contactSearch={contactSearch}
+                                            setContactSearch={setContactSearch}
                                         />
                                     )
                             )}

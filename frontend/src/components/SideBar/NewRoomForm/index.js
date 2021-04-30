@@ -4,7 +4,6 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { Avatar, IconButton } from '@material-ui/core';
 import { createNewRoom } from '../../../store/chatroom';
 import { withStyles } from '@material-ui/styles';
-import CloseIcon from '@material-ui/icons/Close';
 
 import ContactsSearch from '../Contacts';
 
@@ -16,20 +15,6 @@ const CustomAvatar = withStyles({
         height: '8rem',
     },
 })(Avatar);
-
-const CustomCloseIcon = withStyles({
-    root: {
-        '&:hover': {
-            backgroundColor: 'gray',
-        },
-        borderRadius: '100%',
-        marginLeft: '10px',
-        cursor: 'pointer',
-        height: '12px',
-        width: '12px',
-        padding: '2px',
-    },
-})(CloseIcon);
 
 const NewRoomForm = () => {
     const dispatch = useDispatch();
@@ -117,7 +102,7 @@ const NewRoomForm = () => {
                     ></CustomAvatar>
                     <input
                         onChange={updateFile}
-                        className="fileInput"
+                        className="fileInput newForm"
                         type="file"
                         accept="image/gif,image/jpeg,image/jpg,image/png"
                     ></input>
@@ -139,38 +124,10 @@ const NewRoomForm = () => {
                         placeholder="Room Name"
                     ></input>
                 </div>
-                <div className="selectedContactsContainer">
-                    {selectedContacts &&
-                        selectedContacts.map((contact) => (
-                            <div
-                                key={contact.id}
-                                className="selectedContactsItem"
-                            >
-                                <div className="selectedContactInfo">
-                                    <div className="selectedContactProfileImage">
-                                        <Avatar src={contact.profileUrl} />
-                                    </div>
-                                    <div className="selectedContactName">
-                                        {contact.name}
-                                    </div>
-                                    <CustomCloseIcon
-                                        onClick={() =>
-                                            handleRemoveContactFromState(
-                                                contact.id
-                                            )
-                                        }
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                </div>
-                {(roomName || selectedContacts.length > 0) && (
-                    <div className="newRoomFormSubmitContainer">
-                        <button className="newRoomFormSubmit">Create</button>
-                    </div>
-                )}
             </form>
             <ContactsSearch
+                roomName={roomName}
+                handleNewRoomSubmit={handleNewRoomSubmit}
                 contactSearch={contactSearch}
                 setContactSearch={setContactSearch}
                 selectedContacts={selectedContacts}
