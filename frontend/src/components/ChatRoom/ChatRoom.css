@@ -117,6 +117,7 @@
     height: fit-content;
     display: flex;
     padding: 0em 5em;
+    margin: .3em;
 }
 
 @media only screen and (max-width: 1500px) {
@@ -128,15 +129,13 @@
 }
 
 .chatRoomMessage {
-    margin: 5px;
-    /* width: fit-content; */
     padding: 10px 20px;
     border-radius: 10px;
     display: flex;
     max-width: 40ch;
     overflow-wrap: anywhere;
     flex-wrap:wrap;
-
+    height: fit-content;
 }
 
 .chatRoomMessageInfo {
