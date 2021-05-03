@@ -1,11 +1,12 @@
 .chatRoomContainer,
 .noMessagesContainer.chatRoomMessageList {
     /* flex: 65%; */
-    flex: 1 1;
+    flex: 1 0;
     background-color: #262d31;
     position: relative;
     z-index: 6;
     color: white;
+    overflow: hidden;
 }
 
 .chatRoomContainer,
@@ -35,21 +36,6 @@
     /* background-color: black; */
 }
 
-
-
-.chatRoomHeader {
-    position: relative;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px 16px;
-    min-height: 59px;
-    box-sizing: border-box;
-    background-color: #2a2f32;
-    justify-content: space-between;
-}
-
 .chatRoomImageAndName {
     display: flex;
 }
@@ -65,26 +51,41 @@
     color: rgba(241, 241, 242, 0.63)
 }
 
-.chatRoomMessageList {
+.chatRoomHeader {
+    position: relative;
+    z-index: 1000;
     display: flex;
-    order: 2;
+    align-items: center;
+    width: 100%;
+    padding: 10px 16px;
+    min-height: 59px;
+    box-sizing: border-box;
+    background-color: #2a2f32;
+    justify-content: space-between;
+}
+
+.chatRoomMessageList {
+    display: block;
+    /* order: 2; */
     position: relative;
     height: calc(100% - 130px);
     flex-direction: column;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .chatRoomMessageFooter {
     position: relative;
     z-index: 1;
     box-sizing: border-box;
-    order: 3;
+    /* order: 3; */
     width: 100%;
     height: 62px;
     background-color: #1E2428;
     display: flex;
     padding: 10px 0px;
 }
+
 
 .chatRoomMessageForm {
     width: 100%;
@@ -114,18 +115,15 @@
 }
 
 .chatRoomMessageContainer {
-    height: fit-content;
     display: flex;
     padding: 0em 5em;
-    margin: .3em;
+    margin: .3rem 0rem;
 }
 
 @media only screen and (max-width: 1500px) {
-
     .chatRoomMessageContainer {
         padding: 0em 2em;
     }
-
 }
 
 .chatRoomMessage {
@@ -136,6 +134,12 @@
     overflow-wrap: anywhere;
     flex-wrap:wrap;
     height: fit-content;
+}
+
+@media only screen and (max-width: 900px) {
+    .chatRoomMessage {
+        max-width: 30ch;
+    }
 }
 
 .chatRoomMessageInfo {

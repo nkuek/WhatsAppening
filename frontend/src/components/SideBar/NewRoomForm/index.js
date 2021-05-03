@@ -75,13 +75,6 @@ const NewRoomForm = () => {
             });
     };
 
-    const handleRemoveContactFromState = (contactId) => {
-        const newSelectedContacts = selectedContacts.filter(
-            (contact) => contact.id !== contactId
-        );
-        setSelectedContacts(newSelectedContacts);
-    };
-
     return (
         <>
             <div className="newRoomFormHeader">
