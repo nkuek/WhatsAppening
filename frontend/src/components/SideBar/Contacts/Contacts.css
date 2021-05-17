@@ -93,3 +93,8 @@
 .contactHeader {
     background-color: #131c21;
 }
+
+.contactListBody {
+    height: 100%;
+    background-color: #131C21
+}
