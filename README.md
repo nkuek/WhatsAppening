@@ -54,7 +54,7 @@ To fork this project simply follow these steps!
 5. Create a `postgresql` development database
     ```
     // backend
-    npx dotenv sequelize db:init
+    npx dotenv sequelize db:create
     ```
 6. Migrate and seed the database
     ```
